@@ -1,3 +1,6 @@
-# Final Project
+# CS1230 Final Project: Blueno@Chernobyl
 
-Readme goes here
+<img src="./readme_stuff/team_banner.jpg" height=300 />
+
+Let's geddit!
+
