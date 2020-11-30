@@ -5,11 +5,12 @@
 #include <QMessageBox>
 #include <QApplication>
 
+#include "support/Settings.h"
 #include "support/lib/RGBA.h"
 #include "support/camera/CamtransCamera.h"
 #include "support/camera/OrbitingCamera.h"
-#include "SceneviewScene.h"
-#include "support/Settings.h"
+#include "LSystemTreeScene.h"
+#include "ShaderEvolutionTestingScene.h"
 //#include "ShapesScene.h"
 
 #include <iostream>
@@ -23,6 +24,7 @@ SupportCanvas3D::SupportCanvas3D(QGLFormat format, QWidget *parent) : QGLWidget(
     m_defaultOrbitingCamera(new OrbitingCamera()),
     m_currentScene(nullptr)
 {
+
 }
 
 SupportCanvas3D::~SupportCanvas3D()
@@ -47,8 +49,14 @@ OrbitingCamera *SupportCanvas3D::getOrbitingCamera() {
 }
 
 
-CamtransCamera *SupportCanvas3D::getCamtransCamera() {
-    return m_defaultPerspectiveCamera.get();
+CameraConfig *SupportCanvas3D::getCurrentSceneCamtasConfig() {
+    switch(settings.getSceneMode()) {
+        case SCENEMODE_SHADER_TESTING:
+           return &m_shaderTestingSceneCameraConfig;
+        case SCENEMODE_TREE_TESTING:
+            return &m_LSystemSceneCameraConfig;
+    }
+    return nullptr;
 }
 
 void SupportCanvas3D::initializeGL() {
@@ -102,7 +110,8 @@ void SupportCanvas3D::initializeOpenGLSettings() {
 }
 
 void SupportCanvas3D::initializeScenes() {
-    m_sceneviewScene = std::make_unique<SceneviewScene>();
+    m_LSystemScene = std::make_unique<LSystemTreeScene>();
+    m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
     //m_shapesScene = std::make_unique<ShapesScene>(width(), height());
 }
 
@@ -128,33 +137,56 @@ void SupportCanvas3D::settingsChanged() {
 }
 
 void SupportCanvas3D::setSceneFromSettings() {
-    setSceneToSceneview();
-//    switch(settings.getSceneMode()) {
-//        case SCENEMODE_SHAPES:
-//            setSceneToShapes();
-//            break;
-//        case SCENEMODE_SCENEVIEW:
-//            setSceneToSceneview();
-//            break;
-//    }
+    switch(settings.getSceneMode()) {
+        case SCENEMODE_SHADER_TESTING:
+            setSceneToShaderTesting();
+            break;
+        case SCENEMODE_TREE_TESTING:
+            setSceneToLSystemSceneview();
+            break;
+    }
     m_settingsDirty = false;
 }
 
-void SupportCanvas3D::loadSceneviewSceneFromParser(CS123XmlSceneParser &parser) {
-    m_sceneviewScene = std::make_unique<SceneviewScene>();
-    Scene::parse(m_sceneviewScene.get(), &parser);
+void SupportCanvas3D::loadSceneFromParser(CS123XmlSceneParser &parser) {
+    switch(settings.getSceneMode()) {
+        case SCENEMODE_SHADER_TESTING:
+            m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
+            Scene::parse(m_shaderTestingScene.get(), &parser);
+            applyCameraConfig(m_shaderTestingSceneCameraConfig);
+            break;
+        case SCENEMODE_TREE_TESTING:
+            m_LSystemScene = std::make_unique<LSystemTreeScene>();
+            Scene::parse(m_LSystemScene.get(), &parser);
+            applyCameraConfig(m_LSystemSceneCameraConfig);
+            break;
+    }
     m_settingsDirty = true;
 }
 
-void SupportCanvas3D::setSceneToSceneview() {
-    assert(m_sceneviewScene.get());
-    m_currentScene = m_sceneviewScene.get();
+void SupportCanvas3D::applyCameraConfig(CameraConfig c){
+    m_defaultPerspectiveCamera->orientLook(c.pos, c.look, c.up);
+    m_defaultPerspectiveCamera->setHeightAngle(c.angle);
 }
 
-void SupportCanvas3D::setSceneToShapes() {
+
+void SupportCanvas3D::setSceneToLSystemSceneview() {
+    assert(m_LSystemScene.get());
+    m_currentScene = m_LSystemScene.get();
+    applyCameraConfig(m_LSystemSceneCameraConfig);
+}
+
+void SupportCanvas3D::setSceneToShaderTesting(){
+    assert(m_shaderTestingScene.get());
+    m_currentScene = m_shaderTestingScene.get();
+    applyCameraConfig(m_shaderTestingSceneCameraConfig);
+}
+
+
+//void SupportCanvas3D::setSceneToShapes() {
 //    assert(m_shapesScene.get());
 //    m_currentScene = m_shapesScene.get();
-}
+//}
 
 void SupportCanvas3D::copyPixels(int width, int height, RGBA *data) {
     glReadPixels(0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, data);

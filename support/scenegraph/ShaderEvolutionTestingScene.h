@@ -1,5 +1,6 @@
-#ifndef SCENEVIEWSCENE_H
-#define SCENEVIEWSCENE_H
+#ifndef SHADEREVOLUTIONTESTINGSCENE_H
+#define SHADEREVOLUTIONTESTINGSCENE_H
+
 
 #include "OpenGLScene.h"
 
@@ -16,30 +17,10 @@ namespace CS123 { namespace GL {
 }}
 
 
-enum RENDERING_PASS {
-    PHONG, WIREFRAME, NORMAL_LINE, NORMAL_ARROW
-};
-
-/**
- *
- * @class SceneviewScene
- *
- * A complex scene consisting of multiple objects. Students will implement this class in the
- * Sceneview assignment.
- *
- * Here you will implement your scene graph. The structure is up to you - feel free to create new
- * classes and data structures as you see fit. We are providing this SceneviewScene class for you
- * to use as a stencil if you like.
- *
- * Keep in mind that you'll also be rendering entire scenes in the next two assignments, Intersect
- * and Ray. The difference between this assignment and those that follow is here, we are using
- * OpenGL to do the rendering. In Intersect and Ray, you will be responsible for that.
- */
-
-class SceneviewScene : public OpenGLScene {
+class ShaderEvolutionTestingScene : public OpenGLScene {
 public:
-    SceneviewScene();
-    virtual ~SceneviewScene();
+    ShaderEvolutionTestingScene();
+    virtual ~ShaderEvolutionTestingScene();
 
     virtual void render(SupportCanvas3D *context) override;
     virtual void settingsChanged() override;
@@ -52,14 +33,11 @@ public:
 private:
 
     void loadPhongShader();
-    void loadWireframeShader();
-    void loadNormalsShader();
-    void loadNormalsArrowShader();
 
     void setPhongSceneUniforms(SupportCanvas3D *context);
     void setMatrixUniforms(CS123::GL::Shader *shader, SupportCanvas3D *context);
     void setLights();
-    void renderGeometry(RENDERING_PASS pass);
+    void renderGeometry();
     void defineShapeBank();
     void setLOD();
 
@@ -73,4 +51,5 @@ private:
 
 };
 
-#endif // SCENEVIEWSCENE_H
+
+#endif // SHADEREVOLUTIONTESTINGSCENE_H

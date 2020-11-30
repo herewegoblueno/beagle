@@ -52,25 +52,106 @@
        <height>401</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
       <property name="leftMargin">
        <number>8</number>
       </property>
       <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>This is random text</string>
+       <widget class="QTabWidget" name="mainTabWidget">
+        <property name="currentIndex">
+         <number>1</number>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="rednerButton">
-        <property name="text">
-         <string>Render the thing</string>
-        </property>
+        <widget class="QWidget" name="shaderTab">
+         <attribute name="title">
+          <string>Shaders</string>
+         </attribute>
+         <widget class="QPushButton" name="mutateButton">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>300</y>
+            <width>131</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Mutate</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="renderShadersButton">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>260</y>
+            <width>131</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Render Scene</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="useLightingForShaders">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>10</y>
+            <width>121</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Use Lighting</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="usePointLightsForShaders">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>40</y>
+            <width>131</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Use Point Lights</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="LsystemTab">
+         <attribute name="title">
+          <string>L-system Trees</string>
+         </attribute>
+         <widget class="QPushButton" name="renderLTreesbutton">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>300</y>
+            <width>131</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Locate Scene</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>110</y>
+            <width>141</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>This is Alanas space so I'mma leave it nice and clean :)</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </item>
      </layout>

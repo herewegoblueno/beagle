@@ -73,11 +73,11 @@ void Scene::traverseSceneGraph (Scene *sceneToFill, glm::mat4 accumultedMatrix, 
 
     glm::mat4 accumulatedTransMat = accumultedMatrix * localTransMat;
 
-    for (int i = 0; i < node->primitives.size(); i++){
+    for (unsigned long i = 0; i < node->primitives.size(); i++){
         sceneToFill->addPrimitive(*node->primitives[i], accumulatedTransMat);
     }
 
-    for (int i = 0; i < node->children.size(); i++){
+    for (unsigned long i = 0; i < node->children.size(); i++){
         traverseSceneGraph(sceneToFill, accumulatedTransMat, node->children[i]);
     }
 }

@@ -25,30 +25,16 @@ Settings settings;
  */
 void Settings::loadSettingsOrDefaults() {
     // Set the default values below
-    QSettings s("CS123", "CS123");
-
-    // Brush
-    brushType = s.value("brushType", BRUSH_LINEAR).toInt();
-    brushRadius = s.value("brushRadius", 50).toInt();
-    brushColor.r = s.value("brushRed", 127).toInt();
-    brushColor.g = s.value("brushGreen", 255).toInt();
-    brushColor.b = s.value("brushBlue", 0).toInt();
-    brushColor.a = s.value("brushAlpha", 20).toInt();
-
-    // Filter
-    filterType = s.value("filterType", FILTER_EDGE_DETECT).toInt();
-    edgeDetectSensitivity = s.value("edgeDetectSensitivity", 0.5f).toDouble();
-    blurRadius = s.value("blurRadius", 10).toInt();
-    scaleX = s.value("scaleX", 2).toDouble();
-    scaleY = s.value("scaleY", 2).toDouble();
-    rotateAngle = s.value("rotateAngle", 0).toInt();
+    QSettings s("CS123", "final");
 
     // Shapes
-    shapeType = s.value("shapeType", SHAPE_SPHERE).toInt();
+    //shapeType = s.value("shapeType", SHAPE_SPHERE).toInt();
     shapeParameter1 = s.value("shapeParameter1", 15).toInt();
     shapeParameter2 = s.value("shapeParameter2", 15).toInt();
     shapeParameter3 = s.value("shapeParameter3", 15).toDouble();
     useLighting = s.value("useLighting", true).toBool();
+    usePointLights = s.value("usePointLights", true).toBool();
+
     drawWireframe = s.value("drawWireframe", true).toBool();
     drawNormals = s.value("drawNormals", false).toBool();
 
@@ -58,21 +44,7 @@ void Settings::loadSettingsOrDefaults() {
     cameraNear = s.value("cameraNear", 0.1).toDouble();
     cameraFar = s.value("cameraFar", 50).toDouble();
 
-    // Ray
-    useSuperSampling = s.value("useSuperSampling", false).toBool();
-    numSuperSamples = s.value("numSuperSamples", 2).toInt();
-    useAntiAliasing = s.value("useAntiAliasing", true).toBool();
-    useShadows = s.value("useShadows", false).toBool();
-    useTextureMapping = s.value("useTextureMapping", false).toBool();
-    useReflection = s.value("useReflection", false).toBool();
-    useRefraction = s.value("useRefraction", false).toBool();
-    useMultiThreading = s.value("useMultiThreading", true).toBool();
-    usePointLights = s.value("usePointLights", true).toBool();
-    useDirectionalLights = s.value("useDirectionalLights", true).toBool();
-    useSpotLights = s.value("useSpotLights", true).toBool();
-    useKDTree = s.value("useKDTree", true).toBool();
-
-    currentTab = s.value("currentTab", TAB_2D).toBool();
+    currentTab = s.value("currentTab", SHADER_TESTING_TAB).toInt();
 
     // These are for computing deltas and the values don't matter, so start all dials in the up
     // position
@@ -85,26 +57,10 @@ void Settings::loadSettingsOrDefaults() {
 }
 
 void Settings::saveSettings() {
-    QSettings s("CS123", "CS123");
-
-    // Brush
-    s.setValue("brushType", brushType);
-    s.setValue("brushRadius", brushRadius);
-    s.setValue("brushRed", brushColor.r);
-    s.setValue("brushGreen", brushColor.g);
-    s.setValue("brushBlue", brushColor.b);
-    s.setValue("brushAlpha", brushColor.a);
-
-    // Filter
-    s.setValue("filterType", filterType);
-    s.setValue("edgeDetectSensitivity", edgeDetectSensitivity);
-    s.setValue("blurRadius", blurRadius);
-    s.setValue("scaleX", scaleX);
-    s.setValue("scaleY", scaleY);
-    s.setValue("rotateAngle", rotateAngle);
+    QSettings s("CS123", "final");
 
     // Shapes
-    s.setValue("shapeType", shapeType);
+    //s.setValue("shapeType", shapeType);
     s.setValue("shapeParameter1", shapeParameter1);
     s.setValue("shapeParameter2", shapeParameter2);
     s.setValue("shapeParameter3", shapeParameter3);
@@ -118,28 +74,19 @@ void Settings::saveSettings() {
     s.setValue("cameraNear", cameraNear);
     s.setValue("cameraFar", cameraFar);
 
-    // Ray
-    s.setValue("useSuperSampling", useSuperSampling);
-    s.setValue("numSuperSamples", numSuperSamples);
-    s.setValue("useAntiAliasing", useAntiAliasing);
-    s.setValue("useShadows", useShadows);
-    s.setValue("useTextureMapping", useTextureMapping);
-    s.setValue("useReflection", useReflection);
-    s.setValue("useRefraction", useRefraction);
-    s.setValue("useMultiThreading", useMultiThreading);
     s.setValue("usePointLights", usePointLights);
     s.setValue("useDirectionalLights", useDirectionalLights);
     s.setValue("useSpotLights", useSpotLights);
-    s.setValue("useKDTree", useKDTree);
+
 
     s.setValue("currentTab", currentTab);
 }
 
 int Settings::getSceneMode() {
-    if (this->useSceneviewScene)
-        return SCENEMODE_SCENEVIEW;
+    if (this->currentTab == SHADER_TESTING_TAB)
+        return SCENEMODE_SHADER_TESTING;
     else
-        return SCENEMODE_SHAPES;
+        return SCENEMODE_TREE_TESTING;
 }
 
 int Settings::getCameraMode() {

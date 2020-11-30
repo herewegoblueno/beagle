@@ -1,4 +1,4 @@
-#include "SceneviewScene.h"
+#include "LSystemTreeScene.h"
 #include "GL/glew.h"
 #include <QGLWidget>
 #include "support/camera/Camera.h"
@@ -17,7 +17,7 @@
 using namespace CS123::GL;
 
 
-SceneviewScene::SceneviewScene()
+LSystemTreeScene::LSystemTreeScene()
 {
     loadPhongShader();
 //    loadWireframeShader();
@@ -28,37 +28,37 @@ SceneviewScene::SceneviewScene()
     defineShapeBank();
 }
 
-SceneviewScene::~SceneviewScene()
+LSystemTreeScene::~LSystemTreeScene()
 {
 }
 
-void SceneviewScene::loadPhongShader() {
+void LSystemTreeScene::loadPhongShader() {
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/default.vert");
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/default.frag");
     m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 }
 
-void SceneviewScene::loadWireframeShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.vert");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.frag");
-    m_wireframeShader = std::make_unique<Shader>(vertexSource, fragmentSource);
-}
+//void SceneviewScene::loadWireframeShader() {
+//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.vert");
+//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.frag");
+//    m_wireframeShader = std::make_unique<Shader>(vertexSource, fragmentSource);
+//}
 
-void SceneviewScene::loadNormalsShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.frag");
-    m_normalsShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
-}
+//void SceneviewScene::loadNormalsShader() {
+//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.vert");
+//    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals.gsh");
+//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.frag");
+//    m_normalsShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
+//}
 
-void SceneviewScene::loadNormalsArrowShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.frag");
-    m_normalsArrowShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
-}
+//void SceneviewScene::loadNormalsArrowShader() {
+//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.vert");
+//    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.gsh");
+//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.frag");
+//    m_normalsArrowShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
+//}
 
-void SceneviewScene::render(SupportCanvas3D *context) {
+void LSystemTreeScene::render(SupportCanvas3D *context) {
     setLOD();
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -101,7 +101,7 @@ void SceneviewScene::render(SupportCanvas3D *context) {
 
 }
 
-void SceneviewScene::setPhongSceneUniforms(SupportCanvas3D *context) {
+void LSystemTreeScene::setPhongSceneUniforms(SupportCanvas3D *context) {
     Camera *camera = context->getCamera();
     m_phongShader->setUniform("useLighting", settings.useLighting);
     m_phongShader->setUniform("useArrowOffsets", false);
@@ -109,12 +109,12 @@ void SceneviewScene::setPhongSceneUniforms(SupportCanvas3D *context) {
     m_phongShader->setUniform("v", camera->getViewMatrix());
 }
 
-void SceneviewScene::setMatrixUniforms(Shader *shader, SupportCanvas3D *context) {
+void LSystemTreeScene::setMatrixUniforms(Shader *shader, SupportCanvas3D *context) {
     shader->setUniform("p", context->getCamera()->getProjectionMatrix());
     shader->setUniform("v", context->getCamera()->getViewMatrix());
 }
 
-void SceneviewScene::setLights()
+void LSystemTreeScene::setLights()
 {
     int size = lightingInformation.size();
     for (int i = 0; i < size; i++){
@@ -122,7 +122,7 @@ void SceneviewScene::setLights()
     }
 }
 
-void SceneviewScene::renderGeometry(RENDERING_PASS pass) {
+void LSystemTreeScene::renderGeometry(RENDERING_PASS pass) {
     int size = primitives.size();
     for (int i = 0; i < size; i++){
         CS123ScenePrimitiveBundle bundle = primitives[i];
@@ -153,18 +153,18 @@ void SceneviewScene::renderGeometry(RENDERING_PASS pass) {
     }
 }
 
-void SceneviewScene::settingsChanged() {
+void LSystemTreeScene::settingsChanged() {
     defineShapeBank();
 }
 
-void SceneviewScene::setLOD() {
+void LSystemTreeScene::setLOD() {
     if (primitiveCount == -1) return; //Scene hasn't finished loading yet
     LODdivisor = pow(primitiveCount, 0.5) - 2; //https://www.desmos.com/calculator/jdgphtltcc (my own func)
     if (LODdivisor < 1) LODdivisor = 1;
     if (LODdivisor > 15) LODdivisor = 15;
 }
 
-void SceneviewScene::defineShapeBank(){
+void LSystemTreeScene::defineShapeBank(){
     int p1 = std::floor(settings.shapeParameter1 / std::max(1.f, LODdivisor));
     int p2 = std::floor(settings.shapeParameter2 / std::max(1.f, LODdivisor));
     int p3 = std::floor(settings.shapeParameter3 / std::max(1.f, LODdivisor));

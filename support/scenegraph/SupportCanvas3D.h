@@ -12,10 +12,11 @@ class RGBA;
 class Camera;
 class OpenGLScene;
 //class ShapesScene;
-class SceneviewScene;
 class OrbitingCamera;
 class CamtransCamera;
 class CS123XmlSceneParser;
+class ShaderEvolutionTestingScene;
+class LSystemTreeScene;
 
 /**
  * @class  SupportCanvas3D
@@ -30,6 +31,13 @@ class CS123XmlSceneParser;
  * case the loaded scene does not specify a camera.
  */
 
+struct CameraConfig {
+   glm::vec4 pos;
+   glm::vec4 look;
+   glm::vec4 up;
+  float angle;
+};
+
 class SupportCanvas3D : public QGLWidget {
     Q_OBJECT
 public:
@@ -39,13 +47,12 @@ public:
 
     Camera *getCamera();
     OrbitingCamera *getOrbitingCamera();
-    CamtransCamera *getCamtransCamera();
+    CameraConfig *getCurrentSceneCamtasConfig();
 
     // Returns a pointer to the current scene. If no scene is loaded, this function returns nullptr.
     OpenGLScene *getScene() { return m_currentScene; }
-    SceneviewScene *getSceneviewScene () {return m_sceneviewScene.get();}
 
-    void loadSceneviewSceneFromParser(CS123XmlSceneParser &parser);
+    void loadSceneFromParser(CS123XmlSceneParser &parser);
     void switchToSceneviewScene();
     void switchToShapesScene();
 
@@ -53,11 +60,12 @@ public:
     // order and RGBA data format.
     void copyPixels(int width, int height, RGBA *data);
 
-    // This function will be called by the UI when the settings have changed.
+    // This function will be called by the UI when the settings have changed (see mainwindow.cpp)
     virtual void settingsChanged();
 
 public slots:
     // These will be called by the corresponding UI buttons on the Camtrans dock
+    // ^from support code, probably won't do this anymore
     void resetUpVector();
     void setCameraAxisX();
     void setCameraAxisY();
@@ -65,6 +73,7 @@ public slots:
     void setCameraAxonometric();
 
     // These will be called whenever the corresponding UI elements are updated on the Camtrans dock
+    // ^from support code, probably won't do this anymore
     void updateCameraHeightAngle();
     void updateCameraTranslation();
     void updateCameraRotationU();
@@ -96,8 +105,11 @@ private:
     void initializeOpenGLSettings();
     void initializeScenes();
     void setSceneFromSettings();
-    void setSceneToSceneview();
-    void setSceneToShapes();
+    void setSceneToLSystemSceneview();
+    void setSceneToShaderTesting();
+    //void setSceneToShapes();
+
+    void applyCameraConfig(CameraConfig c);
 
 
     glm::vec4      m_cameraEye;
@@ -109,7 +121,13 @@ private:
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
     //std::unique_ptr<ShapesScene> m_shapesScene;
-    std::unique_ptr<SceneviewScene> m_sceneviewScene;
+    std::unique_ptr<LSystemTreeScene> m_LSystemScene;
+    std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
+    CameraConfig m_LSystemSceneCameraConfig;
+    CameraConfig m_shaderTestingSceneCameraConfig;
+
 };
+
+
 
 #endif // SUPPORTCANVAS3D_H

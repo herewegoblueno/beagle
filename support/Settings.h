@@ -11,28 +11,6 @@
 #include <QObject>
 #include "support/lib/RGBA.h"
 
-// Enumeration values for the Brush types from which the user can choose in the GUI.
-enum BrushType {
-    BRUSH_CONSTANT,
-    BRUSH_LINEAR,
-    BRUSH_QUADRATIC,
-    BRUSH_SMUDGE,
-    BRUSH_SPECIAL_1,
-    BRUSH_SPECIAL_2,
-    NUM_BRUSH_TYPES
-};
-
-// Enumeration values for the Filters that the user can select in the GUI.
-enum FilterType {
-    FILTER_EDGE_DETECT,
-    FILTER_BLUR,
-    FILTER_SCALE,
-    FILTER_ROTATE,
-    FILTER_SPECIAL_1,
-    FILTER_SPECIAL_2,
-    FILTER_SPECIAL_3,
-    NUM_FILTER_TYPES
-};
 
 // Enumeration values for the Shapes that the user can select in the GUI.
 enum ShapeType {
@@ -48,15 +26,15 @@ enum ShapeType {
 
 // Enumeration values for the two tabs (2D, 3D) at the bottom of the Window.
 enum UITab {
-    TAB_2D,
-    TAB_3D,
-    NUM_TABS
+    SHADER_TESTING_TAB,
+    TREE_TESTING_TAB
 };
 
 // Enumeration values for the currently selected scene type
 enum SceneMode {
-    SCENEMODE_SHAPES,
-    SCENEMODE_SCENEVIEW
+    SCENEMODE_TREE_TESTING,
+    SCENEMODE_SHADER_TESTING
+    //SCENEMODE_SHAPES //<---No longer in use
 };
 
 // Enumeration values for the currently selected camera type
@@ -65,40 +43,18 @@ enum CameraMode {
     CAMERAMODE_CAMTRANS
 };
 
-/**
- * @struct Settings
- *
- * Stores application settings for the CS123 GUI.
- *
- * You can access all app settings through the "settings" global variable.
- * The settings will be automatically updated when things are changed in the
- * GUI (the reverse is not true however: changing the value of a setting does
- * not update the GUI).
-*/
-struct Settings {
+// You can access all app settings through the "settings" global variable.
+struct Settings
+{
+
     // Loads settings from disk, or fills in default values if no saved settings exist.
     void loadSettingsOrDefaults();
 
     // Saves the current settings to disk.
     void saveSettings();
 
-    // Brush
-    int brushType;      // The user's selected brush @see BrushType
-    int brushRadius;    // The brush radius
-    RGBA brushColor;
-    bool fixAlphaBlending;
-
-    // Filter
-    int filterType;               // The selected filter @see FilterType
-    float edgeDetectSensitivity;  // Edge detection sensitivity, from 0 to 1.
-    int blurRadius;               // Selected blur radius
-    float scaleX;                 // Horizontal scale factor
-    float scaleY;                 // Vertical scale factor
-    int rotateAngle;              // Rotation angle in degrees
-
     // Shapes
-    bool useSceneviewScene;
-    int shapeType;              // Selected shape type
+    //int shapeType;              // Selected shape type
     int shapeParameter1;
     int shapeParameter2;
     float shapeParameter3;
@@ -121,25 +77,15 @@ struct Settings {
     // Modeler
     int objTool;                // The currently selected modeler tool.
 
-    // Ray
-    bool useSuperSampling;      // Enable or disable super-sampling.
-    int numSuperSamples;        // Controls the number of samples per pixel.
-    bool useAntiAliasing;       // Enable or disable anti-aliasing.
-    bool useShadows;            // Enable or disable shadows.
-    bool useTextureMapping;     // Enable or disable texture mapping.
-    bool useReflection;         // Enable or disable reflection.
-    bool useRefraction;         // Enable or disable refraction (this is extra credit).
-    bool useMultiThreading;     // Enable or disable multi-threading (extra credit).
     bool usePointLights;        // Enable or disable point lighting.
     bool useDirectionalLights;  // Enable or disable directional lighting (extra credit).
     bool useSpotLights;         // Enable or disable spot lights (extra credit).
-    bool useKDTree;
+
 
     int getSceneMode();
     int getCameraMode();
 
     int currentTab;
-
 };
 
 // The global Settings object, will be initialized by MainWindow

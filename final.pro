@@ -24,6 +24,7 @@ win32 {
 SOURCES += ui/mainwindow.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
+    shaderevolution/ShaderEvolutionManager.cpp \
     support/Settings.cpp \
     support/camera/CamtransCamera.cpp \
     support/camera/OrbitingCamera.cpp \
@@ -48,9 +49,10 @@ SOURCES += ui/mainwindow.cpp \
     support/lib/CS123XmlSceneParser.cpp \
     support/lib/RGBA.cpp \
     support/lib/ResourceLoader.cpp \
+    support/scenegraph/LSystemTreeScene.cpp \
     support/scenegraph/OpenGLScene.cpp \
     support/scenegraph/Scene.cpp \
-    support/scenegraph/SceneviewScene.cpp \
+    support/scenegraph/ShaderEvolutionTestingScene.cpp \
     support/scenegraph/SupportCanvas3D.cpp \
     support/shapes/CircularPlane.cpp \
     support/shapes/Cone.cpp \
@@ -62,11 +64,10 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Shape.cpp \
     support/shapes/Sphere.cpp \
     support/shapes/Surface.cpp \
-    support/shapes/Torus.cpp \
-    ui/view.cpp \
-    ui/viewformat.cpp
+    support/shapes/Torus.cpp
 
 HEADERS += ui/mainwindow.h \
+    shaderevolution/ShaderEvolutionManager.h \
     support/Settings.h \
     support/camera/Camera.h \
     support/camera/CamtransCamera.h \
@@ -341,9 +342,10 @@ HEADERS += ui/mainwindow.h \
     support/lib/CS123XmlSceneParser.h \
     support/lib/RGBA.h \
     support/lib/ResourceLoader.h \
+    support/scenegraph/LSystemTreeScene.h \
     support/scenegraph/OpenGLScene.h \
     support/scenegraph/Scene.h \
-    support/scenegraph/SceneviewScene.h \
+    support/scenegraph/ShaderEvolutionTestingScene.h \
     support/scenegraph/SupportCanvas3D.h \
     support/shapes/CircularPlane.h \
     support/shapes/Cone.h \
@@ -357,9 +359,7 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Surface.h \
     support/shapes/Torus.h \
     ui_mainwindow.h \
-    glew-1.10.0/include/GL/glew.h \
-    ui/view.h \
-    ui/viewformat.h
+    glew-1.10.0/include/GL/glew.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
