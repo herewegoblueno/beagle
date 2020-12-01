@@ -399,4 +399,7 @@ DISTFILES += \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
     shaders/normals/normalsArrow.vert \
-    support/glm/CMakeLists.txt
+    shaders/shaderevolutionshader.frag \
+    shaders/shaderevolutionshader.vert \
+    support/glm/CMakeLists.txt \
+    xmlScenes/shaderTestingScene.xml

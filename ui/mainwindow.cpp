@@ -60,6 +60,7 @@ void MainWindow::fileOpen(QString file) {
     // This opens the 3D tab to initialize OGL so parsing
     // the scene doesn't crash. If you can find a better solution
     // feel free to change this.
+    //^That comment is form support code...
     if (!file.isNull()) {
         if (file.endsWith(".xml")) {
             CS123XmlSceneParser parser(file.toLatin1().data());

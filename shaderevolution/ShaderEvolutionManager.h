@@ -12,7 +12,6 @@ public:
     MainWindow * m_window;
 
     QString m_shaderScenePath;
-    QString getShaderScenePath();
     void renderTestingScene();
     void mutate();
 
