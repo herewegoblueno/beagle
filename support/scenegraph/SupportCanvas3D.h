@@ -122,9 +122,11 @@ private:
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
     //std::unique_ptr<ShapesScene> m_shapesScene;
+
     std::unique_ptr<LSystemTreeScene> m_LSystemScene;
-    std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_LSystemSceneCameraConfig;
+
+    std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_shaderTestingSceneCameraConfig;
 
 };

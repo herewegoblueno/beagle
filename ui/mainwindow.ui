@@ -59,7 +59,7 @@
       <item>
        <widget class="QTabWidget" name="mainTabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="shaderTab">
          <attribute name="title">
@@ -115,6 +115,19 @@
           </property>
           <property name="text">
            <string>Use Point Lights</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="useOrbitingCamera">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>70</y>
+            <width>151</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Use Orbiting Camera</string>
           </property>
          </widget>
         </widget>

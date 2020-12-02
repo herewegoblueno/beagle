@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->useLightingForShaders->setCheckState(settings.useLighting ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->usePointLightsForShaders->setCheckState(settings.usePointLights ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->mainTabWidget->setCurrentIndex(settings.currentTab);
+    ui->useOrbitingCamera->setCheckState(settings.useOrbitCamera ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
 }
 
 MainWindow::~MainWindow()
@@ -81,9 +82,6 @@ void MainWindow::fileOpen(QString file) {
 
                   m_canvas3D->loadSceneFromParser(parser);
 
-//                if (settings.useOrbitCamera) {
-//                    ui->cameraOrbitCheckbox->setChecked(false);
-//                }
 
             } else {
                 QMessageBox::critical(this, "Error", "Could not load scene \"" + file + "\"");
@@ -136,4 +134,10 @@ void MainWindow::on_mainTabWidget_currentChanged(int index)
 void MainWindow::on_renderLTreesbutton_clicked()
 {
     fileOpen(QFileDialog::getOpenFileName(this, QString(), "/course/cs123/data/"));
+}
+
+void MainWindow::on_useOrbitingCamera_stateChanged(int state)
+{
+    settings.useOrbitCamera = state == Qt::CheckState::Checked;
+    signalSettingsChanged();
 }

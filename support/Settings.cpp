@@ -35,7 +35,7 @@ void Settings::loadSettingsOrDefaults() {
     useLighting = s.value("useLighting", true).toBool();
     usePointLights = s.value("usePointLights", true).toBool();
 
-    drawWireframe = s.value("drawWireframe", true).toBool();
+    drawWireframe = s.value("drawWireframe", false).toBool();
     drawNormals = s.value("drawNormals", false).toBool();
 
     // Camtrans
