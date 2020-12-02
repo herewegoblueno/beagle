@@ -16,9 +16,11 @@
 
 #include <chrono>
 using namespace std::chrono;
-#include <iostream>
-
 using namespace CS123::GL;
+
+#include "shaderevolution/ShaderConstructor.h"
+#include "shaderevolution/ShaderEvolutionManager.h"
+#include <iostream>
 
 
 ShaderEvolutionTestingScene::ShaderEvolutionTestingScene():
@@ -35,13 +37,20 @@ ShaderEvolutionTestingScene::~ShaderEvolutionTestingScene()
 }
 
 //Currently initializes jsut 3 for the 3 testing cubes
+//Also initializes the genotypes
 void ShaderEvolutionTestingScene::initializeShaders() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.vert");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.frag");
 
-    shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
-    shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
-    shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
+    genotype_bank.clear();
+    shader_bank.clear();
+
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.vert");
+    for (int i = 0; i < 3; i ++){
+        genotype_bank.push_back(SEManager.generateTree(100));
+        std::string fragmentSource = ShaderConstructor::genShader(genotype_bank.back()->stringify());
+        std::cout << fragmentSource << std::endl;
+        shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
+    }
+
 }
 
 void ShaderEvolutionTestingScene::render(SupportCanvas3D *context) {

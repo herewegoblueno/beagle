@@ -50,7 +50,6 @@ private:
     Ui::MainWindow *ui;
 
     SupportCanvas3D *m_canvas3D;
-    ShaderEvolutionManager *SEManager;
 
 };
 

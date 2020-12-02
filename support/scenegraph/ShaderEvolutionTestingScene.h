@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include "support/shapes/Shape.h"
+#include "shaderevolution/AstNodes.h"
 
 
 namespace CS123 { namespace GL {
@@ -25,9 +26,10 @@ public:
     virtual void render(SupportCanvas3D *context) override;
     virtual void settingsChanged() override;
 
+    void initializeShaders();
+
 private:
 
-    void initializeShaders();
     void setShaderSceneUniforms(SupportCanvas3D *context);
     void setLights();
     void defineShapeBank();
@@ -37,6 +39,7 @@ private:
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::vector<std::unique_ptr<CS123::GL::CS123Shader>> shader_bank;
+    std::vector<std::unique_ptr<GenotypeNode>> genotype_bank;
     CS123::GL::CS123Shader *current_shader;
 
     float LODdivisor;

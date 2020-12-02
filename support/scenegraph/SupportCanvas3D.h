@@ -51,6 +51,7 @@ public:
 
     // Returns a pointer to the current scene. If no scene is loaded, this function returns nullptr.
     OpenGLScene *getScene() { return m_currentScene; }
+    ShaderEvolutionTestingScene *getShaderScene() { return m_shaderTestingScene.get(); }
 
     void loadSceneFromParser(CS123XmlSceneParser &parser);
     void switchToSceneviewScene();

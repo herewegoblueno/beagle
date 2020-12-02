@@ -9,14 +9,14 @@
 #include <QMessageBox>
 #include "support/camera/CamtransCamera.h"
 #include "support/lib/CS123XmlSceneParser.h"
-#include "support/scenegraph/LSystemTreeScene.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    SEManager(new ShaderEvolutionManager(this))
+    ui(new Ui::MainWindow)
 {
+    SEManager.init(this);
+
     ui->setupUi(this);
     settings.loadSettingsOrDefaults();
     //You can make changes to the scene now
@@ -106,12 +106,12 @@ void MainWindow::fileOpen(QString file) {
 
 void MainWindow::on_mutateButton_clicked()
 {
-    SEManager->mutate();
+    SEManager.mutate(m_canvas3D->getShaderScene());
 }
 
 void MainWindow::on_renderShadersButton_clicked()
 {
-    SEManager->renderTestingScene();
+    SEManager.renderTestingScene();
 }
 
 

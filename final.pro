@@ -24,6 +24,9 @@ win32 {
 SOURCES += ui/mainwindow.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
+    shaderevolution/AstNodes.cpp \
+    shaderevolution/NodeDispenser.cpp \
+    shaderevolution/ShaderConstructor.cpp \
     shaderevolution/ShaderEvolutionManager.cpp \
     support/Settings.cpp \
     support/camera/CamtransCamera.cpp \
@@ -67,6 +70,9 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Torus.cpp
 
 HEADERS += ui/mainwindow.h \
+    shaderevolution/AstNodes.h \
+    shaderevolution/NodeDispenser.h \
+    shaderevolution/ShaderConstructor.h \
     shaderevolution/ShaderEvolutionManager.h \
     support/Settings.h \
     support/camera/Camera.h \

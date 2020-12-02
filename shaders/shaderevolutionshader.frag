@@ -7,6 +7,7 @@ in float timevar;
 out vec4 fragColor;
 
 void main(){
+    //Default value of fragColor
     fragColor = vec4(pos.r - timevar, pos.g + timevar, -timevar + pos.b, 1) / 0.5f;
     fragColor += vec4(color, 1) / 0.5f;
 }
