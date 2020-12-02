@@ -141,3 +141,10 @@ void MainWindow::on_useOrbitingCamera_stateChanged(int state)
     settings.useOrbitCamera = state == Qt::CheckState::Checked;
     signalSettingsChanged();
 }
+
+void MainWindow::on_showShaderSourceButton_clicked()
+{
+    srcWindow = new ShaderCodeDisplayer(this);
+    srcWindow->setWindowTitle("Shader Source");
+    srcWindow->show();
+}

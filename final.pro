@@ -1,7 +1,8 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-08-22T14:12:19
 # -------------------------------------------------
-QT += opengl xml
+QT += opengl xml \
+    widgets
 TARGET = final
 TEMPLATE = app
 
@@ -67,7 +68,8 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Shape.cpp \
     support/shapes/Sphere.cpp \
     support/shapes/Surface.cpp \
-    support/shapes/Torus.cpp
+    support/shapes/Torus.cpp \
+    ui/shadercodedisplayer.cpp
 
 HEADERS += ui/mainwindow.h \
     shaderevolution/AstNodes.h \
@@ -364,10 +366,12 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Sphere.h \
     support/shapes/Surface.h \
     support/shapes/Torus.h \
+    ui/shadercodedisplayer.h \
     ui_mainwindow.h \
     glew-1.10.0/include/GL/glew.h
 
-FORMS += ui/mainwindow.ui
+FORMS += ui/mainwindow.ui \
+    ui/shadercodedisplayer.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
 DEPENDPATH += glm ui glew-1.10.0/include
 

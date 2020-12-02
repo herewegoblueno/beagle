@@ -36,7 +36,7 @@ ShaderEvolutionTestingScene::~ShaderEvolutionTestingScene()
 {
 }
 
-//Currently initializes jsut 3 for the 3 testing cubes
+//Currently initializes 6 for the 6 testing cubes
 //Also initializes the genotypes
 void ShaderEvolutionTestingScene::initializeShaders() {
 
@@ -44,10 +44,9 @@ void ShaderEvolutionTestingScene::initializeShaders() {
     shader_bank.clear();
 
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.vert");
-    for (int i = 0; i < 3; i ++){
+    for (int i = 0; i < 6; i ++){
         genotype_bank.push_back(SEManager.generateTree(100));
         std::string fragmentSource = ShaderConstructor::genShader(genotype_bank.back()->stringify());
-        std::cout << fragmentSource << std::endl;
         shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
     }
 
@@ -55,7 +54,7 @@ void ShaderEvolutionTestingScene::initializeShaders() {
 
 void ShaderEvolutionTestingScene::render(SupportCanvas3D *context) {
     setLOD();
-    setClearColor();
+    glClearColor(0.2, 0.2, 0.2, 0.3);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     int size = primitives.size();

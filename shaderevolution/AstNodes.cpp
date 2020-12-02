@@ -45,3 +45,46 @@ std::string SubtractionNode::stringify(){
     return children[0]->stringify() + " - " + children[1]->stringify();
 }
 
+std::string MultiplicationNode::stringify(){
+    return "(" + children[0]->stringify() + "* " + children[1]->stringify() + ")";
+}
+
+std::string DivisionNode::stringify(){
+    return "(" + children[0]->stringify() + " / " + children[1]->stringify() + ")";
+}
+
+std::string AbsoluteValueNode::stringify(){
+    return "abs(" + children[0]->stringify() + ")";
+}
+
+std::string ModulusNode::stringify(){
+    return "mod(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string CrossProductNode::stringify(){
+    return "my_cross(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string SinNode::stringify(){
+    return "sin(" + children[0]->stringify() + ")";
+}
+
+std::string CosNode::stringify(){
+    return "cos(" + children[0]->stringify() + ")";
+}
+
+std::string AtanNode::stringify(){
+    return "atan(" + children[0]->stringify() + ")";
+}
+
+std::string MinNode::stringify(){
+    return "min(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string MaxNode::stringify(){
+    return "max(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string PerlinNoiseNode::stringify(){
+    return "perlinNoiseVec3(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}

@@ -5,17 +5,17 @@ std::minstd_rand NodeDispenser::rng(std::time(0));
 int NodeDispenser::numberOfLeavesPossible = 5;
 std::uniform_int_distribution<> NodeDispenser::leafDist(1, NodeDispenser::numberOfLeavesPossible);
 
-int NodeDispenser::numberOfOperatorsPossible = 2;
+int NodeDispenser::numberOfOperatorsPossible = 12;
 std::uniform_int_distribution<> NodeDispenser::operatorDist(1, NodeDispenser::numberOfOperatorsPossible);
 
 std::unique_ptr<GenotypeNode> NodeDispenser::getLeafNode(){
     int choice = NodeDispenser::leafDist(NodeDispenser::rng);
 
-    if (choice == 1) return std::unique_ptr<XPositionNode>(new XPositionNode());
-    if (choice == 2) return std::unique_ptr<ZPositionNode>(new ZPositionNode());
-    if (choice == 3) return std::unique_ptr<YPositionNode>(new YPositionNode());
-    if (choice == 4) return std::unique_ptr<TimeNode>(new TimeNode());
-    if (choice == 5) return std::unique_ptr<RandomVecNode>(new RandomVecNode(rng()));
+    if (choice == 1) return std::make_unique<XPositionNode>();
+    if (choice == 2) return std::make_unique<ZPositionNode>();
+    if (choice == 3) return std::make_unique<YPositionNode>();
+    if (choice == 4) return std::make_unique<TimeNode>();
+    if (choice == 5) return std::make_unique<RandomVecNode>(rng());
     return nullptr;
 }
 
@@ -23,7 +23,19 @@ std::unique_ptr<GenotypeNode> NodeDispenser::getLeafNode(){
 std::unique_ptr<GenotypeNode> NodeDispenser::getOperationNode(){
     int choice = NodeDispenser::operatorDist(NodeDispenser::rng);
 
-    if (choice == 1) return std::unique_ptr<AdditionNode>(new AdditionNode());
-    if (choice == 2) return std::unique_ptr<SubtractionNode>(new SubtractionNode());
+    if (choice == 1) return std::make_unique<AdditionNode>();
+    if (choice == 2) return std::make_unique<SubtractionNode>();
+    if (choice == 3) return std::make_unique<CrossProductNode>();
+    if (choice == 4) return std::make_unique<MultiplicationNode>();
+    if (choice == 5) return std::make_unique<DivisionNode>();
+    if (choice == 6) return std::make_unique<AbsoluteValueNode>();
+//    if (choice == 7) return std::make_unique<ModulusNode>();
+    if (choice == 7) return std::make_unique<SinNode>();
+    if (choice == 8) return std::make_unique<CosNode>();
+    if (choice == 9) return std::make_unique<AtanNode>();
+    if (choice == 10) return std::make_unique<MinNode>();
+    if (choice == 11) return std::make_unique<MaxNode>();
+    if (choice == 12) return std::make_unique<PerlinNoiseNode>();
+
     return nullptr;
 }

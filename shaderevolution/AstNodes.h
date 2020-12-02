@@ -48,7 +48,7 @@ public:
 
 private:
     float min = 0;
-    float max = 5;
+    float max = 1.7;
 };
 
 
@@ -64,6 +64,72 @@ public:
 class SubtractionNode : public GenotypeNode {
 public:
     SubtractionNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class DivisionNode : public GenotypeNode {
+public:
+    DivisionNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class MultiplicationNode : public GenotypeNode {
+public:
+    MultiplicationNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class ModulusNode : public GenotypeNode {
+public:
+    ModulusNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class AbsoluteValueNode : public GenotypeNode {
+public:
+    AbsoluteValueNode() : GenotypeNode(1){}
+    std::string stringify() override;
+};
+
+class CrossProductNode : public GenotypeNode {
+public:
+    CrossProductNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class SinNode : public GenotypeNode {
+public:
+    SinNode() : GenotypeNode(1){}
+    std::string stringify() override;
+};
+
+class CosNode : public GenotypeNode {
+public:
+    CosNode() : GenotypeNode(1){}
+    std::string stringify() override;
+};
+
+class AtanNode : public GenotypeNode {
+public:
+    AtanNode() : GenotypeNode(1){}
+    std::string stringify() override;
+};
+
+class MaxNode : public GenotypeNode {
+public:
+    MaxNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class MinNode : public GenotypeNode {
+public:
+    MinNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class PerlinNoiseNode : public GenotypeNode {
+public:
+    PerlinNoiseNode() : GenotypeNode(2){}
     std::string stringify() override;
 };
 
