@@ -22,6 +22,8 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    lsystems/LSystem.cpp \
+    lsystems/Turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
     shaderevolution/ShaderEvolutionManager.cpp \
@@ -67,6 +69,8 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Torus.cpp
 
 HEADERS += ui/mainwindow.h \
+    lsystems/LSystem.h \
+    lsystems/Turtle.h \
     shaderevolution/ShaderEvolutionManager.h \
     support/Settings.h \
     support/camera/Camera.h \
