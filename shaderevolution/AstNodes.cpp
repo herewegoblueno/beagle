@@ -88,3 +88,19 @@ std::string MaxNode::stringify(){
 std::string PerlinNoiseNode::stringify(){
     return "perlinNoiseVec3(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
 }
+
+std::string XTransplantNode::stringify(){
+    return "transplantX(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string YTransplantNode::stringify(){
+    return "transplantY(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string ZTransplantNode::stringify(){
+    return "transplantZ(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}
+
+std::string AverageNode::stringify(){
+    return "average(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+}

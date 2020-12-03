@@ -22,6 +22,7 @@ using namespace CS123::GL;
 #include "shaderevolution/ShaderEvolutionManager.h"
 #include <iostream>
 
+int ShaderEvolutionTestingScene::numberOfTestShaders = 6;
 
 ShaderEvolutionTestingScene::ShaderEvolutionTestingScene():
     LODdivisor(-1), //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
@@ -42,11 +43,14 @@ void ShaderEvolutionTestingScene::initializeShaders() {
 
     genotype_bank.clear();
     shader_bank.clear();
+    shaderText_bank.clear();
 
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.vert");
-    for (int i = 0; i < 6; i ++){
-        genotype_bank.push_back(SEManager.generateTree(100));
-        std::string fragmentSource = ShaderConstructor::genShader(genotype_bank.back()->stringify());
+    for (int i = 0; i < ShaderEvolutionTestingScene::numberOfTestShaders; i ++){
+        genotype_bank.push_back(SEManager.generateTree());
+        std::string src = genotype_bank.back()->stringify();
+        shaderText_bank.push_back(src);
+        std::string fragmentSource = ShaderConstructor::genShader(src);
         shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
     }
 
@@ -132,4 +136,9 @@ float ShaderEvolutionTestingScene::calculateTime(){
     const float frequency = 0.1; // Frequency in Hz
     return sinf(2 * pi * frequency * 0.001 * difference);
 }
+
+std::string ShaderEvolutionTestingScene::getShaderSource(int index){
+    return shaderText_bank[index];
+}
+
 

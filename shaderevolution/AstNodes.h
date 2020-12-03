@@ -133,4 +133,28 @@ public:
     std::string stringify() override;
 };
 
+class XTransplantNode : public GenotypeNode {
+public:
+    XTransplantNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class YTransplantNode : public GenotypeNode {
+public:
+    YTransplantNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class ZTransplantNode : public GenotypeNode {
+public:
+    ZTransplantNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
+class AverageNode : public GenotypeNode {
+public:
+    AverageNode() : GenotypeNode(2){}
+    std::string stringify() override;
+};
+
 #endif // ASTNODES_H

@@ -104,7 +104,7 @@ void checkShaderCompilationStatus(GLuint shaderID) {
 
         std::cerr << &errorLog[0] << std::endl;
     } else {
-        std::cerr << "Shader compiled." << std::endl;
+        //std::cerr << "Shader compiled." << std::endl;
     }
 }
 
@@ -114,7 +114,7 @@ void checkShaderLinkStatus(GLuint shaderProgramID) {
     if (linked == GL_FALSE) {
         std::cerr << "Shader failed to link" << std::endl;
     } else {
-        std::cerr << "Shader linked successfully." << std::endl;
+        //std::cerr << "Shader linked successfully." << std::endl;
     }
 }
 

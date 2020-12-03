@@ -5,7 +5,7 @@ std::minstd_rand NodeDispenser::rng(std::time(0));
 int NodeDispenser::numberOfLeavesPossible = 5;
 std::uniform_int_distribution<> NodeDispenser::leafDist(1, NodeDispenser::numberOfLeavesPossible);
 
-int NodeDispenser::numberOfOperatorsPossible = 12;
+int NodeDispenser::numberOfOperatorsPossible = 16;
 std::uniform_int_distribution<> NodeDispenser::operatorDist(1, NodeDispenser::numberOfOperatorsPossible);
 
 std::unique_ptr<GenotypeNode> NodeDispenser::getLeafNode(){
@@ -36,6 +36,10 @@ std::unique_ptr<GenotypeNode> NodeDispenser::getOperationNode(){
     if (choice == 10) return std::make_unique<MinNode>();
     if (choice == 11) return std::make_unique<MaxNode>();
     if (choice == 12) return std::make_unique<PerlinNoiseNode>();
+    if (choice == 13) return std::make_unique<XTransplantNode>();
+    if (choice == 14) return std::make_unique<YTransplantNode>();
+    if (choice == 15) return std::make_unique<ZTransplantNode>();
+    if (choice == 16) return std::make_unique<AverageNode>();
 
     return nullptr;
 }

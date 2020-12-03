@@ -9,7 +9,8 @@ ShaderEvolutionManager SEManager;
 void ShaderEvolutionManager::init(MainWindow * window)
 {
     m_window = window;
-    changeDist = std::uniform_int_distribution<>(1, 100);
+    maxProbability = 100;
+    changeDist = std::uniform_int_distribution<>(1, maxProbability);
 }
 
 
@@ -30,6 +31,10 @@ std::unique_ptr<GenotypeNode> ShaderEvolutionManager::generateTree(int chanceOfO
         nodePointer->children.push_back(generateTree(chanceOfOperator - 10));
     }
     return nodePointer;
+}
+
+std::unique_ptr<GenotypeNode> ShaderEvolutionManager::generateTree(){
+    return generateTree(maxProbability);
 }
 
 void ShaderEvolutionManager::renderTestingScene(){

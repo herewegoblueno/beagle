@@ -9,6 +9,8 @@
 
 class SupportCanvas3D;
 class ShaderEvolutionManager;
+class ShaderCodeDisplayer;
+class ShaderEvolutionTestingScene;
 
 namespace Ui {
     class MainWindow;
@@ -25,6 +27,7 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void fileOpen(QString file);
+    ShaderEvolutionTestingScene* getShaderScene();
 
 protected:
 
@@ -40,7 +43,6 @@ private slots:
     void on_usePointLightsForShaders_stateChanged(int arg1);
 
     void on_useLightingForShaders_stateChanged(int arg1);
-
 
     void on_mainTabWidget_currentChanged(int index);
 

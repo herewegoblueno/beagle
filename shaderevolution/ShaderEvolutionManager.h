@@ -16,12 +16,15 @@ public:
     MainWindow * m_window;
 
     std::unique_ptr<GenotypeNode> generateTree(int chanceOfOperator);
+    std::unique_ptr<GenotypeNode> generateTree();
     std::minstd_rand rng;
     std::uniform_int_distribution<> changeDist;
 
     QString m_shaderScenePath;
     void renderTestingScene();
     void mutate(ShaderEvolutionTestingScene * scene);
+
+    int maxProbability;
 
 };
 

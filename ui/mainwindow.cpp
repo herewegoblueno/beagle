@@ -13,11 +13,16 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    srcWindow(new ShaderCodeDisplayer(this))
+
 {
     SEManager.init(this);
-
     ui->setupUi(this);
+
+    srcWindow = new ShaderCodeDisplayer(this);
+    srcWindow->setWindowTitle("Shader Source");
+
     settings.loadSettingsOrDefaults();
     //You can make changes to the scene now
 
@@ -144,7 +149,11 @@ void MainWindow::on_useOrbitingCamera_stateChanged(int state)
 
 void MainWindow::on_showShaderSourceButton_clicked()
 {
-    srcWindow = new ShaderCodeDisplayer(this);
-    srcWindow->setWindowTitle("Shader Source");
+    srcWindow->reset();
     srcWindow->show();
 }
+
+ShaderEvolutionTestingScene* MainWindow::getShaderScene(){
+    return m_canvas3D->getShaderScene();
+}
+

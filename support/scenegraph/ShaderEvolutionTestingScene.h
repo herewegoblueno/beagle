@@ -28,6 +28,9 @@ public:
 
     void initializeShaders();
 
+    static int numberOfTestShaders;
+    std::string getShaderSource(int index);
+
 private:
 
     void setShaderSceneUniforms(SupportCanvas3D *context);
@@ -39,6 +42,7 @@ private:
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::vector<std::unique_ptr<CS123::GL::CS123Shader>> shader_bank;
+    std::vector<std::string> shaderText_bank;
     std::vector<std::unique_ptr<GenotypeNode>> genotype_bank;
     CS123::GL::CS123Shader *current_shader;
 

@@ -66,6 +66,23 @@ std::string ShaderConstructor::beginning = R"(
        return vec3(pNoise(v.xy, res), pNoise(v.yz, res), pNoise(v.zx, res));
     }
 
+   //For the 3 transplant nodes...
+   vec3 transplantY(vec3 donor, vec3 recepeint){
+       return vec3(recepeint.x, donor.y, recepeint.z);
+   }
+
+   vec3 transplantX(vec3 donor, vec3 recepeint){
+       return vec3(donor.x, recepeint.y, recepeint.z);
+   }
+
+   vec3 transplantZ(vec3 donor, vec3 recepeint){
+       return vec3(recepeint.x, recepeint.y, donor.z);
+   }
+
+   //For AverageNode
+   vec3 average(vec3 a, vec3 b){
+       return (a + b) / 2.0;
+   }
 
    void main(){
        //Default value of fragColor
