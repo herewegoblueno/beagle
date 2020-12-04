@@ -5,7 +5,7 @@
 Turtle::Turtle()
 {
     // set up initial turtle position - bottom of unit shape
-    m_turtlePos = glm::vec3(0, -0.5, 0);
+    m_turtlePos = glm::vec3(0, -1.25f, 0);
     // initially faces upwards
     m_turtleDir = glm::vec3(0, 1, 0);
     // initialize all vectors

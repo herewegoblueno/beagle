@@ -14,6 +14,8 @@
 #include "support/shapes/Cylinder.h"
 #include "support/shapes/Torus.h"
 
+#include <iostream>
+
 using namespace CS123::GL;
 
 
@@ -181,10 +183,18 @@ void LSystemTreeScene::defineShapeBank(){
 
 void LSystemTreeScene::makeLSystemVisualizer() {
     int numCyls = m_lSystemViz->getNumCyls();
+    CS123SceneMaterial material;
+    material.clear();
+    material.cAmbient.r = 0.2f;
+    material.cAmbient.g = 0.1f;
+    material.cDiffuse.r = 1.0f;
+    material.cDiffuse.g = 0.5f;
+    material.cSpecular.r = material.cSpecular.g = material.cSpecular.b = 1;
+    material.shininess = 64;
     // add all cylinders to scene
     for(int i = 0; i < numCyls; i++) {
         // make a new scene primitive
-        CS123ScenePrimitive cyl = {PrimitiveType::PRIMITIVE_CYLINDER, NULL, {glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 1)}};
+        CS123ScenePrimitive cyl = {PrimitiveType::PRIMITIVE_CYLINDER, std::string(), material};
         addPrimitive(cyl, m_lSystemViz->getTransformationMatrix(i));
 
     }
