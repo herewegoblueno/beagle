@@ -79,3 +79,12 @@ void Turtle::pop(void) {
     m_turtleDir = m_angleStack.top();
     m_angleStack.pop();
 }
+
+std::vector<glm::vec3> Turtle::getStartingCoords() {
+    return m_startingCoords;
+}
+
+
+std::vector<glm::vec3> Turtle::getEndingCoords() {
+    return m_endingCoords;
+}

@@ -12,6 +12,8 @@ public:
     LSystem();
     LSystem(std::map<std::string, std::string> & mappings, std::string start, float angle);
     std::string generate(int replacements);
+    std::vector<glm::vec3> getStartingPoints(void);
+    std::vector<glm::vec3> getEndingPoints(void);
 private:
     std::string m_current;
     std::map<std::string, std::string> m_mappings;

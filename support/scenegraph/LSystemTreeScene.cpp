@@ -26,6 +26,9 @@ LSystemTreeScene::LSystemTreeScene()
     shapeBank.resize(6);
     LODdivisor = -1; //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
     defineShapeBank();
+    // make a new L System visualizer
+    m_lSystemViz = std::make_unique<LSystemVisualizer>();
+    makeLSystemVisualizer();
 }
 
 LSystemTreeScene::~LSystemTreeScene()
@@ -176,3 +179,13 @@ void LSystemTreeScene::defineShapeBank(){
     shapeBank[5] = std::make_unique<Sphere>(p1, p2); //Speres will substitite for meshes for now
 }
 
+void LSystemTreeScene::makeLSystemVisualizer() {
+    int numCyls = m_lSystemViz->getNumCyls();
+    // add all cylinders to scene
+    for(int i = 0; i < numCyls; i++) {
+        // make a new scene primitive
+        CS123ScenePrimitive cyl = {PrimitiveType::PRIMITIVE_CYLINDER, NULL, {glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 1)}};
+        addPrimitive(cyl, m_lSystemViz->getTransformationMatrix(i));
+
+    }
+}

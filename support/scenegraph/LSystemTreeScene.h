@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 #include "support/shapes/Shape.h"
+#include "lsystems/LSystemVisualizer.h"
 
 
 namespace CS123 { namespace GL {
@@ -62,12 +63,14 @@ private:
     void renderGeometry(RENDERING_PASS pass);
     void defineShapeBank();
     void setLOD();
+    void makeLSystemVisualizer();
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
     std::unique_ptr<CS123::GL::Shader> m_wireframeShader;
     std::unique_ptr<CS123::GL::Shader> m_normalsShader;
     std::unique_ptr<CS123::GL::Shader> m_normalsArrowShader;
+    std::unique_ptr<LSystemVisualizer> m_lSystemViz;
 
     float LODdivisor;
 

@@ -15,6 +15,8 @@ public:
     void turnAround(void);
     void push(void);
     void pop(void);
+    std::vector<glm::vec3> getStartingCoords(void);
+    std::vector<glm::vec3> getEndingCoords(void);
 private:
     glm::vec3 m_turtlePos;
     glm::vec3 m_turtleDir;

@@ -80,3 +80,11 @@ void LSystem::replace() {
     m_current = replaced;
 
 }
+
+std::vector<glm::vec3> LSystem::getStartingPoints() {
+    return m_turtle->getStartingCoords();
+}
+
+std::vector<glm::vec3> LSystem::getEndingPoints() {
+    return m_turtle->getEndingCoords();
+}

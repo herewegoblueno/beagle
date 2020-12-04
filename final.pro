@@ -23,6 +23,7 @@ win32 {
 
 SOURCES += ui/mainwindow.cpp \
     lsystems/LSystem.cpp \
+    lsystems/LSystemVisualizer.cpp \
     lsystems/Turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
@@ -70,6 +71,7 @@ SOURCES += ui/mainwindow.cpp \
 
 HEADERS += ui/mainwindow.h \
     lsystems/LSystem.h \
+    lsystems/LSystemVisualizer.h \
     lsystems/Turtle.h \
     shaderevolution/ShaderEvolutionManager.h \
     support/Settings.h \
@@ -362,7 +364,6 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Sphere.h \
     support/shapes/Surface.h \
     support/shapes/Torus.h \
-    ui_mainwindow.h \
     glew-1.10.0/include/GL/glew.h
 
 FORMS += ui/mainwindow.ui
