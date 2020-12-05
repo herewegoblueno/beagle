@@ -9,5 +9,8 @@
 void mutate(GenotypeNode *current, GenotypeNode *parent, int generationToMutate);
 
 GenotypeNode *replaceWithRandomTree(GenotypeNode *current, GenotypeNode *parent, int currentGeneration);
+void addLeafOffset(GenotypeNode *current, int currentGeneration);
+GenotypeNode *changeOperator(GenotypeNode *current, GenotypeNode *parent, int currentGeneration);
+
 
 #endif // MUTATIONFACTORY_H
