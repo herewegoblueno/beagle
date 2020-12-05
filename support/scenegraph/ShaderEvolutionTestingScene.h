@@ -26,10 +26,12 @@ public:
     virtual void render(SupportCanvas3D *context) override;
     virtual void settingsChanged() override;
 
-    void initializeShaders();
+    void initializeGenotypes();
+    void constructShaders();
+    void mutateGenotypes();
 
     static int numberOfTestShaders;
-    std::string getShaderSource(int index);
+    std::string getShaderSource(int index, bool showAnnotations);
 
 private:
 
@@ -42,8 +44,7 @@ private:
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::vector<std::unique_ptr<CS123::GL::CS123Shader>> shader_bank;
-    std::vector<std::string> shaderText_bank;
-    std::vector<std::unique_ptr<GenotypeNode>> genotype_bank;
+    std::vector<std::unique_ptr<ShaderGenotype>> genotype_bank;
     CS123::GL::CS123Shader *current_shader;
 
     float LODdivisor;

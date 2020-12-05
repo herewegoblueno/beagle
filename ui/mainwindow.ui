@@ -81,14 +81,14 @@
          <widget class="QPushButton" name="renderShadersButton">
           <property name="geometry">
            <rect>
-            <x>40</x>
+            <x>30</x>
             <y>260</y>
-            <width>131</width>
+            <width>151</width>
             <height>24</height>
            </rect>
           </property>
           <property name="text">
-           <string>Render Scene</string>
+           <string>Initialize population</string>
           </property>
          </widget>
          <widget class="QCheckBox" name="useLightingForShaders">

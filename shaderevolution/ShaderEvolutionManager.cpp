@@ -37,6 +37,19 @@ std::unique_ptr<GenotypeNode> ShaderEvolutionManager::generateTree(){
     return generateTree(maxProbability);
 }
 
+//The following two shouldn't be needed really, since these should be set in the constructor of GenotypeNode
+//But it'll be a hassle becuase I have lots of node types (and hence constructors to edit for each of them)
+void ShaderEvolutionManager::setNodeGeneration(GenotypeNode *node, int generation){
+    node->generation = generation;
+}
+
+void ShaderEvolutionManager::setTreeGeneration(GenotypeNode *node, int generation){
+    node->generation = generation;
+    for (int i = 0; i < node->numberOfChildrenNeeded; i++){
+        setTreeGeneration(node->children[i].get(), generation);
+    }
+}
+
 void ShaderEvolutionManager::renderTestingScene(){
     m_window->fileOpen(":/xmlScenes/xmlScenes/shaderTestingScene.xml");
 }
@@ -44,7 +57,7 @@ void ShaderEvolutionManager::renderTestingScene(){
 
 void ShaderEvolutionManager::mutate(ShaderEvolutionTestingScene * scene){
     if (scene != nullptr){
-        scene->initializeShaders();
+        scene->mutateGenotypes();
     }
 }
 

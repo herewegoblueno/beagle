@@ -2,20 +2,37 @@
 #include <random>
 
 
+ShaderGenotype::ShaderGenotype(std::unique_ptr<GenotypeNode> rt):
+    root(std::move(rt)),
+    currentGeneration(0)
+{
+}
+
+std::string GenotypeNode::stringify(bool showAnnotations){
+    if (showAnnotations){
+        return ("<b><i><font color='#ff0000'>["
+                + std::to_string(generation)
+                + "]</font></i></b>"
+                + stringifyDispatch(true));
+    }
+    return stringifyDispatch(false);
+}
+
+
 //******************LEAF NODES******************
-std::string XPositionNode::stringify(){
+std::string XPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.x)";
 }
 
-std::string YPositionNode::stringify(){
+std::string YPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.y)";
 }
 
-std::string ZPositionNode::stringify(){
+std::string ZPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.z)";
 }
 
-std::string TimeNode::stringify(){
+std::string TimeNode::stringifyDispatch(bool a){
     return "vec3(timevar)";
 }
 
@@ -24,7 +41,7 @@ RandomVecNode::RandomVecNode(int seed){
     m_seed = seed;
 }
 
-std::string RandomVecNode::stringify(){
+std::string RandomVecNode::stringifyDispatch(bool a){
     std::minstd_rand rng(m_seed);
     std::uniform_real_distribution<> dist(min,max);
 
@@ -37,70 +54,70 @@ std::string RandomVecNode::stringify(){
 
 //******************OPERATION NODES******************
 
-std::string AdditionNode::stringify(){
-    return children[0]->stringify() + " + " + children[1]->stringify();
+std::string AdditionNode::stringifyDispatch(bool a){
+    return children[0]->stringify(a) + " + " + children[1]->stringify(a);
 }
 
-std::string SubtractionNode::stringify(){
-    return children[0]->stringify() + " - " + children[1]->stringify();
+std::string SubtractionNode::stringifyDispatch(bool a){
+    return children[0]->stringify(a) + " - " + children[1]->stringify(a);
 }
 
-std::string MultiplicationNode::stringify(){
-    return "(" + children[0]->stringify() + "* " + children[1]->stringify() + ")";
+std::string MultiplicationNode::stringifyDispatch(bool a){
+    return "(" + children[0]->stringify(a) + "* " + children[1]->stringify(a) + ")";
 }
 
-std::string DivisionNode::stringify(){
-    return "(" + children[0]->stringify() + " / " + children[1]->stringify() + ")";
+std::string DivisionNode::stringifyDispatch(bool a){
+    return "(" + children[0]->stringify(a) + " / " + children[1]->stringify(a) + ")";
 }
 
-std::string AbsoluteValueNode::stringify(){
-    return "abs(" + children[0]->stringify() + ")";
+std::string AbsoluteValueNode::stringifyDispatch(bool a){
+    return "abs(" + children[0]->stringify(a) + ")";
 }
 
-std::string ModulusNode::stringify(){
-    return "mod(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string ModulusNode::stringifyDispatch(bool a){
+    return "mod(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string CrossProductNode::stringify(){
-    return "my_cross(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string CrossProductNode::stringifyDispatch(bool a){
+    return "my_cross(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string SinNode::stringify(){
-    return "sin(" + children[0]->stringify() + ")";
+std::string SinNode::stringifyDispatch(bool a){
+    return "sin(" + children[0]->stringify(a) + ")";
 }
 
-std::string CosNode::stringify(){
-    return "cos(" + children[0]->stringify() + ")";
+std::string CosNode::stringifyDispatch(bool a){
+    return "cos(" + children[0]->stringify(a) + ")";
 }
 
-std::string AtanNode::stringify(){
-    return "atan(" + children[0]->stringify() + ")";
+std::string AtanNode::stringifyDispatch(bool a){
+    return "atan(" + children[0]->stringify(a) + ")";
 }
 
-std::string MinNode::stringify(){
-    return "min(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string MinNode::stringifyDispatch(bool a){
+    return "min(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string MaxNode::stringify(){
-    return "max(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string MaxNode::stringifyDispatch(bool a){
+    return "max(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string PerlinNoiseNode::stringify(){
-    return "perlinNoiseVec3(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string PerlinNoiseNode::stringifyDispatch(bool a){
+    return "perlinNoiseVec3(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string XTransplantNode::stringify(){
-    return "transplantX(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string XTransplantNode::stringifyDispatch(bool a){
+    return "transplantX(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string YTransplantNode::stringify(){
-    return "transplantY(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string YTransplantNode::stringifyDispatch(bool a){
+    return "transplantY(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string ZTransplantNode::stringify(){
-    return "transplantZ(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string ZTransplantNode::stringifyDispatch(bool a){
+    return "transplantZ(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }
 
-std::string AverageNode::stringify(){
-    return "average(" + children[0]->stringify() + ",  " + children[1]->stringify() + ")";
+std::string AverageNode::stringifyDispatch(bool a){
+    return "average(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
 }

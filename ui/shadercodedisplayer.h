@@ -31,10 +31,13 @@ private slots:
 
     void on_increaseButton_clicked();
 
+    void on_showGenerations_stateChanged(int arg1);
+
 private:
     Ui::ShaderCodeDisplayer *ui;
     int currentIndex;
     MainWindow *mainWindow;
+    bool showGenerations;
 
 };
 

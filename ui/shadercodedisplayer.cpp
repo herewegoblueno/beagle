@@ -7,7 +7,8 @@
 ShaderCodeDisplayer::ShaderCodeDisplayer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ShaderCodeDisplayer),
-    mainWindow((MainWindow *) parent)
+    mainWindow((MainWindow *) parent),
+    showGenerations(false)
 {
     ui->setupUi(this);
 }
@@ -28,7 +29,7 @@ void ShaderCodeDisplayer::setShaderIndex(int i)
     currentIndex = i;
     ui->shaderIndex->setText(QString::number(i + 1));
     ui->shaderIndex->repaint();
-    ui->shaderCode->setText(QString::fromStdString(mainWindow->getShaderScene()->getShaderSource(i)));
+    ui->shaderCode->setText(QString::fromStdString(mainWindow->getShaderScene()->getShaderSource(i, showGenerations)));
     updateGeometry();
 }
 
@@ -52,5 +53,11 @@ void ShaderCodeDisplayer::on_decreaseButton_clicked()
 void ShaderCodeDisplayer::on_increaseButton_clicked()
 {
     currentIndex = (currentIndex + 1) % ShaderEvolutionTestingScene::numberOfTestShaders;
+    setShaderIndex(currentIndex);
+}
+
+void ShaderCodeDisplayer::on_showGenerations_stateChanged(int state)
+{
+    showGenerations = state == Qt::CheckState::Checked;
     setShaderIndex(currentIndex);
 }

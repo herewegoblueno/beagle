@@ -26,6 +26,7 @@ SOURCES += ui/mainwindow.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
     shaderevolution/AstNodes.cpp \
+    shaderevolution/MutationFactory.cpp \
     shaderevolution/NodeDispenser.cpp \
     shaderevolution/ShaderConstructor.cpp \
     shaderevolution/ShaderEvolutionManager.cpp \
@@ -73,6 +74,7 @@ SOURCES += ui/mainwindow.cpp \
 
 HEADERS += ui/mainwindow.h \
     shaderevolution/AstNodes.h \
+    shaderevolution/MutationFactory.h \
     shaderevolution/NodeDispenser.h \
     shaderevolution/ShaderConstructor.h \
     shaderevolution/ShaderEvolutionManager.h \

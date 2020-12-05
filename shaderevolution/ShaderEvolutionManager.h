@@ -17,14 +17,17 @@ public:
 
     std::unique_ptr<GenotypeNode> generateTree(int chanceOfOperator);
     std::unique_ptr<GenotypeNode> generateTree();
+    void setNodeGeneration(GenotypeNode *node, int generation);
+    void setTreeGeneration(GenotypeNode *node, int generation);
+
     std::minstd_rand rng;
     std::uniform_int_distribution<> changeDist;
+    int maxProbability;
 
     QString m_shaderScenePath;
     void renderTestingScene();
     void mutate(ShaderEvolutionTestingScene * scene);
 
-    int maxProbability;
 
 };
 
