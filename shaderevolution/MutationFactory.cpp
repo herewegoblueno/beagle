@@ -19,30 +19,30 @@ std::uniform_real_distribution<> offsetDist(-2.f, 2.f);
 void mutate(GenotypeNode *current, GenotypeNode *parent, int maxGenToMutate){
     if (current->generation > maxGenToMutate) return; //Skipped
 
-    //Mutate the current node (if it's not the parent node)
+//    //Mutate the current node (if it's not the parent node)
 //    if (parent != nullptr){
 //        if (mutationDist(RNG) < 10){
 //            //10% chance for mutation
-//            current = replaceWithRandomTree(current, parent, generationToMutate);
+//            current = replaceWithRandomTree(current, parent, maxGenToMutate);
 //        }
 //    }
 
-//    if (current->containsClassification(LEAF)){
-//        if (mutationDist(RNG) < 10){
-//            //10% chance for offset mutation
-//            addLeafOffset(current, maxGenToMutate);
-//        }
-//    }
-
-
-    if (parent != nullptr){
-        if (!current->containsClassification(LEAF)){
-            if (mutationDist(RNG) < 10){
-                //10% chance for mutation
-                current = changeOperator(current, parent, maxGenToMutate);
-            }
+    if (current->containsClassification(LEAF)){
+        if (mutationDist(RNG) < 10){
+            //10% chance for offset mutation
+            addLeafOffset(current, maxGenToMutate);
         }
     }
+
+
+//    if (parent != nullptr){
+//        if (!current->containsClassification(LEAF)){
+//            if (mutationDist(RNG) < 10){
+//                //10% chance for mutation
+//                current = changeOperator(current, parent, maxGenToMutate);
+//            }
+//        }
+//    }
 
     //Mutate the children
     for (int i = 0; i < current->numberOfChildrenNeeded; i ++){
@@ -87,7 +87,7 @@ GenotypeNode *changeOperator(GenotypeNode *current, GenotypeNode *parent, int cu
     for (; i < newTree->numberOfChildrenNeeded; i++){
         newTree->children.push_back(SEManager.generateTree(50));
         //These new children will need new generations
-        SEManager.setNodeGeneration(newTree->children.back().get(), currentGeneration + 1);
+        SEManager.setTreeGeneration(newTree->children.back().get(), currentGeneration + 1);
     }
 
     //Let's find the index in the parent's children list that points to the to-be-replaced node
