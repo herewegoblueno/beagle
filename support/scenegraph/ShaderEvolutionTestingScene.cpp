@@ -51,6 +51,14 @@ void ShaderEvolutionTestingScene::constructShaders() {
     shader_bank.clear();
 
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.vert");
+
+    //Uncomment these (and comment out the for loop below) if you want to test out a manually created shader
+    //super quickly
+//    for (int i = 0; i < ShaderEvolutionTestingScene::numberOfTestShaders; i ++){
+//        std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/shaders/shaderevolutionshader.frag");
+//        shader_bank.push_back(std::make_unique<CS123Shader>(vertexSource, fragmentSource));
+//    }
+
     for (int i = 0; i < ShaderEvolutionTestingScene::numberOfTestShaders; i ++){
         std::string src = genotype_bank[i]->root->stringify();
         std::string fragmentSource = ShaderConstructor::genShader(src);

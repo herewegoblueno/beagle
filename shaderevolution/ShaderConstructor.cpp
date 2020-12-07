@@ -84,6 +84,75 @@ std::string ShaderConstructor::beginning = R"(
        return (a + b) / 2.0;
    }
 
+   //For JuliaFractalNode
+   //See README for info on inspiratoin for this methodology
+   //l[x]v[n] (stand for color layer x vector n) parameters are [0, 4]
+   //l[x]ci[n] (stand for color layer coorindate index n) parameters are [0, 1]
+   vec3 fractal(vec3 scalevec, vec3 centervec, vec3 seedx, vec3 seedy,
+                bool usePositionForSeed, bool breakAfter, vec3 zStarter,
+                int l1v1, int l1v2, int l1v3, int l1ci1, int l1ci2, int l1ci3,
+                int l2v1, int l2v2, int l2v3, int l2ci1, int l2ci2, int l2ci3,
+                int l3v1, int l3v2, int l3v3, int l3ci1, int l3ci2, int l3ci3){
+
+       int maxIterations = 10;
+
+       float scale = length(scalevec);
+       vec2 center = centervec.xy;
+       vec2 z, c;
+
+       c.x = length(seedx);
+       c.y = length(seedy);
+
+       if (usePositionForSeed){
+           c.x += pos.x * scale - center.x;
+           c.y += pos.y * scale - center.y;
+       }
+
+       z.x = zStarter.x * scale - center.x;
+       z.y = zStarter.y * scale - center.y;
+
+       int i;
+       vec2 accumulator = vec2(0,0);
+       vec2 multiplier = vec2(1,1);
+       vec2 differenceHolder = vec2(0,0);
+
+       for(i=0; i<maxIterations; i++) {
+
+           float x = (z.x * z.x - z.y * z.y) + c.x;
+           float y = (z.y * z.x + z.x * z.y) + c.y;
+
+           if (!breakAfter) if((x * x + y * y) > 4.0) break;
+           z.x = x;
+           z.y = y;
+
+           accumulator += z;
+           if (x != 0) multiplier.x *= -x;
+           if (y != 0) multiplier.y *= y;
+           ((i % 2) == 0) ? differenceHolder += z : differenceHolder -= z;
+
+           if((x * x + y * y) > 4.0) break;
+       }
+
+       int numberOfLayers = 3;
+       float iterationFraction = 1 - i / float(maxIterations);
+       vec2 iterationFractionVec = vec2(iterationFraction, iterationFraction);
+       vec2 layerOps[5] = vec2[5](accumulator, multiplier, differenceHolder, iterationFractionVec, z);
+
+       vec4 col;
+       col = vec4(layerOps[l1v1][l1ci1], layerOps[l1v2][l1ci2], layerOps[l1v3][l1ci3], 1);
+       col += vec4(layerOps[l2v1][l2ci1], layerOps[l2v2][l2ci2], layerOps[l2v3][l2ci3], 1);
+       col += vec4(layerOps[l3v1][l3ci1], layerOps[l3v2][l3ci2], layerOps[l3v3][l3ci3], 1);
+
+       if (i == maxIterations){
+           col += vec4(z.x, z.y, iterationFraction, 1);
+           numberOfLayers++;
+       }
+
+       //breakAfter tends to make things very bright
+       col /= (numberOfLayers + (breakAfter ? 0.7 : 0));
+       return vec3(col) / 2;
+   }
+
    void main(){
        //Default value of fragColor
        vec3 evolvedval = )";

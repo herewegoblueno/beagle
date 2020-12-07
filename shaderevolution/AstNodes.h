@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+#include <random>
 
 //Useful for assing the "similarity" of nodes
 enum GenotypeNodeClassification{
@@ -216,6 +216,22 @@ public:
     AverageNode() : GenotypeNode(2){}
    virtual std::string stringifyDispatch(bool a) override;
     std::vector<GenotypeNodeClassification> getClassifications() override;
+};
+
+class JuliaFractalNode : public GenotypeNode {
+public:
+    JuliaFractalNode(int seed);
+    virtual std::string stringifyDispatch(bool a) override;
+    std::vector<GenotypeNodeClassification> getClassifications() override;
+
+    int m_seed;
+    bool usePositionForSeed;
+    bool breakAfter;
+    std::minstd_rand rng;
+
+    static std::uniform_int_distribution<> binaryDist;
+    static std::uniform_int_distribution<> layerChoiceDist;
+    std::vector<int> layerChoicesAndComponents;
 };
 
 #endif // ASTNODES_H

@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iomanip>
 
-
 ShaderGenotype::ShaderGenotype(std::unique_ptr<GenotypeNode> rt):
     root(std::move(rt)),
     currentGeneration(0)
@@ -36,6 +35,10 @@ std::string float_to_string(float f){
     std::ostringstream oss;
     oss << std::setprecision(8) << std::noshowpoint << f;
     return oss.str();
+}
+
+std::string bool_to_string(bool b){
+    return b ? "true" : "false";
 }
 
 
@@ -268,4 +271,52 @@ std::string AverageNode::stringifyDispatch(bool a){
 std::vector<GenotypeNodeClassification> AverageNode::getClassifications(){
     return {ARITHMETIC, BINARY_OPERATION};
 }
+//***
+std::uniform_int_distribution<> JuliaFractalNode::binaryDist(0, 1);
+std::uniform_int_distribution<> JuliaFractalNode::layerChoiceDist(0, 4);
+
+//Unlike the RandomVecNode, this initalizes its things in the contructor
+//(since there are so many), not wise to calculate everything with every stringify call
+JuliaFractalNode::JuliaFractalNode(int seed) : GenotypeNode(5)
+{
+    rng.seed(seed);
+    usePositionForSeed = JuliaFractalNode::binaryDist(rng) == 1;
+    breakAfter = JuliaFractalNode::binaryDist(rng) == 1;
+
+    //Making the coloring choices (there are 3 layers, 18 choices in total)
+    for (int layer = 0; layer < 3; layer ++){
+        //Choose the color vector type
+        for (int layer = 0; layer < 3; layer ++){
+            layerChoicesAndComponents.push_back(JuliaFractalNode::layerChoiceDist(rng));
+        }
+
+        //Choose the component chosed for each vector in this layer
+        for (int layer = 0; layer < 3; layer ++){
+            layerChoicesAndComponents.push_back(JuliaFractalNode::binaryDist(rng));
+        }
+
+    }
+
+}
+
+std::string JuliaFractalNode::stringifyDispatch(bool a){
+
+    std::string str = "fractal("
+            + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ", "
+            + children[2]->stringify(a) + ",  " + children[3]->stringify(a) + ", "
+            + bool_to_string(usePositionForSeed) + ", " + bool_to_string(usePositionForSeed) + ", "
+            + children[4]->stringify(a) + ", ";
+
+    for (int i = 0; i < 18; i++){
+        str += std::to_string(layerChoicesAndComponents[i]);
+        if (i != 17) str += ", ";
+        else str += ")";
+    }
+    return str;
+}
+
+std::vector<GenotypeNodeClassification> JuliaFractalNode::getClassifications(){
+    return {};
+}
+
 //***

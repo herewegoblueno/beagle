@@ -5,7 +5,7 @@ std::minstd_rand NodeDispenser::rng(std::time(0));
 int NodeDispenser::numberOfLeavesPossible = 5;
 std::uniform_int_distribution<> NodeDispenser::leafDist(1, NodeDispenser::numberOfLeavesPossible);
 
-int NodeDispenser::numberOfOperatorsPossible = 16;
+int NodeDispenser::numberOfOperatorsPossible = 17;
 std::uniform_int_distribution<> NodeDispenser::operatorDist(1, NodeDispenser::numberOfOperatorsPossible);
 
 std::unique_ptr<GenotypeNode> NodeDispenser::getLeafNode(){
@@ -40,6 +40,7 @@ std::unique_ptr<GenotypeNode> NodeDispenser::getOperationNode(){
     if (choice == 14) return std::make_unique<YTransplantNode>();
     if (choice == 15) return std::make_unique<ZTransplantNode>();
     if (choice == 16) return std::make_unique<AverageNode>();
+    if (choice == 17) return std::make_unique<JuliaFractalNode>(rng());
 
     return nullptr;
 }
