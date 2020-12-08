@@ -1,5 +1,6 @@
 #include "LSystem.h"
 #include <iostream>
+#include "support/Settings.h"
 
 LSystem::LSystem()
 {
@@ -7,11 +8,11 @@ LSystem::LSystem()
 }
 
 // set up L system mappings
-LSystem::LSystem(std::map<std::string, std::string> & mappings, std::string start, float angle) {
+LSystem::LSystem(const std::map<std::string, std::string> & mappings, const std::string start, const float angle) {
     m_mappings = mappings;
     m_current = start;
     m_turtle = std::make_unique<Turtle>();
-    m_length = 1.f;
+    m_length = 1.5f;
     m_angle = angle;
 
 }
@@ -34,7 +35,21 @@ void LSystem::draw(void) {
     for(int i = 0; i < currentLen; i++) {
         switch(m_current[i]){
         case 'F': {
-            m_turtle->forward(m_length);
+            //
+            if(settings.lengthStochasticity) {
+                // random number between 0 and 1
+                float randomNum = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+                randomNum -= 0.5f;
+                randomNum *= m_length;
+                if(randomNum + m_length > 0) {
+                    m_turtle->forward(m_length + randomNum);
+                } else {
+                    m_turtle->forward(m_length);
+                }
+
+            } else {
+                m_turtle->forward(m_length);
+            }
             break;
         }
         case '+': {

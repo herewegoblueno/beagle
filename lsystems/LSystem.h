@@ -10,7 +10,7 @@ class LSystem
 {
 public:
     LSystem();
-    LSystem(std::map<std::string, std::string> & mappings, std::string start, float angle);
+    LSystem(const std::map<std::string, std::string> & mappings, const std::string start, const float angle);
     std::string generate(int replacements);
     std::vector<glm::vec3> getStartingPoints(void);
     std::vector<glm::vec3> getEndingPoints(void);

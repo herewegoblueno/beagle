@@ -81,6 +81,11 @@ struct Settings
     bool useDirectionalLights;  // Enable or disable directional lighting (extra credit).
     bool useSpotLights;         // Enable or disable spot lights (extra credit).
 
+    bool lengthStochasticity;
+    bool angleStochasticity;
+
+    int numRecursions;
+    int lSystemType;
 
     int getSceneMode();
     int getCameraMode();

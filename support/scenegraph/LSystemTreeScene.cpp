@@ -159,7 +159,12 @@ void LSystemTreeScene::renderGeometry(RENDERING_PASS pass) {
 }
 
 void LSystemTreeScene::settingsChanged() {
-    defineShapeBank();
+    // make a new LSystem with the current settings
+    m_lSystemViz = std::make_unique<LSystemVisualizer>();
+    makeLSystemVisualizer();
+    std::cout << "the settings were chnanged" << std::endl;
+    std::cout << settings.lengthStochasticity << std::endl;
+    renderGeometry(PHONG);
 }
 
 void LSystemTreeScene::setLOD() {
@@ -191,6 +196,7 @@ void LSystemTreeScene::makeLSystemVisualizer() {
     material.cDiffuse.g = 0.5f;
     material.cSpecular.r = material.cSpecular.g = material.cSpecular.b = 1;
     material.shininess = 64;
+    primitives.clear();
     // add all cylinders to scene
     for(int i = 0; i < numCyls; i++) {
         // make a new scene primitive

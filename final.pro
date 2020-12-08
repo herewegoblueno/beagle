@@ -67,7 +67,8 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Shape.cpp \
     support/shapes/Sphere.cpp \
     support/shapes/Surface.cpp \
-    support/shapes/Torus.cpp
+    support/shapes/Torus.cpp \
+    lsystems/LSystemUtils.cpp
 
 HEADERS += ui/mainwindow.h \
     lsystems/LSystem.h \
@@ -364,7 +365,8 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Sphere.h \
     support/shapes/Surface.h \
     support/shapes/Torus.h \
-    glew-1.10.0/include/GL/glew.h
+    glew-1.10.0/include/GL/glew.h \
+    lsystems/LSystemUtils.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include

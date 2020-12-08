@@ -2,6 +2,7 @@
 #define LSYSTEMVISUALIZER_H
 
 #include "LSystem.h"
+#include "LSystemUtils.h"
 
 class LSystemVisualizer
 {

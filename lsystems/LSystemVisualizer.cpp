@@ -1,16 +1,18 @@
 #include "LSystemVisualizer.h"
 #include "glm/gtx/transform.hpp"
 #include <iostream>
+#include "support/Settings.h"
 
 
 LSystemVisualizer::LSystemVisualizer()
 {
     // test map for trees
-    std::map<std::string, std::string> alphabet;
-    alphabet.insert(std::pair<std::string, std::string>("F", "FF+[+F-F-F]-[-F+F+F]"));
+    // std::map<std::string, std::string> alphabet;
+    // alphabet.insert(std::pair<std::string, std::string>("F", "FF+[+F-F-F]-[-F+F+F]"));
     // make L System
-    m_LSystem = std::make_unique<LSystem>(alphabet, "F", M_PI/6.f);
-    m_LSystem->generate(2);
+    // m_LSystem = std::make_unique<LSystem>(alphabet, "F", M_PI/6.f);
+    m_LSystem = std::make_unique<LSystem>(LSystemUtils::natur_map, LSystemUtils::natur_start, LSystemUtils::natur_angle);
+    m_LSystem->generate(settings.numRecursions);
     m_LSystem->draw();
     // get coords
     m_startingPoints = m_LSystem->getStartingPoints();
@@ -30,8 +32,8 @@ glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {
     // scaling - y direction, by length of vector
     glm::vec3 scale;
     scale.y = glm::length(end - start);
-    scale.x = 0.05;
-    scale.z = 0.05;
+    scale.x = 0.025;
+    scale.z = 0.025;
     // rotate to the direction vector
     // glm::vec3 xaxis = glm::normalize(glm::cross(glm::vec3(0, 1, 0), end - start));
     // glm::vec3 yaxis = glm::normalize(glm::cross(end - start, xaxis));

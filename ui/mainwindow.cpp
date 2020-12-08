@@ -136,3 +136,32 @@ void MainWindow::on_renderLTreesbutton_clicked()
 {
     fileOpen(QFileDialog::getOpenFileName(this, QString(), "/course/cs123/data/"));
 }
+
+void MainWindow::on_angleStochasticity_stateChanged(int arg1)
+{
+    settings.angleStochasticity = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_generateLSystemTree_clicked()
+{
+
+}
+
+void MainWindow::on_lSystemType_currentIndexChanged(int index)
+{
+    settings.lSystemType = index;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_recursiveDepth_sliderMoved(int position)
+{
+    settings.numRecursions = position;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_lengthStochasticity_stateChanged(int arg1)
+{
+    settings.lengthStochasticity = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
+}
