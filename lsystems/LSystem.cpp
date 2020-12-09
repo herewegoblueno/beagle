@@ -135,3 +135,7 @@ std::vector<glm::vec3> LSystem::getStartingPoints() {
 std::vector<glm::vec3> LSystem::getEndingPoints() {
     return m_turtle->getEndingCoords();
 }
+
+std::vector<glm::vec3> LSystem::getLeaves() {
+    return m_turtle->getLeafCoords();
+}

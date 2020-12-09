@@ -218,7 +218,7 @@
           <property name="geometry">
            <rect>
             <x>30</x>
-            <y>150</y>
+            <y>180</y>
             <width>160</width>
             <height>16</height>
            </rect>
@@ -246,13 +246,26 @@
           <property name="geometry">
            <rect>
             <x>30</x>
-            <y>130</y>
+            <y>160</y>
             <width>131</width>
             <height>16</height>
            </rect>
           </property>
           <property name="text">
            <string>Recursive Depth</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="leaves">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>130</y>
+            <width>85</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Leaves</string>
           </property>
          </widget>
         </widget>

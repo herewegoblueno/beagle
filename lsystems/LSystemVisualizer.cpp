@@ -17,10 +17,15 @@ LSystemVisualizer::LSystemVisualizer()
     // get coords
     m_startingPoints = m_LSystem->getStartingPoints();
     m_endingPoints = m_LSystem->getEndingPoints();
+    m_leaves = m_LSystem->getLeaves();
 }
 
 int LSystemVisualizer::getNumCyls() {
     return m_startingPoints.size();
+}
+
+int LSystemVisualizer::getNumLeaves() {
+    return m_leaves.size();
 }
 
 glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {

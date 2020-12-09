@@ -14,6 +14,7 @@ public:
     std::string generate(int replacements);
     std::vector<glm::vec3> getStartingPoints(void);
     std::vector<glm::vec3> getEndingPoints(void);
+    std::vector<glm::vec3> getLeaves(void);
     void draw(void);
 private:
     std::string m_current;

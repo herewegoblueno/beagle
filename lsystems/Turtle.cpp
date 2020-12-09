@@ -1,6 +1,8 @@
 #include "Turtle.h"
 // model turtle graphics, except using cylinders
 #include "glm/gtx/transform.hpp"
+#include "support/Settings.h"
+
 
 Turtle::Turtle()
 {
@@ -11,6 +13,7 @@ Turtle::Turtle()
     // initialize all vectors
     m_startingCoords = std::vector<glm::vec3>();
     m_endingCoords = std::vector<glm::vec3>();
+    m_leaves = std::vector<glm::vec3>();
     // initialize the stacks
     m_coordStack = std::stack<glm::vec3>();
     m_angleStack = std::stack<glm::vec3>();
@@ -74,6 +77,10 @@ void Turtle::push(void) {
 
 // restore the turtle to the last position on the stack
 void Turtle::pop(void) {
+    // if leaves are enabled, make a leaf here
+    if(settings.hasLeaves) {
+        addLeaf();
+    }
     m_turtlePos = m_coordStack.top();
     m_coordStack.pop();
     m_turtleDir = m_angleStack.top();
@@ -87,4 +94,12 @@ std::vector<glm::vec3> Turtle::getStartingCoords() {
 
 std::vector<glm::vec3> Turtle::getEndingCoords() {
     return m_endingCoords;
+}
+
+void Turtle::addLeaf() {
+    m_leaves.push_back(m_turtlePos);
+}
+
+std::vector<glm::vec3> Turtle::getLeafCoords() {
+    return m_leaves;
 }

@@ -17,6 +17,7 @@ public:
     void pop(void);
     std::vector<glm::vec3> getStartingCoords(void);
     std::vector<glm::vec3> getEndingCoords(void);
+    std::vector<glm::vec3> getLeafCoords(void);
 private:
     glm::vec3 m_turtlePos;
     glm::vec3 m_turtleDir;
@@ -28,6 +29,7 @@ private:
     std::stack<glm::vec3> m_angleStack;
     // store where leaves are added
     std::vector<glm::vec3> m_leaves;
+    void addLeaf(void);
 
 };
 
