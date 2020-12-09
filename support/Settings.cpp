@@ -35,7 +35,7 @@ void Settings::loadSettingsOrDefaults() {
     useLighting = s.value("useLighting", true).toBool();
     usePointLights = s.value("usePointLights", true).toBool();
 
-    drawWireframe = s.value("drawWireframe", true).toBool();
+    drawWireframe = s.value("drawWireframe", false).toBool();
     drawNormals = s.value("drawNormals", false).toBool();
 
     // Camtrans
@@ -45,6 +45,13 @@ void Settings::loadSettingsOrDefaults() {
     cameraFar = s.value("cameraFar", 50).toDouble();
 
     currentTab = s.value("currentTab", SHADER_TESTING_TAB).toInt();
+
+    // l system trees
+    lengthStochasticity = s.value("lengthStochasticity").toBool();
+    angleStochasticity = s.value("angleStochasticity").toBool();
+    numRecursions = s.value("recursiveDepth").toInt();
+    lSystemType = s.value("lSystemType").toInt();
+    hasLeaves = s.value("leaves").toBool();
 
     // These are for computing deltas and the values don't matter, so start all dials in the up
     // position
@@ -77,6 +84,12 @@ void Settings::saveSettings() {
     s.setValue("usePointLights", usePointLights);
     s.setValue("useDirectionalLights", useDirectionalLights);
     s.setValue("useSpotLights", useSpotLights);
+
+    s.setValue("lengthStochasticity", lengthStochasticity);
+    s.setValue("angleStochasticity", angleStochasticity);
+    s.setValue("recursiveDepth", numRecursions);
+    s.setValue("lSystemType", lSystemType);
+    s.setValue("leaves", hasLeaves);
 
 
     s.setValue("currentTab", currentTab);

@@ -1,7 +1,8 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-08-22T14:12:19
 # -------------------------------------------------
-QT += opengl xml
+QT += opengl xml \
+    widgets
 TARGET = final
 TEMPLATE = app
 
@@ -22,8 +23,15 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    lsystems/LSystem.cpp \
+    lsystems/LSystemVisualizer.cpp \
+    lsystems/Turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
+    shaderevolution/AstNodes.cpp \
+    shaderevolution/MutationFactory.cpp \
+    shaderevolution/NodeDispenser.cpp \
+    shaderevolution/ShaderConstructor.cpp \
     shaderevolution/ShaderEvolutionManager.cpp \
     support/Settings.cpp \
     support/camera/CamtransCamera.cpp \
@@ -64,9 +72,19 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Shape.cpp \
     support/shapes/Sphere.cpp \
     support/shapes/Surface.cpp \
-    support/shapes/Torus.cpp
+    support/shapes/Torus.cpp \
+    ui/shadercodedisplayer.cpp \
+    lsystems/LSystemUtils.cpp
+
 
 HEADERS += ui/mainwindow.h \
+    lsystems/LSystem.h \
+    lsystems/LSystemVisualizer.h \
+    lsystems/Turtle.h \
+    shaderevolution/AstNodes.h \
+    shaderevolution/MutationFactory.h \
+    shaderevolution/NodeDispenser.h \
+    shaderevolution/ShaderConstructor.h \
     shaderevolution/ShaderEvolutionManager.h \
     support/Settings.h \
     support/camera/Camera.h \
@@ -358,10 +376,13 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Sphere.h \
     support/shapes/Surface.h \
     support/shapes/Torus.h \
+    ui/shadercodedisplayer.h \
     ui_mainwindow.h \
-    glew-1.10.0/include/GL/glew.h
+    glew-1.10.0/include/GL/glew.h \
+    lsystems/LSystemUtils.h
 
-FORMS += ui/mainwindow.ui
+FORMS += ui/mainwindow.ui \
+    ui/shadercodedisplayer.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
 DEPENDPATH += glm ui glew-1.10.0/include
 
@@ -399,4 +420,7 @@ DISTFILES += \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
     shaders/normals/normalsArrow.vert \
-    support/glm/CMakeLists.txt
+    shaders/shaderevolutionshader.frag \
+    shaders/shaderevolutionshader.vert \
+    support/glm/CMakeLists.txt \
+    xmlScenes/shaderTestingScene.xml

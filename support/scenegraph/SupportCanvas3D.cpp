@@ -143,6 +143,7 @@ void SupportCanvas3D::setSceneFromSettings() {
             break;
         case SCENEMODE_TREE_TESTING:
             setSceneToLSystemSceneview();
+            m_LSystemScene->render(this);
             break;
     }
     m_settingsDirty = false;

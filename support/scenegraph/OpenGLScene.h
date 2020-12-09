@@ -25,6 +25,7 @@ public:
 protected:
 
     void setClearColor();
+    void setClearColor(float r, float g, float b, float a);
 };
 
 #endif // OPENGLSCENE_H

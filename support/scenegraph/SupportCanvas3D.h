@@ -51,6 +51,7 @@ public:
 
     // Returns a pointer to the current scene. If no scene is loaded, this function returns nullptr.
     OpenGLScene *getScene() { return m_currentScene; }
+    ShaderEvolutionTestingScene *getShaderScene() { return m_shaderTestingScene.get(); }
 
     void loadSceneFromParser(CS123XmlSceneParser &parser);
     void switchToSceneviewScene();
@@ -121,9 +122,11 @@ private:
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
     //std::unique_ptr<ShapesScene> m_shapesScene;
+
     std::unique_ptr<LSystemTreeScene> m_LSystemScene;
-    std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_LSystemSceneCameraConfig;
+
+    std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_shaderTestingSceneCameraConfig;
 
 };
