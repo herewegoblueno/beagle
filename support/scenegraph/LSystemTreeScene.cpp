@@ -14,6 +14,8 @@
 #include "support/shapes/Cylinder.h"
 #include "support/shapes/Torus.h"
 
+#include <iostream>
+
 using namespace CS123::GL;
 
 
@@ -26,6 +28,17 @@ LSystemTreeScene::LSystemTreeScene()
     shapeBank.resize(6);
     LODdivisor = -1; //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
     defineShapeBank();
+    // make a new L System visualizer
+    m_lSystemViz = std::make_unique<LSystemVisualizer>();
+    makeLSystemVisualizer();
+    // add some lights to the scene
+    CS123SceneLightData light = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(1, 1, 1, 0)};
+    CS123SceneLightData light2 = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(-2, 1, -2, 0)};
+    CS123SceneGlobalData globalLSys = {0.7f, 0.6f, 0.1f, 1};
+    setGlobal(globalLSys);
+    lightingInformation.push_back(light);
+    lightingInformation.push_back(light2);
+    setLights();
 }
 
 LSystemTreeScene::~LSystemTreeScene()
@@ -154,7 +167,12 @@ void LSystemTreeScene::renderGeometry(RENDERING_PASS pass) {
 }
 
 void LSystemTreeScene::settingsChanged() {
-    defineShapeBank();
+    // make a new LSystem with the current settings
+    m_lSystemViz = std::make_unique<LSystemVisualizer>();
+    makeLSystemVisualizer();
+    // std::cout << "the settings were chnanged" << std::endl;
+    // std::cout << settings.lengthStochasticity << std::endl;
+    renderGeometry(PHONG);
 }
 
 void LSystemTreeScene::setLOD() {
@@ -176,3 +194,30 @@ void LSystemTreeScene::defineShapeBank(){
     shapeBank[5] = std::make_unique<Sphere>(p1, p2); //Speres will substitite for meshes for now
 }
 
+void LSystemTreeScene::makeLSystemVisualizer() {
+    int numCyls = m_lSystemViz->getNumCyls();
+    CS123SceneMaterial material;
+    material.clear();
+    material.cAmbient.r = 0.2f;
+    material.cAmbient.g = 0.1f;
+    material.cDiffuse.r = 1.0f;
+    material.cDiffuse.g = 0.5f;
+    material.cSpecular.r = material.cSpecular.g = material.cSpecular.b = 0.3;
+    material.shininess = 12;
+    // if seaweed, make material green
+    if(settings.lSystemType == 1) {
+        material.cAmbient.r = 0.04f;
+        material.cAmbient.g = 0.2f;
+        material.cAmbient.b = 0.04f;
+        material.cDiffuse.r = 0.2f;
+        material.cDiffuse.b = 0.4f;
+    }
+    primitives.clear();
+    // add all cylinders to scene
+    CS123ScenePrimitive cyl = {PrimitiveType::PRIMITIVE_CYLINDER, std::string(), material};
+    for(int i = 0; i < numCyls; i++) {
+        // make a new scene primitive
+        addPrimitive(cyl, m_lSystemViz->getTransformationMatrix(i));
+
+    }
+}

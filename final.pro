@@ -23,6 +23,9 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    lsystems/LSystem.cpp \
+    lsystems/LSystemVisualizer.cpp \
+    lsystems/Turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
     shaderevolution/AstNodes.cpp \
@@ -70,9 +73,14 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Sphere.cpp \
     support/shapes/Surface.cpp \
     support/shapes/Torus.cpp \
-    ui/shadercodedisplayer.cpp
+    ui/shadercodedisplayer.cpp \
+    lsystems/LSystemUtils.cpp
+
 
 HEADERS += ui/mainwindow.h \
+    lsystems/LSystem.h \
+    lsystems/LSystemVisualizer.h \
+    lsystems/Turtle.h \
     shaderevolution/AstNodes.h \
     shaderevolution/MutationFactory.h \
     shaderevolution/NodeDispenser.h \
@@ -370,7 +378,8 @@ HEADERS += ui/mainwindow.h \
     support/shapes/Torus.h \
     ui/shadercodedisplayer.h \
     ui_mainwindow.h \
-    glew-1.10.0/include/GL/glew.h
+    glew-1.10.0/include/GL/glew.h \
+    lsystems/LSystemUtils.h
 
 FORMS += ui/mainwindow.ui \
     ui/shadercodedisplayer.ui

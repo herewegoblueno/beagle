@@ -40,6 +40,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->useLightingForShaders->setCheckState((settings.useLighting && settings.usePointLights) ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->mainTabWidget->setCurrentIndex(settings.currentTab);
     ui->useOrbitingCamera->setCheckState(settings.useOrbitCamera ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
+    ui->lengthStochasticity->setCheckState(settings.lengthStochasticity ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
+    ui->angleStochasticity->setCheckState(settings.angleStochasticity ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
+    ui->recursiveDepth->setValue(settings.numRecursions);
+    ui->lSystemType->setCurrentIndex(settings.lSystemType);
 }
 
 MainWindow::~MainWindow()
@@ -241,4 +245,39 @@ void MainWindow::on_Parent2Chooser_currentIndexChanged(int index)
 void MainWindow::on_Offspringbutton_clicked()
 {
     SEManager.replaceSelectedWithOffspring(m_canvas3D->getShaderScene());
+}
+
+void MainWindow::on_angleStochasticity_stateChanged(int arg1)
+{
+    settings.angleStochasticity = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_generateLSystemTree_clicked()
+{
+
+}
+
+void MainWindow::on_lSystemType_currentIndexChanged(int index)
+{
+    settings.lSystemType = index;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_recursiveDepth_sliderMoved(int position)
+{
+    settings.numRecursions = position;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_lengthStochasticity_stateChanged(int arg1)
+{
+    settings.lengthStochasticity = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_leaves_stateChanged(int arg1)
+{
+    settings.hasLeaves = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
 }
