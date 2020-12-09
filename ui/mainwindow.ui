@@ -185,7 +185,7 @@
           </property>
           <item>
            <property name="text">
-            <string>2D Maple</string>
+            <string>2D Tree</string>
            </property>
           </item>
           <item>
@@ -195,7 +195,22 @@
           </item>
           <item>
            <property name="text">
-            <string>2D Tree</string>
+            <string>2D Maple</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bad Tree</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bush</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Simple 3D</string>
            </property>
           </item>
          </widget>

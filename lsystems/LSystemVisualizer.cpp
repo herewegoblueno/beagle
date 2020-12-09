@@ -11,7 +11,7 @@ LSystemVisualizer::LSystemVisualizer()
     // alphabet.insert(std::pair<std::string, std::string>("F", "FF+[+F-F-F]-[-F+F+F]"));
     // make L System
     // m_LSystem = std::make_unique<LSystem>(alphabet, "F", M_PI/6.f);
-    m_LSystem = std::make_unique<LSystem>(LSystemUtils::natur_map, LSystemUtils::natur_start, LSystemUtils::natur_angle);
+    m_LSystem = std::make_unique<LSystem>(LSystemUtils::getMap(settings.lSystemType), LSystemUtils::getStart(settings.lSystemType), LSystemUtils::getAngle(settings.lSystemType));
     m_LSystem->generate(settings.numRecursions);
     m_LSystem->draw();
     // get coords
