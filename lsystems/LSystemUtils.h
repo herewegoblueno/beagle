@@ -58,6 +58,7 @@ const float simple_angle = M_PI/12.f;
 std::string getStart(int type);
 std::map<std::string, std::string> getMap(int type);
 float getAngle(int type);
+float getStartingLength(int type);
 
 
 }

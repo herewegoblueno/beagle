@@ -83,6 +83,7 @@ struct Settings
 
     bool lengthStochasticity;
     bool angleStochasticity;
+    bool hasLeaves;
 
     int numRecursions;
     int lSystemType;

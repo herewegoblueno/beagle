@@ -51,6 +51,7 @@ void Settings::loadSettingsOrDefaults() {
     angleStochasticity = s.value("angleStochasticity").toBool();
     numRecursions = s.value("recursiveDepth").toInt();
     lSystemType = s.value("lSystemType").toInt();
+    hasLeaves = s.value("leaves").toBool();
 
     // These are for computing deltas and the values don't matter, so start all dials in the up
     // position
@@ -88,6 +89,7 @@ void Settings::saveSettings() {
     s.setValue("angleStochasticity", angleStochasticity);
     s.setValue("recursiveDepth", numRecursions);
     s.setValue("lSystemType", lSystemType);
+    s.setValue("leaves", hasLeaves);
 
 
     s.setValue("currentTab", currentTab);

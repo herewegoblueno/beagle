@@ -103,6 +103,13 @@ float getAngle(int type) {
 
 }
 
-
+float getStartingLength(int type) {
+    if(type == 4 || type == 3) {
+        return 4.f;
+    } else if(type == 1) {
+        return 1.3f;
+    }
+    return 1.5f;
+}
 
 }

@@ -1,6 +1,7 @@
 #include "LSystem.h"
 #include <iostream>
 #include "support/Settings.h"
+#include "LSystemUtils.h"
 
 LSystem::LSystem()
 {
@@ -12,7 +13,7 @@ LSystem::LSystem(const std::map<std::string, std::string> & mappings, const std:
     m_mappings = mappings;
     m_current = start;
     m_turtle = std::make_unique<Turtle>();
-    m_length = 1.5f;
+    m_length = LSystemUtils::getStartingLength(settings.lSystemType);
     m_angle = angle;
 
 }

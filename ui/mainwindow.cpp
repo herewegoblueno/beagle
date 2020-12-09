@@ -169,3 +169,9 @@ void MainWindow::on_lengthStochasticity_stateChanged(int arg1)
     settings.lengthStochasticity = arg1 == Qt::CheckState::Checked;
     signalSettingsChanged();
 }
+
+void MainWindow::on_leaves_stateChanged(int arg1)
+{
+    settings.hasLeaves = arg1 == Qt::CheckState::Checked;
+    signalSettingsChanged();
+}

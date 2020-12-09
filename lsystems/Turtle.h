@@ -26,6 +26,8 @@ private:
     // store position of the turtle
     std::stack<glm::vec3> m_coordStack;
     std::stack<glm::vec3> m_angleStack;
+    // store where leaves are added
+    std::vector<glm::vec3> m_leaves;
 
 };
 

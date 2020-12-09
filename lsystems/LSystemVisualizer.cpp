@@ -37,29 +37,18 @@ glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {
     scale.y = glm::length(end - start);
     scale.x = 0.025;
     scale.z = 0.025;
-    // rotate to the direction vector
-    // glm::vec3 xaxis = glm::normalize(glm::cross(glm::vec3(0, 1, 0), end - start));
-    // glm::vec3 yaxis = glm::normalize(glm::cross(end - start, xaxis));
 
-    // glm::mat4x4 rotation = glm::mat4x4(xaxis.x, yaxis.x, (end - start).x, 0,
-                                    //   xaxis.y, yaxis.y, (end - start).y, 0,
-                                     //  xaxis.z, yaxis.z, (end - start).z, 0,
-                                     //  0, 0, 0, 1);
+    // rotate to the direction vector
     glm::vec3 axis = glm::cross(glm::vec3(0, 1, 0), end - start);
     float sinangle = glm::length(axis)/(glm::length(end - start));
-    std::cout << "sin o the angle " << sinangle << std::endl;
     float cosangle = glm::dot(glm::vec3(0, 1, 0), end - start)/(glm::length(end - start));
     axis = glm::normalize(axis);
-    std::cout << "arcsin o the angle " << asin(sinangle) << std::endl;
-    std::cout << "arccos o the angle " << acos(cosangle) << std::endl;
 
-    // glm::mat4x4 rotation = glm::mat4x4(cosangle + axis.x*axis.x*(1 - cosangle), axis.x*axis.y*(1-cosangle) + axis.z*sinangle, axis.x*axis.z*(1-cosangle) - axis.y*sinangle, 0);
-    // return glm::mat4x4(1);
-    // return rotation;
     // case where no rotation needed
     if(abs(glm::normalize(end - start).y - 1.f) <= 0.0001) {
         return glm::translate(pos)*glm::scale(scale);
     }
+    // edge case where sin domain makes some angles backwards
     if(acos(cosangle) > asin(sinangle)) {
         return glm::translate(pos)*glm::rotate((float)acos(cosangle), axis)*glm::scale(scale);
     }
