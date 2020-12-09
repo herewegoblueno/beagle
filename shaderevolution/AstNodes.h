@@ -39,9 +39,10 @@ public:
 
 class ShaderGenotype{
 public:
-    ShaderGenotype(std::unique_ptr<GenotypeNode> rt);
+    ShaderGenotype(std::unique_ptr<GenotypeNode> rt, int birthGeneration = 0);
     std::unique_ptr<GenotypeNode> root;
     int currentGeneration;
+    int birthGeneration;
 };
 
 
@@ -52,6 +53,7 @@ public:
 //Leaf nodes will inheret from this
 class XPositionNode : public GenotypeNode {
 public:
+    XPositionNode(float x, float y, float z);
    virtual std::string stringifyDispatch(bool a) override;
    std::vector<GenotypeNodeClassification> getClassifications() override;
    float offsetX; float offsetY; float offsetZ;
@@ -60,6 +62,7 @@ public:
 
 class YPositionNode : public GenotypeNode {
 public:
+    YPositionNode(float x, float y, float z);
    virtual std::string stringifyDispatch(bool a) override;
    std::vector<GenotypeNodeClassification> getClassifications() override;
    float offsetX; float offsetY; float offsetZ;
@@ -68,6 +71,7 @@ public:
 
 class ZPositionNode : public GenotypeNode {
 public:
+    ZPositionNode(float x, float y, float z);
    virtual std::string stringifyDispatch(bool a) override;
     std::vector<GenotypeNodeClassification> getClassifications() override;
     float offsetX; float offsetY; float offsetZ;
@@ -76,6 +80,7 @@ public:
 
 class TimeNode : public GenotypeNode {
 public:
+    TimeNode(float x, float y, float z);
    virtual std::string stringifyDispatch(bool a) override;
     std::vector<GenotypeNodeClassification> getClassifications() override;
     float offsetX; float offsetY; float offsetZ;
@@ -85,6 +90,7 @@ public:
 class RandomVecNode : public GenotypeNode {
 public:
     RandomVecNode(int seed);
+    RandomVecNode(int seed, int x, int y, int z);
    virtual std::string stringifyDispatch(bool a) override;
     std::vector<GenotypeNodeClassification> getClassifications() override;
     int m_seed;
@@ -127,12 +133,13 @@ public:
     std::vector<GenotypeNodeClassification> getClassifications() override;
 };
 
-class ModulusNode : public GenotypeNode {
-public:
-    ModulusNode() : GenotypeNode(2){}
-   virtual std::string stringifyDispatch(bool a) override;
-    std::vector<GenotypeNodeClassification> getClassifications() override;
-};
+//Not currenly in use: creates very noise shaders
+//class ModulusNode : public GenotypeNode {
+//public:
+//    ModulusNode() : GenotypeNode(2){}
+//   virtual std::string stringifyDispatch(bool a) override;
+//    std::vector<GenotypeNodeClassification> getClassifications() override;
+//};
 
 class AbsoluteValueNode : public GenotypeNode {
 public:

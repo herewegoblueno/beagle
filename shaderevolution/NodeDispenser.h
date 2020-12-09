@@ -16,6 +16,9 @@ public:
     static int numberOfOperatorsPossible;
     static std::uniform_int_distribution<> operatorDist;
     static std::unique_ptr<GenotypeNode> getOperationNode();
+
+    static std::unique_ptr<GenotypeNode> copyTree(GenotypeNode * parent);
+    static std::unique_ptr<GenotypeNode> copyNode(GenotypeNode * parent);
 };
 
 #endif // NODEDISPENSER_H

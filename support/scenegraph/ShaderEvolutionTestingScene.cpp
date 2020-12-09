@@ -20,8 +20,8 @@ using namespace CS123::GL;
 
 #include "shaderevolution/ShaderConstructor.h"
 #include "shaderevolution/ShaderEvolutionManager.h"
+
 #include <iostream>
-#include "shaderevolution/MutationFactory.h"
 
 int ShaderEvolutionTestingScene::numberOfTestShaders = 6;
 
@@ -66,12 +66,8 @@ void ShaderEvolutionTestingScene::constructShaders() {
     }
 }
 
-void ShaderEvolutionTestingScene::mutateGenotypes(){
-    for (int i = 0; i < ShaderEvolutionTestingScene::numberOfTestShaders; i ++){
-        mutate(genotype_bank[i]->root.get(), nullptr, genotype_bank[i]->currentGeneration);
-        genotype_bank[i]->currentGeneration ++;
-    }
-    constructShaders();
+std::vector<std::unique_ptr<ShaderGenotype>> *ShaderEvolutionTestingScene::getShaderGenotypes(){
+    return &genotype_bank;
 }
 
 void ShaderEvolutionTestingScene::render(SupportCanvas3D *context) {

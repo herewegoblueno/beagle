@@ -4,9 +4,10 @@
 #include <sstream>
 #include <iomanip>
 
-ShaderGenotype::ShaderGenotype(std::unique_ptr<GenotypeNode> rt):
+ShaderGenotype::ShaderGenotype(std::unique_ptr<GenotypeNode> rt, int _birthGeneration):
     root(std::move(rt)),
-    currentGeneration(0)
+    currentGeneration(_birthGeneration),
+    birthGeneration(_birthGeneration)
 {
 }
 
@@ -44,6 +45,11 @@ std::string bool_to_string(bool b){
 
 
 //******************LEAF NODES******************
+
+XPositionNode::XPositionNode(float x, float y, float z):
+    offsetX(x), offsetY(y), offsetZ(z)
+{}
+
 std::string XPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.x+ " + float_to_string(offsetX)
             + ", pos.x+" + float_to_string(offsetY)
@@ -54,6 +60,10 @@ std::vector<GenotypeNodeClassification> XPositionNode::getClassifications(){
     return {LEAF};
 }
 //***
+
+YPositionNode::YPositionNode(float x, float y, float z):
+    offsetX(x), offsetY(y), offsetZ(z)
+{}
 
 std::string YPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.y+" + float_to_string(offsetX)
@@ -67,6 +77,10 @@ std::vector<GenotypeNodeClassification> YPositionNode::getClassifications(){
 
 //***
 
+ZPositionNode::ZPositionNode(float x, float y, float z):
+    offsetX(x), offsetY(y), offsetZ(z)
+{}
+
 std::string ZPositionNode::stringifyDispatch(bool a){
     return "vec3(pos.z+" + float_to_string(offsetX)
             + ", pos.z+" + float_to_string(offsetY)
@@ -78,6 +92,10 @@ std::vector<GenotypeNodeClassification> ZPositionNode::getClassifications(){
 }
 
 //***
+
+TimeNode::TimeNode(float x, float y, float z):
+    offsetX(x), offsetY(y), offsetZ(z)
+{}
 
 std::string TimeNode::stringifyDispatch(bool a){
     return "vec3(timevar+" + float_to_string(offsetX)
@@ -94,6 +112,12 @@ std::vector<GenotypeNodeClassification> TimeNode::getClassifications(){
 
 RandomVecNode::RandomVecNode(int seed):
     offsetX(0), offsetY(0), offsetZ(0)
+{
+    m_seed = seed;
+}
+
+RandomVecNode::RandomVecNode(int seed, int x, int y, int z):
+    offsetX(x), offsetY(y), offsetZ(z)
 {
     m_seed = seed;
 }
@@ -165,13 +189,14 @@ std::vector<GenotypeNodeClassification> AbsoluteValueNode::getClassifications(){
 }
 //***
 
-std::string ModulusNode::stringifyDispatch(bool a){
-    return "mod(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
-}
+//Not currenly in use: creates very noise shaders
+//std::string ModulusNode::stringifyDispatch(bool a){
+//    return "mod(" + children[0]->stringify(a) + ",  " + children[1]->stringify(a) + ")";
+//}
 
-std::vector<GenotypeNodeClassification> ModulusNode::getClassifications(){
-    return {ARITHMETIC, BINARY_OPERATION};
-}
+//std::vector<GenotypeNodeClassification> ModulusNode::getClassifications(){
+//    return {ARITHMETIC, BINARY_OPERATION};
+//}
 //***
 
 std::string CrossProductNode::stringifyDispatch(bool a){
@@ -277,9 +302,9 @@ std::uniform_int_distribution<> JuliaFractalNode::layerChoiceDist(0, 4);
 
 //Unlike the RandomVecNode, this initalizes its things in the contructor
 //(since there are so many), not wise to calculate everything with every stringify call
-JuliaFractalNode::JuliaFractalNode(int seed) : GenotypeNode(5)
+JuliaFractalNode::JuliaFractalNode(int seed) : GenotypeNode(5), m_seed(seed)
 {
-    rng.seed(seed);
+    rng.seed(m_seed);
     usePositionForSeed = JuliaFractalNode::binaryDist(rng) == 1;
     breakAfter = JuliaFractalNode::binaryDist(rng) == 1;
 

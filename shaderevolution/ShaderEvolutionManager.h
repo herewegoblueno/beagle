@@ -25,10 +25,17 @@ public:
     int maxProbability;
 
     QString m_shaderScenePath;
-    void renderTestingScene();
-    void mutate(ShaderEvolutionTestingScene * scene);
+    void initializeShaderScene();
+    void mutateSelected(ShaderEvolutionTestingScene * scene);
+    void refreshSelected(ShaderEvolutionTestingScene * scene);
+    void replaceWithMutationsOfDonor(ShaderEvolutionTestingScene * scene);
+    void replaceSelectedWithOffspring(ShaderEvolutionTestingScene * scene);
 
 
+    std::vector<bool> shaderSelections;
+    int donorShaderIndex;
+    int parent1ShaderIndex;
+    int parent2ShaderIndex;
 };
 
 // The global ShaderEvolutionManager object, initialized in

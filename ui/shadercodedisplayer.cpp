@@ -29,7 +29,14 @@ void ShaderCodeDisplayer::setShaderIndex(int i)
     currentIndex = i;
     ui->shaderIndex->setText(QString::number(i + 1));
     ui->shaderIndex->repaint();
-    ui->shaderCode->setText(QString::fromStdString(mainWindow->getShaderScene()->getShaderSource(i, showGenerations)));
+    ui->shaderCode->setText(
+                (!showGenerations ? "" : QString::fromStdString(
+                                      "<b><i><font color='#0000ff'> Generation at birth: ["
+                                      + std::to_string((*mainWindow->getShaderScene()->getShaderGenotypes())[i]->birthGeneration)
+                                      + "]<br>Current Generation: ["
+                                      + std::to_string((*mainWindow->getShaderScene()->getShaderGenotypes())[i]->currentGeneration)
+                                      + "]</font></i></b><br>")) +
+                QString::fromStdString(mainWindow->getShaderScene()->getShaderSource(i, showGenerations)));
     updateGeometry();
 }
 

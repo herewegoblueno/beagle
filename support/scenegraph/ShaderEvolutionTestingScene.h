@@ -28,7 +28,7 @@ public:
 
     void initializeGenotypes();
     void constructShaders();
-    void mutateGenotypes();
+    std::vector<std::unique_ptr<ShaderGenotype>>* getShaderGenotypes();
 
     static int numberOfTestShaders;
     std::string getShaderSource(int index, bool showAnnotations);
