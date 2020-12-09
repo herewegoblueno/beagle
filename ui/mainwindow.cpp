@@ -35,6 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->useLightingForShaders->setCheckState(settings.useLighting ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->usePointLightsForShaders->setCheckState(settings.usePointLights ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->mainTabWidget->setCurrentIndex(settings.currentTab);
+    ui->lengthStochasticity->setCheckState(settings.lengthStochasticity ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
+    ui->angleStochasticity->setCheckState(settings.angleStochasticity ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
+    ui->recursiveDepth->setValue(settings.numRecursions);
+    ui->lSystemType->setCurrentIndex(settings.lSystemType);
 }
 
 MainWindow::~MainWindow()

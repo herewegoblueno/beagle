@@ -33,6 +33,16 @@ void LSystem::draw(void) {
     // std::cout << "we finna draw!" << std::endl;
     int currentLen = m_current.size();
     for(int i = 0; i < currentLen; i++) {
+        float angle = m_angle;
+        if(settings.angleStochasticity) {
+            // modify angle by random amount
+            // random number between 0 and 1
+            float randomNum = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+            // random offset between -angle/2 and angle/2
+            randomNum -= 0.5f;
+            randomNum *= m_angle;
+            angle = m_angle + randomNum;
+        }
         switch(m_current[i]){
         case 'F': {
             //
@@ -54,32 +64,32 @@ void LSystem::draw(void) {
         }
         case '+': {
             // turn left
-            m_turtle->turn(m_angle);
+            m_turtle->turn(angle);
             break;
         }
         case '-': {
             // turn right
-            m_turtle->turn(-m_angle);
+            m_turtle->turn(-angle);
             break;
         }
         case '\\': {
             // roll left
-            m_turtle->roll(m_angle);
+            m_turtle->roll(angle);
             break;
         }
         case '/': {
             // roll right
-            m_turtle->roll(-m_angle);
+            m_turtle->roll(-angle);
             break;
         }
         case '^': {
             // pitch up
-            m_turtle->pitch(m_angle);
+            m_turtle->pitch(angle);
             break;
         }
         case '&': {
             // pitch down
-            m_turtle->pitch(-m_angle);
+            m_turtle->pitch(-angle);
             break;
         }
         case '[': {

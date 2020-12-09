@@ -26,7 +26,10 @@ int LSystemVisualizer::getNumCyls() {
 glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {
     glm::vec3 start = m_startingPoints.at(index);
     glm::vec3 end = m_endingPoints.at(index);
-    std::cout << "index " << index << " start " << start.y << " end " << end.y << std::endl;
+    // std::cout << "index " << index << " start " << start.y << " end " << end.y << std::endl;
+    // std::cout << "index " << index << " x start " << start.x << " end " << end.x << std::endl;
+    // std::cout << "index " << index << " z start " << start.z << " end " << end.z << std::endl;
+
     // position to translate to
     glm::vec3 pos = 0.5f * (start + end);
     // scaling - y direction, by length of vector
@@ -44,15 +47,21 @@ glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {
                                      //  0, 0, 0, 1);
     glm::vec3 axis = glm::cross(glm::vec3(0, 1, 0), end - start);
     float sinangle = glm::length(axis)/(glm::length(end - start));
+    std::cout << "sin o the angle " << sinangle << std::endl;
     float cosangle = glm::dot(glm::vec3(0, 1, 0), end - start)/(glm::length(end - start));
     axis = glm::normalize(axis);
+    std::cout << "arcsin o the angle " << asin(sinangle) << std::endl;
+    std::cout << "arccos o the angle " << acos(cosangle) << std::endl;
 
     // glm::mat4x4 rotation = glm::mat4x4(cosangle + axis.x*axis.x*(1 - cosangle), axis.x*axis.y*(1-cosangle) + axis.z*sinangle, axis.x*axis.z*(1-cosangle) - axis.y*sinangle, 0);
     // return glm::mat4x4(1);
     // return rotation;
     // case where no rotation needed
-    if(glm::normalize(end - start).y == 1.f) {
+    if(abs(glm::normalize(end - start).y - 1.f) <= 0.0001) {
         return glm::translate(pos)*glm::scale(scale);
+    }
+    if(acos(cosangle) > asin(sinangle)) {
+        return glm::translate(pos)*glm::rotate((float)acos(cosangle), axis)*glm::scale(scale);
     }
     return glm::translate(pos)*glm::rotate((float)asin(sinangle), axis)*glm::scale(scale);
 
