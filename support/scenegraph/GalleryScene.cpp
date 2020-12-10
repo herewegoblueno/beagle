@@ -26,8 +26,9 @@ using namespace CS123::GL;
 
 GalleryScene::GalleryScene()
 {
-    // seeding rand() for Ltree generation
-    srand((unsigned)time(NULL));
+    treeTypeDist = std::uniform_int_distribution<>(0, 5);
+    levelDist = std::uniform_int_distribution<>(2, 4);
+    RNG.seed(time(NULL));
 
     loadPhongShader();
     numTreePrims = 0;
@@ -60,20 +61,25 @@ void::GalleryScene::loadPhongShader() {
 void GalleryScene::setUpLights() {
     // add some lights to the scene
     // to do: make the lights in a helper
-    CS123SceneLightData light = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(0, 1, 3, 0)};
-    CS123SceneLightData light2 = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(0, 1, -3, 0)};
-    CS123SceneLightData light3 = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0.05), glm::vec4(0, 5, 0, 0)};
+    CS123SceneLightData mainLight = {0, LightType::LIGHT_POINT, glm::vec4(0.05), glm::vec3(0, 0, 10), glm::vec4(0, 5, 0, 0)};
+
+    CS123SceneLightData light = {1, LightType::LIGHT_POINT, glm::vec4(0.5, 0.4, 0, 1), glm::vec3(1, 0, 1), glm::vec4(5, 3, 5, 0)};
+    CS123SceneLightData light2 = {2, LightType::LIGHT_POINT, glm::vec4(0.3, 0.3, 1, 1), glm::vec3(1, 0, 1), glm::vec4(-5, 3, 5, 0)};
+    CS123SceneLightData light3 = {3, LightType::LIGHT_POINT, glm::vec4(1, 0.3, 0.3, 1), glm::vec3(1, 0, 1), glm::vec4(0, 3, -5, 0)};
+
+
     lightingInformation.push_back(light);
     lightingInformation.push_back(light2);
     lightingInformation.push_back(light3);
+    lightingInformation.push_back(mainLight);
 
-    CS123SceneGlobalData globalLSys = {0.7f, 0.6f, 0.1f, 1};
+    CS123SceneGlobalData globalLSys = {0.55f, 0.8, 0.8, 1};
     setGlobal(globalLSys);
 }
 
 
 void GalleryScene::render(SupportCanvas3D *context) {
-    setClearColor(0.6, 0.6, 0.0, 1);
+    setClearColor(153.f/255, 229.f/255, 255.f/255, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     std::vector<int> indexesForSpecialShaders = {0, 2, 4, 6, 8};
@@ -174,14 +180,14 @@ void GalleryScene::loadScene() {
     //evolved shaders to them
     addPotsToScene();
     addGroundToScene();
-    addBackgroundToScene();
+    //addBackgroundToScene();
 
     // make new L System visualizers
     for(int i = 0; i < numTrees; i++) {
         // get recursive depth between 2 and 4
-        settings.numRecursions = 2 + rand()%3;
+        settings.numRecursions = levelDist(RNG);
         // randomize type of tree (0-5)
-        settings.lSystemType = rand()%6;
+        settings.lSystemType = treeTypeDist(RNG);
         // if seaweed, cap depth at 3 bc it ar large recursion levels
         if(settings.lSystemType == 1 && settings.numRecursions > 3) {
             settings.numRecursions = 3;
@@ -300,37 +306,37 @@ void GalleryScene::addGroundToScene() {
 
     CS123SceneMaterial material;
     material.clear();
-    material.cAmbient.r = 0.13f;
-    material.cAmbient.g = 0.1f;
-    material.cAmbient.b = 0.05f;
-    material.cDiffuse.r = 0.70f;
-    material.cDiffuse.g = 0.5f;
-    material.cDiffuse.b = 0.2f;
+    material.cAmbient.r = 0.45;
+    material.cAmbient.g = .45;
+    material.cAmbient.b = .45;
+    material.cDiffuse.r = 0.4f;
+    material.cDiffuse.g = 0.4f;
+    material.cDiffuse.b = 0.4f;
 
     CS123ScenePrimitive theGround = {PrimitiveType::PRIMITIVE_CUBE, "", material};
     addPrimitive(theGround, glm::translate(pos) * glm::scale(scale));
 }
 
-void GalleryScene::addBackgroundToScene() {
-    // make large, flat cubes off in the distance
-    glm::vec3 scale = glm::vec3(30, 30, 0.04f);
+//void GalleryScene::addBackgroundToScene() {
+//    // make large, flat cubes off in the distance
+//    glm::vec3 scale = glm::vec3(30, 30, 0.04f);
 
-    // make it sky colored
-    CS123SceneMaterial material;
-    material.clear();
-    material.cAmbient.r = 0.2f;
-    material.cAmbient.g = 0.35f;
-    material.cAmbient.b = 0.45f;
-    material.cDiffuse.r = 0.55f;
-    material.cDiffuse.g = 0.6f;
-    material.cDiffuse.b = 1.f;
+//    // make it sky colored
+//    CS123SceneMaterial material;
+//    material.clear();
+//    material.cAmbient.r = 0.2f;
+//    material.cAmbient.g = 0.35f;
+//    material.cAmbient.b = 0.45f;
+//    material.cDiffuse.r = 0.55f;
+//    material.cDiffuse.g = 0.6f;
+//    material.cDiffuse.b = 1.f;
 
-    CS123ScenePrimitive theSky = {PrimitiveType::PRIMITIVE_CUBE, "", material};
-    addPrimitive(theSky, glm::translate(glm::vec3(0, 0, -15)) * glm::scale(scale));
-    addPrimitive(theSky, glm::translate(glm::vec3(0, 0, 15)) * glm::scale(scale));
-    addPrimitive(theSky, glm::translate(glm::vec3(15, 0, 0)) * glm::rotate((float)M_PI_2, glm::vec3(0, 1, 0)) *  glm::scale(scale));
-    addPrimitive(theSky, glm::translate(glm::vec3(-15, 0, 0)) * glm::rotate((float)M_PI_2, glm::vec3(0, 1, 0)) *  glm::scale(scale));
-}
+//    CS123ScenePrimitive theSky = {PrimitiveType::PRIMITIVE_CUBE, "", material};
+//    addPrimitive(theSky, glm::translate(glm::vec3(0, 0, -15)) * glm::scale(scale));
+//    addPrimitive(theSky, glm::translate(glm::vec3(0, 0, 15)) * glm::scale(scale));
+//    addPrimitive(theSky, glm::translate(glm::vec3(15, 0, 0)) * glm::rotate((float)M_PI_2, glm::vec3(0, 1, 0)) *  glm::scale(scale));
+//    addPrimitive(theSky, glm::translate(glm::vec3(-15, 0, 0)) * glm::rotate((float)M_PI_2, glm::vec3(0, 1, 0)) *  glm::scale(scale));
+//}
 
 void GalleryScene::renderPhongGeometry(std::vector<int> indexesToSkip) {
     int size = primitives.size();

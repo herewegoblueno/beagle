@@ -8,6 +8,7 @@
 #include "support/shapes/Shape.h"
 #include "lsystems/LSystemVisualizer.h"
 #include "LSystemTreeScene.h"
+#include <random>
 
 // basically the L System tree scene but copied
 //and modified to accomodate for a whole scene
@@ -47,7 +48,7 @@ private:
     void loadScene();
     void addGroundToScene();
     void addPotsToScene();
-    void addBackgroundToScene();
+//    void addBackgroundToScene();
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
@@ -58,6 +59,11 @@ private:
     // could be useful for determining number of shapes related to trees maybe
     // meh
     int numTreePrims;
+
+
+    std::minstd_rand RNG;
+    std::uniform_int_distribution<> treeTypeDist;
+    std::uniform_int_distribution<> levelDist;
 };
 
 

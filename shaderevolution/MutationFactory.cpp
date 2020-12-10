@@ -25,11 +25,25 @@ std::uniform_int_distribution<> binaryDist(0, 1);
 void mutate(GenotypeNode *current, GenotypeNode *parent, int maxGenToMutate){
     if (current->generation > maxGenToMutate) return; //Skipped
 
+//The next two chunks of commented out code are two different ways to mutate the genotype apart form
+//Just adding offsets to the leaf nodes. The second one (changeOperator) is more promising as it
+//causes less dramatic changes compared to the first one. They are commented out becuase the addLeafOffset
+//is good enough for demonstrations - it causes a good enough range of changes
+
 //    //Mutate the current node (if it's not a root node)
 //    if (parent != nullptr){
 //        if (mutationDist(RNG) < 10){
 //            //10% chance for mutation
 //            current = replaceWithRandomTree(current, parent, maxGenToMutate);
+//        }
+//    }
+
+//    if (parent != nullptr){
+//        if (!current->containsClassification(LEAF)){
+//            if (mutationDist(RNG) < 10){
+//                //10% chance for mutation
+//                current = changeOperator(current, parent, maxGenToMutate);
+//            }
 //        }
 //    }
 
@@ -40,15 +54,6 @@ void mutate(GenotypeNode *current, GenotypeNode *parent, int maxGenToMutate){
         }
     }
 
-
-//    if (parent != nullptr){
-//        if (!current->containsClassification(LEAF)){
-//            if (mutationDist(RNG) < 10){
-//                //10% chance for mutation
-//                current = changeOperator(current, parent, maxGenToMutate);
-//            }
-//        }
-//    }
 
     //Mutate the children
     for (int i = 0; i < current->numberOfChildrenNeeded; i ++){
