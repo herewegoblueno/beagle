@@ -28,6 +28,9 @@ LSystemTreeScene::LSystemTreeScene()
     shapeBank.resize(6);
     LODdivisor = -1; //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
     defineShapeBank();
+    if(settings.numRecursions < 1) {
+        settings.numRecursions = 1;
+    }
     // make a new L System visualizer
     m_lSystemViz = std::make_unique<LSystemVisualizer>();
     makeLSystemVisualizer();

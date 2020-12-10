@@ -67,7 +67,7 @@
        <item>
         <widget class="QTabWidget" name="mainTabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="shaderTab">
           <attribute name="title">
@@ -642,6 +642,24 @@
            </property>
            <property name="text">
             <string>Leaves</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="combinedTab">
+          <attribute name="title">
+           <string>Gallery</string>
+          </attribute>
+          <widget class="QPushButton" name="regenerateGallery">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>400</y>
+             <width>80</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Generate!</string>
            </property>
           </widget>
          </widget>

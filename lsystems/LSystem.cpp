@@ -2,6 +2,7 @@
 #include <iostream>
 #include "support/Settings.h"
 #include "LSystemUtils.h"
+#include "time.h"
 
 LSystem::LSystem()
 {
@@ -15,6 +16,8 @@ LSystem::LSystem(const std::map<std::string, std::string> & mappings, const std:
     m_turtle = std::make_unique<Turtle>();
     m_length = LSystemUtils::getStartingLength(settings.lSystemType);
     m_angle = angle;
+    srand((unsigned)time(NULL));
+
 
 }
 
@@ -24,7 +27,7 @@ std::string LSystem::generate(int replacements) {
         m_length *= 0.5f;
         replace();
     }
-    std::cout << m_current << std::endl;
+    // std::cout << m_current << std::endl;
 
     return m_current;
 }

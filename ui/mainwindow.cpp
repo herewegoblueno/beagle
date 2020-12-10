@@ -282,3 +282,8 @@ void MainWindow::on_leaves_stateChanged(int arg1)
     settings.hasLeaves = arg1 == Qt::CheckState::Checked;
     signalSettingsChanged();
 }
+
+void MainWindow::on_regenerateGallery_clicked()
+{
+    signalSettingsChanged();
+}

@@ -11,6 +11,7 @@
 #include "support/camera/OrbitingCamera.h"
 #include "LSystemTreeScene.h"
 #include "ShaderEvolutionTestingScene.h"
+#include "GalleryScene.h"
 //#include "ShapesScene.h"
 
 #include <iostream>
@@ -55,6 +56,8 @@ CameraConfig *SupportCanvas3D::getCurrentSceneCamtasConfig() {
            return &m_shaderTestingSceneCameraConfig;
         case SCENEMODE_TREE_TESTING:
             return &m_LSystemSceneCameraConfig;
+        case SCENEMODE_COMBINED_SCENE:
+            return &m_GallerySceneCameraConfig;
     }
     return nullptr;
 }
@@ -112,6 +115,7 @@ void SupportCanvas3D::initializeOpenGLSettings() {
 void SupportCanvas3D::initializeScenes() {
     m_LSystemScene = std::make_unique<LSystemTreeScene>();
     m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
+    m_galleryScene = std::make_unique<GalleryScene>();
     //m_shapesScene = std::make_unique<ShapesScene>(width(), height());
 }
 
@@ -145,6 +149,10 @@ void SupportCanvas3D::setSceneFromSettings() {
             setSceneToLSystemSceneview();
             m_LSystemScene->render(this);
             break;
+        case SCENEMODE_COMBINED_SCENE:
+            setSceneToGallery();
+            m_galleryScene->render(this);
+            break;
     }
     m_settingsDirty = false;
 }
@@ -161,6 +169,7 @@ void SupportCanvas3D::loadSceneFromParser(CS123XmlSceneParser &parser) {
             Scene::parse(m_LSystemScene.get(), &parser);
             applyCameraConfig(m_LSystemSceneCameraConfig);
             break;
+
     }
     m_settingsDirty = true;
 }
@@ -181,6 +190,12 @@ void SupportCanvas3D::setSceneToShaderTesting(){
     assert(m_shaderTestingScene.get());
     m_currentScene = m_shaderTestingScene.get();
     applyCameraConfig(m_shaderTestingSceneCameraConfig);
+}
+
+void::SupportCanvas3D::setSceneToGallery() {
+    assert(m_galleryScene.get());
+    m_currentScene = m_galleryScene.get();
+    applyCameraConfig(m_GallerySceneCameraConfig);
 }
 
 
