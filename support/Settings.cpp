@@ -96,10 +96,13 @@ void Settings::saveSettings() {
 }
 
 int Settings::getSceneMode() {
-    if (this->currentTab == SHADER_TESTING_TAB)
+    if (this->currentTab == SHADER_TESTING_TAB) {
         return SCENEMODE_SHADER_TESTING;
-    else
+    } else if(this->currentTab == TREE_TESTING_TAB) {
         return SCENEMODE_TREE_TESTING;
+    } else {
+        return SCENEMODE_COMBINED_SCENE;
+    }
 }
 
 int Settings::getCameraMode() {

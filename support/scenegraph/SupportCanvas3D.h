@@ -17,6 +17,7 @@ class CamtransCamera;
 class CS123XmlSceneParser;
 class ShaderEvolutionTestingScene;
 class LSystemTreeScene;
+class GalleryScene;
 
 /**
  * @class  SupportCanvas3D
@@ -108,7 +109,7 @@ private:
     void setSceneFromSettings();
     void setSceneToLSystemSceneview();
     void setSceneToShaderTesting();
-    //void setSceneToShapes();
+    void setSceneToGallery();
 
     void applyCameraConfig(CameraConfig c);
 
@@ -121,13 +122,15 @@ private:
     std::unique_ptr<CamtransCamera> m_defaultPerspectiveCamera;
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
-    //std::unique_ptr<ShapesScene> m_shapesScene;
 
     std::unique_ptr<LSystemTreeScene> m_LSystemScene;
     CameraConfig m_LSystemSceneCameraConfig;
 
     std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_shaderTestingSceneCameraConfig;
+
+    std::unique_ptr<GalleryScene> m_galleryScene;
+    CameraConfig m_GallerySceneCameraConfig;
 
 };
 

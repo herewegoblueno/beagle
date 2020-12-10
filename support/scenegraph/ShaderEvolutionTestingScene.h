@@ -28,27 +28,26 @@ public:
 
     void initializeGenotypes();
     void constructShaders();
-    std::vector<std::unique_ptr<ShaderGenotype>>* getShaderGenotypes();
 
     static int numberOfTestShaders;
+    static float calculateTime();
+    static long startTime;
+
     std::string getShaderSource(int index, bool showAnnotations);
+    std::vector<std::unique_ptr<ShaderGenotype>>* getShaderGenotypes();
+    std::vector<std::unique_ptr<CS123::GL::CS123Shader>> * getShaderPrograms();
 
 private:
 
     void setShaderSceneUniforms(SupportCanvas3D *context);
     void setLights();
     void defineShapeBank();
-    void setLOD();
     void drawPrimitiveWithShader(int shapeIndex, glm::mat4x4 modelMat, CS123SceneMaterial mat, Shape *shape, SupportCanvas3D *c);
-    float calculateTime();
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::vector<std::unique_ptr<CS123::GL::CS123Shader>> shader_bank;
     std::vector<std::unique_ptr<ShaderGenotype>> genotype_bank;
     CS123::GL::CS123Shader *current_shader;
-
-    float LODdivisor;
-    long startTime;
 
 };
 

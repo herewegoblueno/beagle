@@ -74,7 +74,8 @@ SOURCES += ui/mainwindow.cpp \
     support/shapes/Surface.cpp \
     support/shapes/Torus.cpp \
     ui/shadercodedisplayer.cpp \
-    lsystems/LSystemUtils.cpp
+    lsystems/LSystemUtils.cpp \
+    support/scenegraph/GalleryScene.cpp
 
 
 HEADERS += ui/mainwindow.h \
@@ -379,7 +380,8 @@ HEADERS += ui/mainwindow.h \
     ui/shadercodedisplayer.h \
     ui_mainwindow.h \
     glew-1.10.0/include/GL/glew.h \
-    lsystems/LSystemUtils.h
+    lsystems/LSystemUtils.h \
+    support/scenegraph/GalleryScene.h
 
 FORMS += ui/mainwindow.ui \
     ui/shadercodedisplayer.ui

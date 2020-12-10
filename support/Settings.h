@@ -27,13 +27,15 @@ enum ShapeType {
 // Enumeration values for the two tabs (2D, 3D) at the bottom of the Window.
 enum UITab {
     SHADER_TESTING_TAB,
-    TREE_TESTING_TAB
+    TREE_TESTING_TAB,
+    GALLERY_TAB
 };
 
 // Enumeration values for the currently selected scene type
 enum SceneMode {
     SCENEMODE_TREE_TESTING,
-    SCENEMODE_SHADER_TESTING
+    SCENEMODE_SHADER_TESTING,
+    SCENEMODE_COMBINED_SCENE
     //SCENEMODE_SHAPES //<---No longer in use
 };
 

@@ -11,7 +11,7 @@
 #include "support/camera/OrbitingCamera.h"
 #include "LSystemTreeScene.h"
 #include "ShaderEvolutionTestingScene.h"
-//#include "ShapesScene.h"
+#include "GalleryScene.h"
 
 #include <iostream>
 #include "support/gl/GLDebug.h"
@@ -24,6 +24,11 @@ SupportCanvas3D::SupportCanvas3D(QGLFormat format, QWidget *parent) : QGLWidget(
     m_defaultOrbitingCamera(new OrbitingCamera()),
     m_currentScene(nullptr)
 {
+    //The CameraConfig for the Shader Testing scene is set up in
+    //MainWindow::fileOpen when the initialize button is called
+    //But for the other two scenes they have to be manually set
+    m_LSystemSceneCameraConfig = {glm::vec4(-7,1,0,1), glm::vec4(7,0,0,0), glm::vec4(0,1,0,0), 45};
+    m_GallerySceneCameraConfig = {glm::vec4(0,0,9.5,1), glm::vec4(0,0,-7,0), glm::vec4(0,1,0,0), 45};
 
 }
 
@@ -55,6 +60,8 @@ CameraConfig *SupportCanvas3D::getCurrentSceneCamtasConfig() {
            return &m_shaderTestingSceneCameraConfig;
         case SCENEMODE_TREE_TESTING:
             return &m_LSystemSceneCameraConfig;
+        case SCENEMODE_COMBINED_SCENE:
+            return &m_GallerySceneCameraConfig;
     }
     return nullptr;
 }
@@ -112,7 +119,7 @@ void SupportCanvas3D::initializeOpenGLSettings() {
 void SupportCanvas3D::initializeScenes() {
     m_LSystemScene = std::make_unique<LSystemTreeScene>();
     m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
-    //m_shapesScene = std::make_unique<ShapesScene>(width(), height());
+    m_galleryScene = std::make_unique<GalleryScene>();
 }
 
 void SupportCanvas3D::paintGL() {
@@ -145,23 +152,20 @@ void SupportCanvas3D::setSceneFromSettings() {
             setSceneToLSystemSceneview();
             m_LSystemScene->render(this);
             break;
+        case SCENEMODE_COMBINED_SCENE:
+            setSceneToGallery();
+            m_galleryScene->render(this);
+            break;
     }
     m_settingsDirty = false;
 }
 
 void SupportCanvas3D::loadSceneFromParser(CS123XmlSceneParser &parser) {
-    switch(settings.getSceneMode()) {
-        case SCENEMODE_SHADER_TESTING:
-            m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
-            Scene::parse(m_shaderTestingScene.get(), &parser);
-            applyCameraConfig(m_shaderTestingSceneCameraConfig);
-            break;
-        case SCENEMODE_TREE_TESTING:
-            m_LSystemScene = std::make_unique<LSystemTreeScene>();
-            Scene::parse(m_LSystemScene.get(), &parser);
-            applyCameraConfig(m_LSystemSceneCameraConfig);
-            break;
-    }
+    assert(settings.getSceneMode() == SCENEMODE_SHADER_TESTING);
+    //The shader testing scene is the only scene who is build from an xml scene
+    m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
+    Scene::parse(m_shaderTestingScene.get(), &parser);
+    applyCameraConfig(m_shaderTestingSceneCameraConfig);
     m_settingsDirty = true;
 }
 
@@ -183,11 +187,12 @@ void SupportCanvas3D::setSceneToShaderTesting(){
     applyCameraConfig(m_shaderTestingSceneCameraConfig);
 }
 
+void::SupportCanvas3D::setSceneToGallery() {
+    assert(m_galleryScene.get());
+    m_currentScene = m_galleryScene.get();
+    applyCameraConfig(m_GallerySceneCameraConfig);
+}
 
-//void SupportCanvas3D::setSceneToShapes() {
-//    assert(m_shapesScene.get());
-//    m_currentScene = m_shapesScene.get();
-//}
 
 void SupportCanvas3D::copyPixels(int width, int height, RGBA *data) {
     glReadPixels(0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, data);

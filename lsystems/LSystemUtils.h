@@ -50,9 +50,18 @@ const float bush_angle = M_PI/8.f;
 
 const std::string simple_start = "F";
 const std::map<std::string, std::string> simple_map {
-    {std::string("F"), std::string("F[-&<F][<++&F]|F[-&>F][+&F]")}
+    {std::string("F"), std::string("F[-&^F][^++&F]|F[-&^F][+&F]")}
 };
 const float simple_angle = M_PI/12.f;
+
+const std::string tree3D_start = "FA";
+const std::map<std::string, std::string> tree3D_map {
+    {std::string("A"), std::string("[&FLA^]////[&FLA]/////[^FLA]")},
+    {std::string("F"), std::string("S ///// F")}
+    // ,
+    // {std::string("L"), std::string("[```^^{-f+f+f-|-f+f+f}]")}
+};
+const float tree3D_angle = M_PI/6.f;
 
 
 std::string getStart(int type);

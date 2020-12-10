@@ -18,6 +18,7 @@ LSystemVisualizer::LSystemVisualizer()
     m_startingPoints = m_LSystem->getStartingPoints();
     m_endingPoints = m_LSystem->getEndingPoints();
     m_leaves = m_LSystem->getLeaves();
+    leaf_len = 0.15f;
 }
 
 int LSystemVisualizer::getNumCyls() {
@@ -58,6 +59,42 @@ glm::mat4x4 LSystemVisualizer::getTransformationMatrix(int index) {
         return glm::translate(pos)*glm::rotate((float)acos(cosangle), axis)*glm::scale(scale);
     }
     return glm::translate(pos)*glm::rotate((float)asin(sinangle), axis)*glm::scale(scale);
+
+}
+
+glm::mat4x4 LSystemVisualizer::getLeafMatrix(int index) {
+    glm::vec3 start = m_leaves.at(index);
+    // leaf points down in a random direction
+    // generate random amount down
+    // random number between 0 and 1
+    float randY = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    // generate random x/z direction
+    randY *= 0.75f;
+    float randomX = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    randomX -= 0.5f;
+    float randomZ = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    randomZ -= 0.5f;
+
+    glm::vec3 leafDir = glm::normalize(glm::vec3(randomX, -randY, randomZ));
+
+    // find perpendicular vector
+    glm::vec3 normal = glm::cross(leafDir, leafDir + glm::vec3(0.5f, 0, 0));
+
+    glm::vec3 axis = glm::cross(glm::vec3(0, 1, 0), normal);
+    float sinangle = glm::length(axis)/(glm::length(normal));
+    float cosangle = glm::dot(glm::vec3(0, 1, 0), normal)/(glm::length(normal));
+    axis = glm::normalize(axis);
+
+
+    glm::vec3 leafPos = start + leafDir*leaf_len*0.5f;
+    // scale leaf len
+    glm::vec3 scale = glm::vec3(leaf_len/2.f, 0.01f, leaf_len);
+
+    // edge case where sin domain makes some angles backwards
+    if(acos(cosangle) > asin(sinangle)) {
+        return glm::translate(leafPos)*glm::rotate((float)acos(cosangle), axis)*glm::scale(scale);
+    }
+    return glm::translate(leafPos)*glm::rotate((float)asin(sinangle), axis)*glm::scale(scale);
 
 
 
