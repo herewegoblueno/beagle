@@ -1,4 +1,5 @@
 #include "NodeDispenser.h"
+#include <ctime>
 
 std::minstd_rand NodeDispenser::rng(std::time(0));
 

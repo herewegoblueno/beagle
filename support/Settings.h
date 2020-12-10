@@ -33,7 +33,8 @@ enum UITab {
 // Enumeration values for the currently selected scene type
 enum SceneMode {
     SCENEMODE_TREE_TESTING,
-    SCENEMODE_SHADER_TESTING
+    SCENEMODE_SHADER_TESTING,
+    SCENEMODE_COMBINED_SCENE
     //SCENEMODE_SHAPES //<---No longer in use
 };
 

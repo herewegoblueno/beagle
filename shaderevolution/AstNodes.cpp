@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 ShaderGenotype::ShaderGenotype(std::unique_ptr<GenotypeNode> rt, int _birthGeneration):
     root(std::move(rt)),

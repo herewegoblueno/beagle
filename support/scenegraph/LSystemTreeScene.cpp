@@ -32,8 +32,8 @@ LSystemTreeScene::LSystemTreeScene()
     m_lSystemViz = std::make_unique<LSystemVisualizer>();
     makeLSystemVisualizer();
     // add some lights to the scene
-    CS123SceneLightData light = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(1, 1, 1, 0)};
-    CS123SceneLightData light2 = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(-2, 1, -2, 0)};
+    CS123SceneLightData light = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(0, 1, 3, 0)};
+    CS123SceneLightData light2 = {0, LightType::LIGHT_POINT, glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 1), glm::vec4(0, 1, -3, 0)};
     CS123SceneGlobalData globalLSys = {0.7f, 0.6f, 0.1f, 1};
     setGlobal(globalLSys);
     lightingInformation.push_back(light);
@@ -198,10 +198,13 @@ void LSystemTreeScene::makeLSystemVisualizer() {
     int numCyls = m_lSystemViz->getNumCyls();
     CS123SceneMaterial material;
     material.clear();
-    material.cAmbient.r = 0.2f;
+    material.cAmbient.r = 0.13f;
     material.cAmbient.g = 0.1f;
-    material.cDiffuse.r = 1.0f;
+    material.cAmbient.b = 0.05f;
+    material.cDiffuse.r = 0.70f;
     material.cDiffuse.g = 0.5f;
+    material.cDiffuse.b = 0.2f;
+
     material.cSpecular.r = material.cSpecular.g = material.cSpecular.b = 0.3;
     material.shininess = 12;
     // if seaweed, make material green
@@ -218,6 +221,28 @@ void LSystemTreeScene::makeLSystemVisualizer() {
     for(int i = 0; i < numCyls; i++) {
         // make a new scene primitive
         addPrimitive(cyl, m_lSystemViz->getTransformationMatrix(i));
+
+    }
+
+    // if there are leaves, add the leaves to the scene
+    if(settings.hasLeaves) {
+        CS123SceneMaterial leafMaterial;
+        leafMaterial.clear();
+        leafMaterial.cAmbient.r = 0.05f;
+        leafMaterial.cAmbient.g = 0.5f;
+        leafMaterial.cAmbient.b = 0.05f;
+        leafMaterial.cDiffuse.r = 0.05f;
+        leafMaterial.cDiffuse.g = 0.3f;
+        leafMaterial.cDiffuse.b = 0.2f;
+
+        leafMaterial.cSpecular.r = leafMaterial.cSpecular.g = leafMaterial.cSpecular.b = 0.3;
+        leafMaterial.shininess = 12;
+
+        CS123ScenePrimitive leafCyl = {PrimitiveType::PRIMITIVE_CYLINDER, std::string(), leafMaterial};
+        int numLeaves = m_lSystemViz->getNumLeaves();
+        for(int i = 0; i < numLeaves; i++) {
+            addPrimitive(leafCyl, m_lSystemViz->getLeafMatrix(i));
+        }
 
     }
 }

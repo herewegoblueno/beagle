@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <memory>
 
 //Useful for assing the "similarity" of nodes
 enum GenotypeNodeClassification{

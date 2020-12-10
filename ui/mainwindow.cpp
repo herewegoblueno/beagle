@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->angleStochasticity->setCheckState(settings.angleStochasticity ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
     ui->recursiveDepth->setValue(settings.numRecursions);
     ui->lSystemType->setCurrentIndex(settings.lSystemType);
+    ui->leaves->setCheckState(settings.hasLeaves ? Qt::CheckState::Checked : Qt::CheckState::Unchecked);
 }
 
 MainWindow::~MainWindow()
@@ -255,7 +256,7 @@ void MainWindow::on_angleStochasticity_stateChanged(int arg1)
 
 void MainWindow::on_generateLSystemTree_clicked()
 {
-
+    signalSettingsChanged();
 }
 
 void MainWindow::on_lSystemType_currentIndexChanged(int index)
