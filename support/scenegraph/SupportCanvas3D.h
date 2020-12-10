@@ -110,7 +110,6 @@ private:
     void setSceneToLSystemSceneview();
     void setSceneToShaderTesting();
     void setSceneToGallery();
-    //void setSceneToShapes();
 
     void applyCameraConfig(CameraConfig c);
 
@@ -123,7 +122,6 @@ private:
     std::unique_ptr<CamtransCamera> m_defaultPerspectiveCamera;
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
-    //std::unique_ptr<ShapesScene> m_shapesScene;
 
     std::unique_ptr<LSystemTreeScene> m_LSystemScene;
     CameraConfig m_LSystemSceneCameraConfig;

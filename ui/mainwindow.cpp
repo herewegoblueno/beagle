@@ -97,10 +97,6 @@ void MainWindow::fileOpen(QString file) {
             }
         }
         else {
-//            if (!ui->canvas2D->loadImage(file)) {
-//                QMessageBox::critical(this, "Error", "Could not load image \"" + file + "\"");
-//            } else {
-//            }
              QMessageBox::critical(this, "Error", "We don't support non-xml stuff yettt");
         }
     }
@@ -124,17 +120,6 @@ void MainWindow::on_useLightingForShaders_stateChanged(int state)
 void MainWindow::on_mainTabWidget_currentChanged(int index)
 {
     settings.currentTab = index;
-    signalSettingsChanged();
-}
-
-void MainWindow::on_renderLTreesbutton_clicked()
-{
-    fileOpen(QFileDialog::getOpenFileName(this, QString(), "/course/cs123/data/"));
-}
-
-void MainWindow::on_useOrbitingCamera_stateChanged(int state)
-{
-    settings.useOrbitCamera = state == Qt::CheckState::Checked;
     signalSettingsChanged();
 }
 
@@ -265,11 +250,6 @@ void MainWindow::on_lSystemType_currentIndexChanged(int index)
     signalSettingsChanged();
 }
 
-void MainWindow::on_recursiveDepth_sliderMoved(int position)
-{
-    settings.numRecursions = position;
-    signalSettingsChanged();
-}
 
 void MainWindow::on_lengthStochasticity_stateChanged(int arg1)
 {
@@ -285,5 +265,42 @@ void MainWindow::on_leaves_stateChanged(int arg1)
 
 void MainWindow::on_regenerateGallery_clicked()
 {
+    //This is a simple way to trigger a rerender of that scene
     signalSettingsChanged();
 }
+
+void MainWindow::on_recursiveDepth_valueChanged(int position)
+{
+    settings.numRecursions = position;
+    signalSettingsChanged();
+}
+
+void MainWindow::on_useOrbitingCameraLTrees_stateChanged(int state)
+{
+    changeCameraSettings(state == Qt::CheckState::Checked);
+}
+
+void MainWindow::on_useOrbitingCameraGallery_stateChanged(int state)
+{
+    changeCameraSettings(state == Qt::CheckState::Checked);
+}
+
+void MainWindow::on_useOrbitingCamera_stateChanged(int state)
+{
+    changeCameraSettings(state == Qt::CheckState::Checked);
+}
+
+void MainWindow::changeCameraSettings(bool useOrbiting){
+    settings.useOrbitCamera = useOrbiting;
+    //We now have to change the state of the 3 checkboxes that can trigger this (so that they're all synced)
+    //IT can be a bit tricky though, since changing one will trigger a signal which will call this again
+    //(causing an infitie loop). So, we'll block the signal when we're changing them
+    //https://stackoverflow.com/questions/31341442/qlistwidget-change-selection-without-triggering-selectionchanged
+    QSignalBlocker blocker(ui->Dock);
+    Qt::CheckState state = useOrbiting ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
+    ui->useOrbitingCamera->setCheckState(state);
+    ui->useOrbitingCameraLTrees->setCheckState(state);
+    ui->useOrbitingCameraGallery->setCheckState(state);
+    signalSettingsChanged();
+}
+

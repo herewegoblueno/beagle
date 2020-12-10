@@ -10,7 +10,7 @@
 #include "LSystemTreeScene.h"
 
 // basically the L System tree scene but copied
-
+//and modified to accomodate for a whole scene
 
 namespace CS123 { namespace GL {
 
@@ -34,37 +34,29 @@ public:
 private:
 
     void loadPhongShader();
-    void loadWireframeShader();
-    void loadNormalsShader();
-    void loadNormalsArrowShader();
 
     void setPhongSceneUniforms(SupportCanvas3D *context);
-    void setMatrixUniforms(CS123::GL::Shader *shader, SupportCanvas3D *context);
     void setLights();
-    void renderGeometry(RENDERING_PASS pass);
+    void renderNonPhongGeometry(SupportCanvas3D *context, std::vector<int> indexesForSpecialShaders);
+    void renderPhongGeometry(std::vector<int> indexesToSkip);
     void defineShapeBank();
-    void setLOD();
     void makeLSystemVisualizer(int index);
 
     void makePotPosns();
     void setUpLights();
-    void drawTheScene();
-    void drawGround();
-    void drawPots();
-    void drawBG();
+    void loadScene();
+    void addGroundToScene();
+    void addPotsToScene();
+    void addBackgroundToScene();
 
     std::vector<std::unique_ptr<Shape>> shapeBank;
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
-    std::unique_ptr<CS123::GL::Shader> m_wireframeShader;
-    std::unique_ptr<CS123::GL::Shader> m_normalsShader;
-    std::unique_ptr<CS123::GL::Shader> m_normalsArrowShader;
     std::unique_ptr<LSystemVisualizer> m_lSystemViz;
 
     std::vector<glm::vec3> m_potPosns;
 
-    float LODdivisor;
-
-    // could be useful for determining number of shapes related to trees?
+    // could be useful for determining number of shapes related to trees maybe
+    // meh
     int numTreePrims;
 };
 

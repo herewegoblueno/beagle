@@ -22,15 +22,13 @@ using namespace CS123::GL;
 LSystemTreeScene::LSystemTreeScene()
 {
     loadPhongShader();
-//    loadWireframeShader();
-//    loadNormalsShader();
-//    loadNormalsArrowShader();
+
     shapeBank.resize(6);
-    LODdivisor = -1; //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
     defineShapeBank();
     if(settings.numRecursions < 1) {
         settings.numRecursions = 1;
     }
+
     // make a new L System visualizer
     m_lSystemViz = std::make_unique<LSystemVisualizer>();
     makeLSystemVisualizer();
@@ -54,29 +52,8 @@ void LSystemTreeScene::loadPhongShader() {
     m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 }
 
-//void SceneviewScene::loadWireframeShader() {
-//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.vert");
-//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.frag");
-//    m_wireframeShader = std::make_unique<Shader>(vertexSource, fragmentSource);
-//}
-
-//void SceneviewScene::loadNormalsShader() {
-//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.vert");
-//    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals.gsh");
-//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.frag");
-//    m_normalsShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
-//}
-
-//void SceneviewScene::loadNormalsArrowShader() {
-//    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.vert");
-//    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.gsh");
-//    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.frag");
-//    m_normalsArrowShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
-//}
-
 void LSystemTreeScene::render(SupportCanvas3D *context) {
-    setLOD();
-    setClearColor();
+    setClearColor(0.2,0.2,0.3,1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //Phong pass
@@ -84,36 +61,9 @@ void LSystemTreeScene::render(SupportCanvas3D *context) {
     setPhongSceneUniforms(context);
     setLights();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    renderGeometry(PHONG);
+    renderGeometry();
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
-
-
-//    //Wireframe pass
-//    if (settings.drawWireframe) {
-//        m_wireframeShader->bind();
-//        setMatrixUniforms(m_wireframeShader.get(), context);
-//        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//        renderGeometry(WIREFRAME);
-//        m_wireframeShader->unbind();
-//    }
-
-//    //Normals pass
-//    if (settings.drawNormals) {
-//        // Render the lines.
-//        m_normalsShader->bind();
-//        setMatrixUniforms(m_normalsShader.get(), context);
-//        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//        renderGeometry(NORMAL_LINE);
-//        m_normalsShader->unbind();
-
-//        // Render the arrows.
-//        m_normalsArrowShader->bind();
-//        setMatrixUniforms(m_normalsArrowShader.get(), context);
-//        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//        renderGeometry(NORMAL_ARROW);
-//        m_normalsArrowShader->unbind();
-//    }
 
 }
 
@@ -138,7 +88,7 @@ void LSystemTreeScene::setLights()
     }
 }
 
-void LSystemTreeScene::renderGeometry(RENDERING_PASS pass) {
+void LSystemTreeScene::renderGeometry() {
     int size = primitives.size();
     for (int i = 0; i < size; i++){
         CS123ScenePrimitiveBundle bundle = primitives[i];
@@ -148,22 +98,8 @@ void LSystemTreeScene::renderGeometry(RENDERING_PASS pass) {
         mat.shininess *= globalData.ks;
         mat.cTransparent *= globalData.kt;
 
-        switch (pass) {
-            case PHONG:
-                m_phongShader->setUniform("m", bundle.model);
-                m_phongShader->applyMaterial(mat);
-                break;
-            case WIREFRAME:
-                m_wireframeShader->setUniform("m", bundle.model);
-                break;
-            case NORMAL_LINE:
-                m_normalsShader->setUniform("m", bundle.model);
-                break;
-            case NORMAL_ARROW:
-                m_normalsArrowShader->setUniform("m", bundle.model);
-                break;
-        }
-
+        m_phongShader->setUniform("m", bundle.model);
+        m_phongShader->applyMaterial(mat);
 
         (shapeBank[(int) bundle.primitive.type])->draw();
     }
@@ -173,22 +109,16 @@ void LSystemTreeScene::settingsChanged() {
     // make a new LSystem with the current settings
     m_lSystemViz = std::make_unique<LSystemVisualizer>();
     makeLSystemVisualizer();
-    // std::cout << "the settings were chnanged" << std::endl;
-    // std::cout << settings.lengthStochasticity << std::endl;
-    renderGeometry(PHONG);
-}
-
-void LSystemTreeScene::setLOD() {
-    if (primitiveCount == -1) return; //Scene hasn't finished loading yet
-    LODdivisor = pow(primitiveCount, 0.5) - 2; //https://www.desmos.com/calculator/jdgphtltcc (my own func)
-    if (LODdivisor < 1) LODdivisor = 1;
-    if (LODdivisor > 15) LODdivisor = 15;
+    renderGeometry();
 }
 
 void LSystemTreeScene::defineShapeBank(){
-    int p1 = std::floor(settings.shapeParameter1 / std::max(1.f, LODdivisor));
-    int p2 = std::floor(settings.shapeParameter2 / std::max(1.f, LODdivisor));
-    int p3 = std::floor(settings.shapeParameter3 / std::max(1.f, LODdivisor));
+    //Can be linked to settings.parameter1-3, but since
+    //we know the scenes that are being made we'll but hardcode it
+    //Helpful for perfomance reasons too (prevents excessive tessellation)
+    int p1 = 8;
+    int p2 = 8;
+    int p3 = 8;
     shapeBank[0] = std::make_unique<Cube>(p1);
     shapeBank[1] = std::make_unique<Cone>(p1, p2);
     shapeBank[2] = std::make_unique<Cylinder>(p1, p2);

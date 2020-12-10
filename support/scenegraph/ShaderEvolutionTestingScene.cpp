@@ -24,10 +24,10 @@ using namespace CS123::GL;
 #include <iostream>
 
 int ShaderEvolutionTestingScene::numberOfTestShaders = 6;
+long ShaderEvolutionTestingScene::startTime =
+                                 (duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 
-ShaderEvolutionTestingScene::ShaderEvolutionTestingScene():
-    LODdivisor(-1), //-1 = uninitialized, anything else is initialized (since a scene can have 0 primitives)
-    startTime(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count())
+ShaderEvolutionTestingScene::ShaderEvolutionTestingScene()
 {
     initializeGenotypes();
     shapeBank.resize(6);
@@ -70,8 +70,11 @@ std::vector<std::unique_ptr<ShaderGenotype>> *ShaderEvolutionTestingScene::getSh
     return &genotype_bank;
 }
 
+std::vector<std::unique_ptr<CS123Shader>> *ShaderEvolutionTestingScene::getShaderPrograms(){
+    return &shader_bank;
+}
+
 void ShaderEvolutionTestingScene::render(SupportCanvas3D *context) {
-    setLOD();
     glClearColor(0.2, 0.2, 0.2, 0.3);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -86,6 +89,8 @@ void ShaderEvolutionTestingScene::render(SupportCanvas3D *context) {
 
         drawPrimitiveWithShader(i, bundle.model, mat, (shapeBank[(int) bundle.primitive.type]).get(), context);
     }
+
+    //Trigger another render
     context->update();
 }
 
@@ -123,17 +128,14 @@ void ShaderEvolutionTestingScene::settingsChanged() {
     defineShapeBank();
 }
 
-void ShaderEvolutionTestingScene::setLOD() {
-    if (primitiveCount == -1) return; //Scene hasn't finished loading yet
-    LODdivisor = pow(primitiveCount, 0.5) - 2; //https://www.desmos.com/calculator/jdgphtltcc (my own func)
-    if (LODdivisor < 1) LODdivisor = 1;
-    if (LODdivisor > 15) LODdivisor = 15;
-}
 
 void ShaderEvolutionTestingScene::defineShapeBank(){
-    int p1 = std::floor(settings.shapeParameter1 / std::max(1.f, LODdivisor));
-    int p2 = std::floor(settings.shapeParameter2 / std::max(1.f, LODdivisor));
-    int p3 = std::floor(settings.shapeParameter3 / std::max(1.f, LODdivisor));
+    //Can be linked to settings.parameter1-3, but since
+    //we know the scenes that are being made we'll but hardcode it
+    //Helpful for perfomance reasons too (prevents excessive tessellation)
+    int p1 = std::floor(2);
+    int p2 = std::floor(2);
+    int p3 = std::floor(2);
     shapeBank[0] = std::make_unique<Cube>(p1);
     shapeBank[1] = std::make_unique<Cone>(p1, p2);
     shapeBank[2] = std::make_unique<Cylinder>(p1, p2);
