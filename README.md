@@ -4,6 +4,14 @@
 
 Let's geddit!
 
+## README
+
+[shader tab]
+
+The L-System tab generates a tree according to the settings on the UI. The user can choose between 6 different L-Systems. Some of these options are 2D (these might show up sideways at first), and others are 3D. The user has the option to change the recursive depth, which determines the number of replacements in the L-system strings. Since the L-System trees generate the same thing each time, to add more variation, the user has the option to add length stochasticity and angle stochasticity. In length stochasticity, the length of each branch is shortened or lengthened by a random amount, and the angle is similarly randomly modified. The user also has the option to add leaves, which puts leaves at the end of each branch pointing downward and then in a random x/z direction to look more natural. As the user updates the settings, the tree will update and regenerate accordingly.
+
+The gallery tab randomly generates 5 trees with randomly selected L-Systems and recursive depths, and displays them in pots patterned with the current shaders on the shader evolution tab. 
+
 #### [24/11/20 Update]
 
 So we've uploaded a project plan in the readme_stuff folder. It's pretty detailed, though I'm sure we'll deviate from it when we start making this thing.
