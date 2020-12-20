@@ -10,6 +10,8 @@ By the way, were was our team banner!
 
 <img src="./readme_stuff/team_banner.jpg" height=300 />
 
+Oh, any by the way, we tried to compile this to WebAssembly, but it proved [too troublesome](https://forum.qt.io/topic/121724/qt-webassembly-unable-to-build-redefinition-of-__glewcreateprogram-as-different-kind-of-symbol).
+
 ## The 4 Parts
 
 ### The Shader Tab

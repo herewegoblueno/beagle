@@ -52,6 +52,9 @@ void ShaderImportScene::render(SupportCanvas3D *context) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     current_shader->setUniform("m", glm::scale(glm::vec3(2)));
+    //Tori are too large...
+    if (currentShapeIndex == 3) current_shader->setUniform("m", glm::scale(glm::vec3(1)));
+
     current_shader->setUniform("time", ShaderEvolutionTestingScene::calculateTime());
 
     //We don't really need a material actually, evolved shaders don't use lighting
