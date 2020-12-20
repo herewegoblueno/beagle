@@ -6,7 +6,7 @@ It was built with Qt Creator (v 4.11).
 
 **You can get a MacOX build for it in the "Releases" section of this Github Repo!**
 
-By the way, were was our team banner!
+By the way, here was our team banner!
 
 <img src="./readme_stuff/team_banner.jpg" height=300 />
 
