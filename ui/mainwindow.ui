@@ -332,8 +332,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
-                <height>128</height>
+                <width>269</width>
+                <height>213</height>
                </rect>
               </property>
               <attribute name="label">
@@ -364,8 +364,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>131</width>
-                <height>256</height>
+                <width>269</width>
+                <height>213</height>
                </rect>
               </property>
               <attribute name="label">
@@ -507,6 +507,13 @@
              </property>
              <property name="wordWrap">
               <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="orbitingCameraImport">
+             <property name="text">
+              <string>Use Orbiting Camera</string>
              </property>
             </widget>
            </item>

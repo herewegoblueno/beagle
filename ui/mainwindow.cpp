@@ -291,6 +291,11 @@ void MainWindow::on_useOrbitingCamera_stateChanged(int state)
     changeCameraSettings(state == Qt::CheckState::Checked);
 }
 
+void MainWindow::on_orbitingCameraImport_stateChanged(int state)
+{
+    changeCameraSettings(state == Qt::CheckState::Checked);
+}
+
 void MainWindow::changeCameraSettings(bool useOrbiting){
     settings.useOrbitCamera = useOrbiting;
     //We now have to change the state of the 3 checkboxes that can trigger this (so that they're all synced)
@@ -302,6 +307,7 @@ void MainWindow::changeCameraSettings(bool useOrbiting){
     ui->useOrbitingCamera->setCheckState(state);
     ui->useOrbitingCameraLTrees->setCheckState(state);
     ui->useOrbitingCameraGallery->setCheckState(state);
+    ui->orbitingCameraImport->setCheckState(state);
     signalSettingsChanged();
 }
 
