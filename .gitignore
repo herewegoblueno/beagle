@@ -19,6 +19,6 @@ Makefile*
 ui_*
 *.user
 
-final.app
-final
+beagle.app
+beagle
 
