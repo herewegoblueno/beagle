@@ -25,7 +25,7 @@ Settings settings;
  */
 void Settings::loadSettingsOrDefaults() {
     // Set the default values below
-    QSettings s("CS123", "final");
+    QSettings s("Beagle", "beagle");
 
     // Shapes
     //shapeType = s.value("shapeType", SHAPE_SPHERE).toInt();
@@ -64,7 +64,7 @@ void Settings::loadSettingsOrDefaults() {
 }
 
 void Settings::saveSettings() {
-    QSettings s("CS123", "final");
+    QSettings s("Beagle", "beagle");
 
     // Shapes
     //s.setValue("shapeType", shapeType);
@@ -99,7 +99,9 @@ int Settings::getSceneMode() {
     if (this->currentTab == SHADER_TESTING_TAB) {
         return SCENEMODE_SHADER_TESTING;
     } else if(this->currentTab == TREE_TESTING_TAB) {
-        return SCENEMODE_TREE_TESTING;
+        return SCENEMODE_TREE_TESTING;      
+    } else if(this->currentTab == SHADER_IMPORT_TAB) {
+        return SCENEMODE_SHADER_IMPORT;
     } else {
         return SCENEMODE_COMBINED_SCENE;
     }

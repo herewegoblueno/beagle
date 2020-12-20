@@ -35,7 +35,7 @@
   <widget class="QDockWidget" name="Dock">
    <property name="minimumSize">
     <size>
-     <width>240</width>
+     <width>300</width>
      <height>487</height>
     </size>
    </property>
@@ -67,7 +67,7 @@
        <item>
         <widget class="QTabWidget" name="mainTabWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="shaderTab">
           <attribute name="title">
@@ -230,8 +230,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>195</width>
-                <height>228</height>
+                <width>269</width>
+                <height>213</height>
                </rect>
               </property>
               <attribute name="label">
@@ -489,190 +489,221 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="importShaderTab">
+          <attribute name="title">
+           <string>Import</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>You can make your own shaders, or paste in the souce of previous shaders you've seen and liked.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="importTextArea"/>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_2" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QLabel" name="shapeLabel">
+                <property name="text">
+                 <string>Shape:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="shapeSelector">
+                <item>
+                 <property name="text">
+                  <string>Cube</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cone</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cylinder</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Torus</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Sphere</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="importButton">
+             <property name="text">
+              <string>Import</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="LsystemTab">
           <attribute name="title">
            <string>L-system Trees</string>
           </attribute>
-          <widget class="QCheckBox" name="lengthStochasticity">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>70</y>
-             <width>151</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Length Stochasticity</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="generateLSystemTree">
-           <property name="geometry">
-            <rect>
-             <x>40</x>
-             <y>300</y>
-             <width>131</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Generate!</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="angleStochasticity">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>100</y>
-             <width>151</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Angle Stochasticity</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="lSystemType">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>40</y>
-             <width>151</width>
-             <height>23</height>
-            </rect>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <property name="spacing">
+            <number>0</number>
            </property>
            <item>
-            <property name="text">
-             <string>2D Tree</string>
-            </property>
+            <widget class="QComboBox" name="lSystemType">
+             <item>
+              <property name="text">
+               <string>2D Tree</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Seaweed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>2D Maple</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bad Tree</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bush</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Simple 3D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>3D Tree</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>Seaweed</string>
-            </property>
+            <widget class="QCheckBox" name="lengthStochasticity">
+             <property name="text">
+              <string>Length Stochasticity</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>2D Maple</string>
-            </property>
+            <widget class="QCheckBox" name="angleStochasticity">
+             <property name="text">
+              <string>Angle Stochasticity</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>Bad Tree</string>
-            </property>
+            <widget class="QCheckBox" name="leaves">
+             <property name="text">
+              <string>Leaves</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>Bush</string>
-            </property>
+            <widget class="QLabel" name="label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Recursive Depth</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>Simple 3D</string>
-            </property>
+            <widget class="QSlider" name="recursiveDepth">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>5</number>
+             </property>
+             <property name="sliderPosition">
+              <number>1</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>1</number>
+             </property>
+            </widget>
            </item>
            <item>
-            <property name="text">
-             <string>3D Tree</string>
-            </property>
+            <widget class="QPushButton" name="generateLSystemTree">
+             <property name="text">
+              <string>Generate!</string>
+             </property>
+            </widget>
            </item>
-          </widget>
-          <widget class="QSlider" name="recursiveDepth">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>180</y>
-             <width>160</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>5</number>
-           </property>
-           <property name="sliderPosition">
-            <number>1</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::TicksBelow</enum>
-           </property>
-           <property name="tickInterval">
-            <number>1</number>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>160</y>
-             <width>131</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Recursive Depth</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="leaves">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>130</y>
-             <width>85</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Leaves</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="useOrbitingCameraLTrees">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>370</y>
-             <width>151</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Use Orbiting Camera</string>
-           </property>
-          </widget>
+           <item>
+            <widget class="QCheckBox" name="useOrbitingCameraLTrees">
+             <property name="text">
+              <string>Use Orbiting Camera</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="combinedTab">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <attribute name="title">
            <string>Gallery</string>
           </attribute>
-          <widget class="QPushButton" name="regenerateGallery">
-           <property name="geometry">
-            <rect>
-             <x>50</x>
-             <y>310</y>
-             <width>121</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Generate!</string>
-           </property>
-          </widget>
-          <widget class="QTextBrowser" name="textBrowser">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>30</y>
-             <width>211</width>
-             <height>192</height>
-            </rect>
-           </property>
-           <property name="html">
-            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QTextBrowser" name="textBrowser">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="html">
+              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -682,21 +713,24 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;circa 2020&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Price tag: $200,000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="useOrbitingCameraGallery">
-           <property name="geometry">
-            <rect>
-             <x>40</x>
-             <y>370</y>
-             <width>151</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Use Orbiting Camera</string>
-           </property>
-          </widget>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="regenerateGallery">
+             <property name="text">
+              <string>Generate!</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="useOrbitingCameraGallery">
+             <property name="text">
+              <string>Use Orbiting Camera</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>

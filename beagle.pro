@@ -3,7 +3,7 @@
 # -------------------------------------------------
 QT += opengl xml \
     widgets
-TARGET = final
+TARGET = beagle
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++14
@@ -61,6 +61,7 @@ SOURCES += ui/mainwindow.cpp \
     support/scenegraph/OpenGLScene.cpp \
     support/scenegraph/Scene.cpp \
     support/scenegraph/ShaderEvolutionTestingScene.cpp \
+    support/scenegraph/ShaderImportScene.cpp \
     support/scenegraph/SupportCanvas3D.cpp \
     support/shapes/CircularPlane.cpp \
     support/shapes/Cone.cpp \
@@ -365,6 +366,7 @@ HEADERS += ui/mainwindow.h \
     support/scenegraph/OpenGLScene.h \
     support/scenegraph/Scene.h \
     support/scenegraph/ShaderEvolutionTestingScene.h \
+    support/scenegraph/ShaderImportScene.h \
     support/scenegraph/SupportCanvas3D.h \
     support/shapes/CircularPlane.h \
     support/shapes/Cone.h \

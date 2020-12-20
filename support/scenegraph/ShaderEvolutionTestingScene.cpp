@@ -125,7 +125,7 @@ void ShaderEvolutionTestingScene::setLights()
 }
 
 void ShaderEvolutionTestingScene::settingsChanged() {
-    defineShapeBank();
+
 }
 
 

@@ -24,9 +24,9 @@ enum ShapeType {
     NUM_SHAPE_TYPES
 };
 
-// Enumeration values for the two tabs (2D, 3D) at the bottom of the Window.
 enum UITab {
     SHADER_TESTING_TAB,
+    SHADER_IMPORT_TAB,
     TREE_TESTING_TAB,
     GALLERY_TAB
 };
@@ -35,8 +35,8 @@ enum UITab {
 enum SceneMode {
     SCENEMODE_TREE_TESTING,
     SCENEMODE_SHADER_TESTING,
+    SCENEMODE_SHADER_IMPORT,
     SCENEMODE_COMBINED_SCENE
-    //SCENEMODE_SHAPES //<---No longer in use
 };
 
 // Enumeration values for the currently selected camera type

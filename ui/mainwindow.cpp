@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include "support/camera/CamtransCamera.h"
 #include "support/lib/CS123XmlSceneParser.h"
+#include "support/scenegraph/ShaderImportScene.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -304,3 +305,14 @@ void MainWindow::changeCameraSettings(bool useOrbiting){
     signalSettingsChanged();
 }
 
+
+void MainWindow::on_importButton_clicked()
+{
+    m_canvas3D->getImportScene()->currentString = ui->importTextArea->toPlainText().toStdString();
+    m_canvas3D->getImportScene()->constructShader();
+}
+
+void MainWindow::on_shapeSelector_currentIndexChanged(int index)
+{
+    m_canvas3D->getImportScene()->currentShapeIndex = index;
+}

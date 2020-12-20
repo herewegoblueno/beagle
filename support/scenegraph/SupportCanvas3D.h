@@ -11,11 +11,11 @@
 class RGBA;
 class Camera;
 class OpenGLScene;
-//class ShapesScene;
 class OrbitingCamera;
 class CamtransCamera;
 class CS123XmlSceneParser;
 class ShaderEvolutionTestingScene;
+class ShaderImportScene;
 class LSystemTreeScene;
 class GalleryScene;
 
@@ -53,6 +53,8 @@ public:
     // Returns a pointer to the current scene. If no scene is loaded, this function returns nullptr.
     OpenGLScene *getScene() { return m_currentScene; }
     ShaderEvolutionTestingScene *getShaderScene() { return m_shaderTestingScene.get(); }
+    ShaderImportScene *getImportScene() { return m_shaderImportScene.get(); }
+
 
     void loadSceneFromParser(CS123XmlSceneParser &parser);
     void switchToSceneviewScene();
@@ -109,6 +111,7 @@ private:
     void setSceneFromSettings();
     void setSceneToLSystemSceneview();
     void setSceneToShaderTesting();
+    void setSceneToShaderImport();
     void setSceneToGallery();
 
     void applyCameraConfig(CameraConfig c);
@@ -123,11 +126,14 @@ private:
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
 
-    std::unique_ptr<LSystemTreeScene> m_LSystemScene;
-    CameraConfig m_LSystemSceneCameraConfig;
-
     std::unique_ptr<ShaderEvolutionTestingScene> m_shaderTestingScene;
     CameraConfig m_shaderTestingSceneCameraConfig;
+
+    std::unique_ptr<ShaderImportScene> m_shaderImportScene;
+    CameraConfig m_shaderImportSceneCameraConfig;
+
+    std::unique_ptr<LSystemTreeScene> m_LSystemScene;
+    CameraConfig m_LSystemSceneCameraConfig;
 
     std::unique_ptr<GalleryScene> m_galleryScene;
     CameraConfig m_GallerySceneCameraConfig;

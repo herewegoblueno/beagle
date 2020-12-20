@@ -9,7 +9,9 @@
 #include "support/lib/RGBA.h"
 #include "support/camera/CamtransCamera.h"
 #include "support/camera/OrbitingCamera.h"
+
 #include "LSystemTreeScene.h"
+#include "ShaderImportScene.h"
 #include "ShaderEvolutionTestingScene.h"
 #include "GalleryScene.h"
 
@@ -26,9 +28,10 @@ SupportCanvas3D::SupportCanvas3D(QGLFormat format, QWidget *parent) : QGLWidget(
 {
     //The CameraConfig for the Shader Testing scene is set up in
     //MainWindow::fileOpen when the initialize button is called
-    //But for the other two scenes they have to be manually set
+    //But for the other 3 scenes they have to be manually set
     m_LSystemSceneCameraConfig = {glm::vec4(-7,1,0,1), glm::vec4(7,0,0,0), glm::vec4(0,1,0,0), 45};
     m_GallerySceneCameraConfig = {glm::vec4(0,0,9.5,1), glm::vec4(0,0,-7,0), glm::vec4(0,1,0,0), 45};
+    m_shaderImportSceneCameraConfig = {glm::vec4(0,0,9.5,1), glm::vec4(0,0,-7,0), glm::vec4(0,1,0,0), 45};
 
 }
 
@@ -62,6 +65,8 @@ CameraConfig *SupportCanvas3D::getCurrentSceneCamtasConfig() {
             return &m_LSystemSceneCameraConfig;
         case SCENEMODE_COMBINED_SCENE:
             return &m_GallerySceneCameraConfig;
+        case SCENEMODE_SHADER_IMPORT:
+            return &m_shaderImportSceneCameraConfig;
     }
     return nullptr;
 }
@@ -120,6 +125,7 @@ void SupportCanvas3D::initializeScenes() {
     m_LSystemScene = std::make_unique<LSystemTreeScene>();
     m_shaderTestingScene = std::make_unique<ShaderEvolutionTestingScene>();
     m_galleryScene = std::make_unique<GalleryScene>();
+    m_shaderImportScene = std::make_unique<ShaderImportScene>();
 }
 
 void SupportCanvas3D::paintGL() {
@@ -147,6 +153,10 @@ void SupportCanvas3D::setSceneFromSettings() {
     switch(settings.getSceneMode()) {
         case SCENEMODE_SHADER_TESTING:
             setSceneToShaderTesting();
+            break;
+        case SCENEMODE_SHADER_IMPORT:
+            setSceneToShaderImport();
+            m_shaderImportScene->render(this);
             break;
         case SCENEMODE_TREE_TESTING:
             setSceneToLSystemSceneview();
@@ -185,6 +195,12 @@ void SupportCanvas3D::setSceneToShaderTesting(){
     assert(m_shaderTestingScene.get());
     m_currentScene = m_shaderTestingScene.get();
     applyCameraConfig(m_shaderTestingSceneCameraConfig);
+}
+
+void SupportCanvas3D::setSceneToShaderImport(){
+    assert(m_shaderImportScene.get());
+    m_currentScene = m_shaderImportScene.get();
+    applyCameraConfig(m_shaderImportSceneCameraConfig);
 }
 
 void::SupportCanvas3D::setSceneToGallery() {
