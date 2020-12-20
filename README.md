@@ -1,12 +1,18 @@
-# CS1230 Final Project: Blueno@Chernobyl
+#  <img src="./readme_stuff/icon_1024.png" height= 70 align="left" />Beagle
+
+Beagle is a team project made by Anderson Addo and Alana White of Brown University to explore shader evolution and L-system trees. It was built for [CS123](https://cs.brown.edu/courses/cs123) ([stencil](https://github.com/cs123tas/final-stencil)). It's named after Darwin's HMS Beagle.
+
+It was built with Qt Creator (v 4.11). 
+
+**You can get a MacOX build for it in the "Releases" section of this Github Repo!**
+
+By the way, were was our team banner!
 
 <img src="./readme_stuff/team_banner.jpg" height=300 />
 
-Let's geddit!
+## The 4 Parts
 
-## The 3 Parts
-
-#### The Shader Tab
+### The Shader Tab
 
 The shader tab is where you can use the laws of evolution to make cool looking shaders. You get to play God with the shaders.
 
@@ -27,11 +33,79 @@ Offspring, though, start out at generation 1. This is because they get all their
 
 
 
-#### The L-System Tab
+### The Import Tab
+
+This tab was made to allow people to paste in shaders that they liked in the past and show them off or tweak them. If you'd like a few to get started, have a look at these!
+
+
+
+<details><summary>Fav Shader 1</summary>
+<p>
+
+```
+average(my_cross(transplantZ(min(vec3(-0.48548174+0,0.63039374+0,-0.67468715+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0) - vec3(pos.y+0, pos.y+0, pos.y+0) + min(vec3(0.29284927+0,0.87573367+0,1.181393+0),  vec3(timevar+0, timevar+0, timevar+0))),  perlinNoiseVec3((transplantX((vec3(pos.y+0, pos.y+0, pos.y+0) / vec3(timevar+0, timevar+0, timevar+0)),  fractal(average(vec3(timevar+0, timevar+0, timevar+0),  vec3(0.57004356+0,1.2222601+0,1.4275744+0)),  vec3(1.4275744+0,1.6760367+0,-0.30855873+0), vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(timevar+0, timevar+0, timevar+0), true, true, vec3(pos.y+0, pos.y+0, pos.y+0), 4, 4, 3, 1, 1, 1, 2, 4, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1))* transplantX(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.y+0, pos.y+0, pos.y+0))),  vec3(pos.x+ 0, pos.x+0, pos.x+0))),  fractal(atan(vec3(timevar+0, timevar+0, timevar+0)),  vec3(timevar+0, timevar+0, timevar+0), average(max(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  vec3(pos.z+0, pos.z+0, pos.z+0)),  transplantZ(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.z+0, pos.z+0, pos.z+0)), false, false, vec3(1.5938786+0,-0.39091733+0,1.5319189+0), 3, 3, 2, 1, 1, 0, 0, 1, 0, 1, 1, 0, 3, 3, 4, 1, 0, 0)),  (vec3(1.0299773+0,0.75646037+0,0.85278189+0)* fractal((vec3(pos.x+ 0, pos.x+0, pos.x+0) / max(vec3(timevar+0, timevar+0, timevar+0),  (perlinNoiseVec3(abs(vec3(timevar+0, timevar+0, timevar+0)),  transplantY(vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(timevar+0, timevar+0, timevar+0)))* min(vec3(0.076585248+0,0.83288985+0,-0.26071259+0),  transplantZ(average(vec3(pos.y+0, pos.y+0, pos.y+0),  transplantY(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.z+0, pos.z+0, pos.z+0))),  vec3(1.1732373+0,0.5403502+0,0.9053238+0)))))),  (transplantX(transplantX(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(pos.y+0, pos.y+0, pos.y+0))* transplantY(vec3(1.5973549+0,0.33649653+0,1.1407388+0),  atan(transplantY(vec3(timevar+0, timevar+0, timevar+0),  vec3(timevar+0, timevar+0, timevar+0))))), sin(vec3(pos.x+ 0, pos.x+0, pos.x+0)) - fractal(fractal((vec3(pos.y+0, pos.y+0, pos.y+0)* vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(pos.x+ 0, pos.x+0, pos.x+0), vec3(pos.z+0, pos.z+0, pos.z+0),  abs(vec3(pos.x+ 0, pos.x+0, pos.x+0)), true, true, (vec3(pos.y+0, pos.y+0, pos.y+0) / vec3(pos.x+ 0, pos.x+0, pos.x+0)), 2, 1, 0, 1, 1, 1, 1, 0, 4, 0, 0, 1, 0, 0, 2, 1, 1, 0),  vec3(timevar+0, timevar+0, timevar+0), vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0), false, false, my_cross(perlinNoiseVec3(vec3(-0.65977585+0,-0.0086404383+0,1.5156628+0) + vec3(pos.x+ 0, pos.x+0, pos.x+0),  min(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0))),  vec3(pos.y+0, pos.y+0, pos.y+0) + vec3(pos.x+ 0, pos.x+0, pos.x+0)), 3, 2, 1, 0, 1, 1, 1, 0, 4, 0, 0, 1, 0, 0, 2, 1, 1, 0),  sin(vec3(pos.y+0, pos.y+0, pos.y+0)), true, true, vec3(pos.z+0, pos.z+0, pos.z+0), 0, 2, 3, 1, 1, 1, 1, 2, 3, 1, 1, 1, 2, 3, 1, 1, 0, 0)))
+```
+
+</p>
+</details>
+
+<details><summary>Fav Shader 2</summary>
+<p>
+
+```
+cos((transplantZ(vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(0.47181803+0,0.17196974+0,0.51834494+0)) / fractal(min(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  abs(my_cross(average(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(-0.66001582+0,0.84839863+0,1.4276572+0))), sin(vec3(pos.x+ 0, pos.x+0, pos.x+0)),  abs(vec3(pos.z+0, pos.z+0, pos.z+0)), true, true, sin(transplantZ(max(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.y+0, pos.y+0, pos.y+0)),  fractal(vec3(pos.x+ 0, pos.x+0, pos.x+0),  (vec3(pos.x+ 0, pos.x+0, pos.x+0)* vec3(pos.x+ 0, pos.x+0, pos.x+0)), vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.y+0, pos.y+0, pos.y+0), true, true, vec3(pos.y+0, pos.y+0, pos.y+0), 0, 4, 3, 0, 0, 0, 2, 2, 2, 1, 0, 1, 3, 0, 0, 1, 1, 1))), 0, 4, 1, 1, 1, 1, 0, 2, 3, 1, 1, 1, 3, 1, 4, 0, 1, 0)))
+```
+
+</p>
+</details>
+
+<details><summary>Fav Shader 3</summary>
+<p>
+
+```
+fractal(sin(fractal(abs(vec3(pos.x+ 0, pos.x+0, pos.x+0)),  vec3(0.36220726+0,1.3940891+0,1.3773476+0), vec3(pos.y+0, pos.y+0, pos.y+0),  (vec3(pos.x+ 0, pos.x+0, pos.x+0) / fractal(average(transplantX(perlinNoiseVec3(vec3(pos.y+0, pos.y+0, pos.y+0),  average(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.y+0, pos.y+0, pos.y+0))),  vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(0.028243922+0,-0.6344083+0,0.10517785+0)),  vec3(-0.4617658+0,-0.16093819+0,-0.039006475+0), vec3(pos.z+0, pos.z+0, pos.z+0),  transplantZ(vec3(pos.y+0, pos.y+0, pos.y+0) - vec3(-0.32460633+0,0.56094122+0,1.582038+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0) - fractal(vec3(-0.61226934+0,-0.46454433+0,0.032795604+0),  vec3(-0.46454433+0,0.032795604+0,0.35751772+0), vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(pos.z+0, pos.z+0, pos.z+0), true, true, vec3(pos.z+0, pos.z+0, pos.z+0), 2, 4, 0, 0, 0, 1, 1, 4, 3, 0, 1, 0, 4, 4, 1, 1, 1, 0)), true, true, vec3(pos.x+ 0, pos.x+0, pos.x+0), 0, 3, 1, 0, 0, 0, 1, 4, 0, 0, 1, 1, 4, 1, 1, 1, 0, 1)), true, true, atan(vec3(pos.z+0, pos.z+0, pos.z+0)), 4, 3, 2, 0, 0, 0, 0, 2, 4, 0, 0, 0, 3, 1, 4, 1, 1, 0)),  transplantX(perlinNoiseVec3(fractal(transplantX(perlinNoiseVec3(vec3(pos.y+0, pos.y+0, pos.y+0),  average(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.y+0, pos.y+0, pos.y+0))),  vec3(pos.z+0, pos.z+0, pos.z+0)),  transplantZ(vec3(pos.y+0, pos.y+0, pos.y+0) - vec3(-0.32460633+0,0.56094122+0,1.582038+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0) - fractal(vec3(-0.61226934+0,-0.46454433+0,0.032795604+0),  vec3(-0.46454433+0,0.032795604+0,0.35751772+0), vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(pos.z+0, pos.z+0, pos.z+0), true, true, vec3(pos.z+0, pos.z+0, pos.z+0), 2, 4, 0, 0, 0, 1, 1, 4, 3, 0, 1, 0, 4, 4, 1, 1, 1, 0)), perlinNoiseVec3(vec3(pos.x+ 0, pos.x+0, pos.x+0),  (vec3(pos.x+ 0, pos.x+0, pos.x+0) - vec3(pos.z+0, pos.z+0, pos.z+0) / cos(transplantZ(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0))))),  vec3(pos.x+ 0, pos.x+0, pos.x+0), false, false, vec3(0.028243922+0,-0.6344083+0,0.10517785+0), 3, 2, 2, 1, 0, 0, 2, 1, 4, 0, 1, 0, 1, 2, 4, 1, 1, 1),  vec3(pos.x+ 0, pos.x+0, pos.x+0) - vec3(pos.z+0, pos.z+0, pos.z+0)),  my_cross(transplantX(vec3(pos.z+0, pos.z+0, pos.z+0) + average(vec3(-0.51711076+0,0.83015585+0,0.897416+0),  vec3(timevar+0, timevar+0, timevar+0)),  abs(vec3(pos.x+ 0, pos.x+0, pos.x+0))),  atan(atan(max(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.y+0, pos.y+0, pos.y+0)))))), transplantZ(transplantZ(min(vec3(pos.z+0, pos.z+0, pos.z+0) - vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  vec3(timevar+0, timevar+0, timevar+0)),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  min(transplantZ(transplantY(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(pos.z+0, pos.z+0, pos.z+0)),  abs(transplantZ(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.y+0, pos.y+0, pos.y+0)))), false, false, vec3(pos.y+0, pos.y+0, pos.y+0), 0, 4, 3, 1, 0, 0, 4, 0, 2, 1, 0, 0, 4, 4, 3, 1, 1, 1)
+```
+
+</p>
+</details>
+
+
+<details><summary>Fav Shader 4</summary>
+<p>
+
+```
+fractal(sin(fractal(vec3(timevar+0, timevar+0, timevar+0),  vec3(-0.12119874+0,0.1405447+0,-0.76657218+0), vec3(pos.z+0, pos.z+0, pos.z+0),  atan(vec3(0.011142236+0,0.0016521072+0,-0.096066147+0)), true, true, transplantX(vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(timevar+0, timevar+0, timevar+0)), 4, 1, 3, 1, 0, 0, 4, 3, 2, 0, 1, 1, 2, 3, 4, 1, 0, 0)),  transplantX(perlinNoiseVec3(vec3(0.32939366+0,0.25905618+0,0.25072694+0),  vec3(pos.z+0, pos.z+0, pos.z+0)),  vec3(pos.z+0, pos.z+0, pos.z+0)), sin(atan(vec3(pos.x+ 0, pos.x+0, pos.x+0))),  min(vec3(pos.z+0, pos.z+0, pos.z+0),  abs(transplantZ(vec3(pos.z+0, pos.z+0, pos.z+0),  min(vec3(0.32939366+0,0.25905618+0,0.25072694+0),  vec3(timevar+0, timevar+0, timevar+0))))), false, false, transplantZ(min(vec3(pos.z+0, pos.z+0, pos.z+0) - vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  vec3(timevar+0, timevar+0, timevar+0)), 0, 4, 3, 1, 0, 0, 4, 0, 2, 1, 0, 0, 4, 4, 3, 1, 1, 1)
+```
+
+</p>
+</details>
+
+<details><summary>Fav Shader 5</summary>
+<p>
+
+```
+(my_cross((fractal(vec3(timevar+0, timevar+0, timevar+0),  average(vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(pos.z+0, pos.z+0, pos.z+0) + vec3(timevar+0, timevar+0, timevar+0)), vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0), true, true, transplantX(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(timevar+0, timevar+0, timevar+0)), 2, 0, 1, 0, 1, 0, 0, 2, 4, 1, 1, 1, 1, 3, 1, 0, 0, 1)* vec3(pos.x+ 0, pos.x+0, pos.x+0) - vec3(0.043860868+0,1.5918975+0,0.37197471+0)),  vec3(pos.z+0, pos.z+0, pos.z+0)) / vec3(pos.x+ 0, pos.x+0, pos.x+0))
+```
+
+</p>
+</details>
+
+<details><summary>Fav Shader 6</summary>
+<p>
+
+```
+fractal((average(vec3(0.24134713+0,0.35078835+0,0.35297719+0),  transplantX(vec3(pos.x+ 0, pos.x+0, pos.x+0),  atan(vec3(pos.x+ 0, pos.x+0, pos.x+0))))* fractal(vec3(pos.z+0, pos.z+0, pos.z+0),  abs(vec3(-0.12445855+0,0.84581727+0,-0.53769475+0)), fractal(vec3(pos.z+0, pos.z+0, pos.z+0),  (vec3(pos.x+ 0, pos.x+0, pos.x+0) / fractal(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.y+0, pos.y+0, pos.y+0), vec3(pos.z+0, pos.z+0, pos.z+0),  (vec3(-0.72968698+0,0.74443954+0,1.170503+0)* vec3(0.74443954+0,1.170503+0,-0.64745098+0)), true, true, vec3(pos.x+ 0, pos.x+0, pos.x+0), 1, 4, 4, 1, 1, 0, 3, 4, 3, 0, 0, 0, 0, 2, 2, 0, 0, 0)), vec3(pos.y+0, pos.y+0, pos.y+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0), true, true, max(vec3(pos.y+0, pos.y+0, pos.y+0),  sin(vec3(-0.37429717+0,1.6037538+0,0.054174744+0))), 1, 4, 0, 0, 1, 1, 2, 1, 4, 0, 1, 1, 4, 3, 4, 1, 0, 0),  vec3(pos.y+0, pos.y+0, pos.y+0), true, true, vec3(pos.z+0, pos.z+0, pos.z+0), 4, 2, 2, 0, 1, 1, 1, 4, 0, 0, 1, 1, 2, 1, 4, 0, 1, 1)),  max(average(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(timevar+0, timevar+0, timevar+0)),  transplantX(vec3(pos.y+0, pos.y+0, pos.y+0),  atan(vec3(0.76205647+0,0.91231072+0,-0.52285618+0)) + transplantX(transplantY(average(vec3(1.4001143+0,-0.24256553+0,-0.2464655+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0)),  vec3(-0.43984178+0,0.093410954+0,1.3026145+0)),  vec3(pos.y+0, pos.y+0, pos.y+0)))), abs(perlinNoiseVec3(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(pos.x+ 0, pos.x+0, pos.x+0))),  min(transplantX((vec3(1.518353+0,-0.34136394+0,-0.29052988+0) / (vec3(0.76205647+0,0.91231072+0,-0.52285618+0) / vec3(timevar+0, timevar+0, timevar+0))),  vec3(pos.y+0, pos.y+0, pos.y+0)),  cos(transplantY(min(max(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(timevar+0, timevar+0, timevar+0) - transplantX(sin(vec3(timevar+0, timevar+0, timevar+0)),  vec3(pos.x+ 0, pos.x+0, pos.x+0))),  cos(vec3(pos.z+0, pos.z+0, pos.z+0))),  transplantY(vec3(timevar+0, timevar+0, timevar+0) + min(fractal(vec3(pos.z+0, pos.z+0, pos.z+0),  min(vec3(pos.z+0, pos.z+0, pos.z+0),  vec3(timevar+0, timevar+0, timevar+0)), vec3(1.6489937+0,1.2269027+0,1.059414+0),  vec3(pos.y+0, pos.y+0, pos.y+0), true, true, vec3(pos.y+0, pos.y+0, pos.y+0), 1, 1, 3, 0, 0, 0, 2, 2, 4, 0, 0, 0, 0, 1, 4, 1, 0, 0),  transplantZ(vec3(pos.x+ 0, pos.x+0, pos.x+0),  vec3(pos.z+0, pos.z+0, pos.z+0))),  vec3(pos.x+ 0, pos.x+0, pos.x+0))))), true, true, fractal(vec3(timevar+0, timevar+0, timevar+0),  vec3(pos.y+0, pos.y+0, pos.y+0), vec3(pos.z+0, pos.z+0, pos.z+0),  (vec3(-0.72968698+0,0.74443954+0,1.170503+0)* vec3(0.74443954+0,1.170503+0,-0.64745098+0)), true, true, vec3(pos.x+ 0, pos.x+0, pos.x+0), 1, 4, 4, 1, 1, 0, 3, 4, 3, 0, 0, 0, 0, 2, 2, 0, 0, 0), 4, 4, 0, 0, 0, 1, 0, 4, 3, 0, 1, 0, 1, 3, 2, 1, 1, 0)
+```
+
+</p>
+</details>
+
+
+### The L-System Tab
 
 The L-System tab generates a tree according to the settings on the UI. The user can choose between 6 different L-Systems. Some of these options are 2D (these might show up sideways at first), and others are 3D. The user has the option to change the recursive depth, which determines the number of replacements in the L-system strings. Since the L-System trees generate the same thing each time, to add more variation, the user has the option to add length stochasticity and angle stochasticity. In length stochasticity, the length of each branch is shortened or lengthened by a random amount, and the angle is similarly randomly modified. The user also has the option to add leaves, which puts leaves at the end of each branch pointing downward and then in a random x/z direction to look more natural. As the user updates the settings, the tree will update and regenerate accordingly.
 
-#### The Gallery
+### The Gallery
 
 The gallery tab randomly generates 5 trees with randomly selected L-Systems and recursive depths, and displays them in pots patterned with the current shaders on the shader evolution tab. 
 
